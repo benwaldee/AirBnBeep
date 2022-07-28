@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![schema](./backend/schema1.PNG?raw=true "Schema")
+![schema](./backend/schema2.PNG?raw=true "Schema")
 
 ## API Documentation
 
@@ -78,7 +78,7 @@ information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /users/log-in
+  * URL: /users/login
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -144,7 +144,7 @@ user's information.
 * Require Authentication: false
 * Request
   * Method: POST
-  * URL: /users/sign-up
+  * URL: /users/signup
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -519,7 +519,7 @@ Deletes an existing spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /spots/spotId
+  * URL: /spots/:spotId
   * Body: none
 
 * Successful Response
