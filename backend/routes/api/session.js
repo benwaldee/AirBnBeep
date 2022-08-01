@@ -1,7 +1,7 @@
 // backend/routes/api/session.js
 const express = require('express')
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -27,7 +27,7 @@ router.post(
     async (req, res, next) => {
         const { credential, password } = req.body;
 
-        const user = await User.login({ credential, password });
+        let user = await User.login({ credential, password });
 
         if (!user) {
             const err = new Error('Login failed');
@@ -37,11 +37,14 @@ router.post(
             return next(err);
         }
 
-        await setTokenCookie(res, user);
+        const token = await setTokenCookie(res, user);
 
-        return res.json({
+        user = user.toJSON()
+        user.token = token
+
+        return res.json(
             user
-        });
+        );
     }
 );
 
@@ -62,13 +65,12 @@ router.get(
     (req, res) => {
         const { user } = req;
         if (user) {
-            return res.json({
-                user: user.toSafeObject()
-            });
+            return res.json(
+                user.toSafeObject()
+            );
         } else return res.json({});
     }
 );
-
 
 
 

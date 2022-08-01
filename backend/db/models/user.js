@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     //Define an instance method toSafeObject in the user.js model file. This method will return an object with only the User instance information that is safe to save to a JWT, like id, username, and email.
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { id, firstName, lastName, username, email } = this; // context will be the User instance
+      return { id, firstName, lastName, username, email };
     }
     //Define an instance method validatePassword in the user.js model file. It should accept a password string and return true if there is a match with the User instance's hashedPassword. If there is no match, it should return false.
     validatePassword(password) {
@@ -32,12 +32,15 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     // Define a static method signup in the user.js model file that accepts an object with a username, email, and password key. Hash the password using the bcryptjs package's hashSync method. Create a User with the username, email, and hashedPassword. Return the created user using the currentUser scope.
-    static async signup({ username, email, password }) {
+    static async signup({ firstName, lastName, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
+        firstName,
+        lastName,
         username,
         email,
         hashedPassword
+
       });
       return await User.scope('currentUser').findByPk(user.id);
     }
@@ -45,11 +48,45 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+
+      User.hasMany(
+        models.Booking,
+        { foreignKey: 'userId' }
+      )
+      User.hasMany(
+        models.Image,
+        { foreignKey: 'userId' }
+      )
+      User.hasMany(
+        models.Review,
+        { foreignKey: 'userId' }
+      )
+      User.hasMany(
+        models.Spot,
+        { foreignKey: 'ownerId' }
+      )
+
     }
   };
 
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [3, 256],
+          isEmail: true
+        }
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -62,14 +99,7 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [3, 256],
-          isEmail: true
-        }
-      },
+
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
         allowNull: false,
@@ -77,6 +107,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60]
         }
       }
+
     },
     {
       sequelize,
@@ -88,7 +119,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       scopes: {
         currentUser: {
-          attributes: { exclude: ["hashedPassword"] }
+          attributes: { exclude: ["hashedPassword", "createdAt", "updatedAt"] }
         },
         loginUser: {
           attributes: {}
