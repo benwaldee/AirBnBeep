@@ -12,7 +12,7 @@ const validateSignup = [
     check('email')
         .exists({ checkFalsy: true })
         .isEmail()
-        .withMessage('Please provide a valid email.'),
+        .withMessage("User with that email already exists"),
     check('username')
         .exists({ checkFalsy: true })
         .isLength({ min: 4 })
