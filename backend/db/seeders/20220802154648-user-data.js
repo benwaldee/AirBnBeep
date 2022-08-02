@@ -1,5 +1,5 @@
 'use strict';
-
+const bcrypt = require("bcryptjs")
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -18,70 +18,70 @@ module.exports = {
         lastName: 'Bon',
         email: 'johnbohn@gmail.com',
         username: 'johnbon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Mark',
         lastName: 'Bon',
         email: 'markbohn@gmail.com',
         username: 'markbon',
-        hashedPassword: '$2a$10$YHAAoiv12de1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Adam',
         lastName: 'Bon',
         email: 'adambohn@gmail.com',
         username: 'adambon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Joe',
         lastName: 'Bon',
         email: 'joebohn@gmail.com',
         username: 'joebon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvdddTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Drew',
         lastName: 'Bon',
         email: 'drewbohn@gmail.com',
         username: 'drewbon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Daniel',
         lastName: 'Bon',
         email: 'danielbohn@gmail.com',
         username: 'danielbon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'JB',
         lastName: 'Bon',
         email: 'JBbohn@gmail.com',
         username: 'JBbon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Ben',
         lastName: 'Bon',
         email: 'benbohn@gmail.com',
         username: 'benbon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Jordan',
         lastName: 'Bon',
         email: 'jordanbohn@gmail.com',
         username: 'jordanbon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
       {
         firstName: 'Matt',
         lastName: 'Bon',
         email: 'mattbohn@gmail.com',
         username: 'mattbon',
-        hashedPassword: '$2a$10$YHAAoivaxnYde1dasdanasLffBvPk8RmTugWaX.Ylhyrz6te'
+        hashedPassword: bcrypt.hashSync('p1')
       },
     ])
 

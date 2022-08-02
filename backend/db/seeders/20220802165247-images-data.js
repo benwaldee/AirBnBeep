@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         url: 'www.2fexample.com',
-        previewImage: false,
+        previewImage: true,
         spotId: 2,
         reviewId: null,
         userId: 2

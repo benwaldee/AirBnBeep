@@ -26,6 +26,18 @@ module.exports = {
         price: 200,
       },
       {
+        ownerId: 1,
+        address: '1112 test drive',
+        city: 'BA',
+        state: 'Oklahoma',
+        country: 'USA',
+        lat: 101.127928,
+        lng: 12.218267,
+        name: 'Acreage2',
+        description: ' village house',
+        price: 200,
+      },
+      {
         ownerId: 2,
         address: '222 test drive',
         city: 'Saint Louis',
