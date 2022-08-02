@@ -14,7 +14,7 @@ module.exports = {
       },
       previewImage: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        allowNull: true
       },
 
       userId: {
