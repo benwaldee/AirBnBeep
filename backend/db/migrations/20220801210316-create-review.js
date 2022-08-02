@@ -24,14 +24,7 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       },
-      spotId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Spots'
-        },
-        onDelete: 'CASCADE'
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -16,20 +16,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
-      spotId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Spots'
-        },
-        onDelete: 'CASCADE'
-      },
-      reviewId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Reviews'
-        },
-        onDelete: 'CASCADE'
-      },
+
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
