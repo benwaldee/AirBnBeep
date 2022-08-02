@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     //Define an instance method toSafeObject in the user.js model file. This method will return an object with only the User instance information that is safe to save to a JWT, like id, username, and email.
     toSafeObject() {
       const { id, firstName, lastName, username, email } = this; // context will be the User instance
-      return { id, firstName, lastName, username, email };
+      return { id, firstName, lastName, email, username };
     }
     //Define an instance method validatePassword in the user.js model file. It should accept a password string and return true if there is a match with the User instance's hashedPassword. If there is no match, it should return false.
     validatePassword(password) {
