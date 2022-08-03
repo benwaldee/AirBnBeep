@@ -21,6 +21,13 @@ module.exports = {
         userId: 1
       },
       {
+        url: 'www.1example.com',
+        previewImage: true,
+        spotId: 1,
+        reviewId: null,
+        userId: 1
+      },
+      {
         url: 'www.2fexample.com',
         previewImage: true,
         spotId: 2,

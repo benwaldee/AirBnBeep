@@ -20,6 +20,12 @@ module.exports = {
         endDate: '2022-01-17T04:33:12.000Z',
       },
       {
+        spotId: 1,
+        userId: 6,
+        startDate: '2023-01-17T04:33:12.000Z',
+        endDate: '2023-01-17T04:33:12.000Z',
+      },
+      {
         spotId: 2,
         userId: 2,
         startDate: '2022-02-17T04:33:12.000Z',

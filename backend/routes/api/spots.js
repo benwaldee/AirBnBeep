@@ -394,4 +394,81 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
 
 })
 
+
+//Get all Bookings for a Spot based on the Spot's id
+
+router.get('/:spotId/bookings', async (req, res) => {
+    const userId = req.user.id
+    const spotId = req.params.spotId
+
+    const idCheck = await Spot.findByPk(spotId)
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    let ownerSpot = await Spot.findOne({
+        where: {
+            ownerId: userId,
+            id: spotId
+
+        },
+        raw: true
+    })
+
+    if (ownerSpot) {
+        let spotBookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            },
+            raw: true
+        })
+
+        let orderedBookings = []
+
+        for (let booking of spotBookings) {
+
+            let bookedUser = await User.findOne({
+                where: { id: booking.userId },
+                attributes: ["id", "firstName", "lastName"],
+
+                raw: true
+            })
+
+            let bookingProper = {
+                User: bookedUser,
+                id: booking.id,
+                spotId: booking.spotId,
+                userId: booking.userId,
+                startDate: booking.startDate,
+                endDate: booking.endDate,
+                createdAt: booking.createdAt,
+                updatedAt: booking.updatedAt
+            }
+
+            orderedBookings.push(bookingProper)
+
+        }
+
+        res.json({ Bookings: orderedBookings })
+
+    }
+
+    if (!ownerSpot) {
+
+        let spotBookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            },
+            attributes: ["spotId", "startDate", "endDate"],
+            raw: true
+        })
+
+        res.json({ Bookings: spotBookings })
+
+    }
+
+})
+
 module.exports = router;
