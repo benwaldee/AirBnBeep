@@ -14,7 +14,7 @@ router.get('/current', async (req, res) => {
     let decodedUser = jwt.decode(token)
     let userId = parseInt(decodedUser.data.id)
 
-    const reviewBig = await Review.findAll({
+    const Reviews = await Review.findAll({
         where: { userId: userId },
         include: [
             { model: User, attributes: ["id", "firstName", "lastName"] },
@@ -22,10 +22,11 @@ router.get('/current', async (req, res) => {
                 model: Spot,
                 attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"]
             },
-            { model: Image, as: "Images", attributes: ["id",] }
+            { model: Image, as: "Images", attributes: ["id", ["reviewId", "imageableId"], "url"] }
         ]
     })
 
+    res.json({ Reviews })
 })
 
 module.exports = router;
