@@ -55,7 +55,8 @@ router.get('/current', restoreUser, async (req, res) => {
         Spots.price = spot.price
         Spots.createdAt = spot.createdAt
         Spots.updatedAt = spot.updatedAt
-        Spots.avgRating = spot.avgRating
+        if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { Spots.avgRating = null }
+        else { Spots.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
 
         let images = await Image.findAll({
             where: { spotId: spot.id },
@@ -171,7 +172,8 @@ router.get('/', async (req, res) => {
         Spots.price = spot.price
         Spots.createdAt = spot.createdAt
         Spots.updatedAt = spot.updatedAt
-        Spots.avgRating = spot.avgRating
+        if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { Spots.avgRating = null }
+        else { Spots.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
 
         let images = await Image.findAll({
             where: { spotId: spot.id },
