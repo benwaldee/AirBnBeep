@@ -5,6 +5,7 @@ const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const { User, Spot, Booking, Review, Image, sequelize } = require('../../db/models');
 const jwt = require('jsonwebtoken');
 const { Op } = require("sequelize");
+const { raw } = require('express');
 
 const router = express.Router();
 
@@ -29,6 +30,89 @@ router.get('/current', async (req, res) => {
     res.json({ Reviews })
 })
 
+// Add an Image to a Review based on the Review's id
+
+router.post('/:reviewId/images', async (req, res) => {
+    const { token } = req.cookies;
+    let decodedUser = jwt.decode(token)
+    let userId = parseInt(decodedUser.data.id)
+
+    const reviewId = req.params.reviewId
+
+    let checkReviewId = await Review.findByPk(reviewId)
+    if (!checkReviewId) {
+        const error = new Error(`Review couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    let checkNumImages = await Image.findAll({
+        where: { reviewId: reviewId },
+        raw: true
+    })
+
+    if (checkNumImages.length >= 10) {
+        const error = new Error(`Maximum number of images for this resource was reached`)
+        error.status = "403"
+        throw error;
+    }
+
+    let { url } = req.body
+
+    let newReviewImage = await Image.create({
+        url,
+        reviewId,
+        userId,
+    })
+    newReviewImage = newReviewImage.toJSON()
+
+    let responseImage = {}
+    responseImage.id = newReviewImage.id
+    responseImage.imageableId = reviewId
+    responseImage.url = url
+
+
+
+    res.json(responseImage)
+})
+
+router.put('/:reviewId', async (req, res) => {
+    const { token } = req.cookies;
+    let decodedUser = jwt.decode(token)
+    let userId = parseInt(decodedUser.data.id)
+
+    let reviewId = req.params.reviewId
+
+    let found = await Review.findByPk(reviewId)
+    if (!found) {
+        const error = new Error(`Review couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    const reviewEdit = await Review.findOne({
+        where: {
+            userId: userId,
+            id: reviewId
+        }
+    })
+    if (!reviewEdit) {
+        const error = new Error(`Forbidden`)
+        error.status = "403"
+        throw error;
+    }
+
+    const { review, stars } = req.body
+
+    reviewEdit.review = review
+    reviewEdit.stars = stars
+
+    reviewEdit.save()
+
+    res.json(reviewEdit)
+
+
+})
 
 
 module.exports = router;
