@@ -10,7 +10,7 @@ const router = express.Router();
 
 // ### Get all Spots owned by the Current User
 router.get('/current', restoreUser, async (req, res) => {
-    const { user } = req
+    const userId = req.user.id
 
 
     const spotBad = await Spot.findAll({
@@ -32,7 +32,7 @@ router.get('/current', restoreUser, async (req, res) => {
         ],
         group: ['Spot.id'],
         raw: true,
-        where: { ownerId: user.id },
+        where: { ownerId: userId },
         order: [["id"]]
     })
 
@@ -112,8 +112,8 @@ router.get('/:spotId', async (req, res) => {
         throw error;
     }
     //
-    if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { spot.avgRating = null }
-    else { spot.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
+    if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { spot.avgStarRating = null }
+    else { spot.avgStarRating = Number.parseFloat(spot.avgStarRating).toFixed(1) }
     //
 
     let Images = await Image.findAll({
@@ -209,7 +209,7 @@ router.post('/:spotId/images', restoreUser, async (req, res) => {
 
     let userId = req.user.id
 
-    const { url } = req.body
+    const { url, previewImage } = req.body
     const spotId = req.params.spotId
 
     const idCheck = await Spot.findByPk(spotId)
@@ -221,6 +221,7 @@ router.post('/:spotId/images', restoreUser, async (req, res) => {
 
     let newImage = await Image.create({
         url,
+        previewImage,
         spotId,
         userId,
     })
@@ -390,6 +391,177 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
     })
 
     res.json(newReview)
+
+})
+
+
+//Get all Bookings for a Spot based on the Spot's id
+
+router.get('/:spotId/bookings', async (req, res) => {
+    const userId = req.user.id
+    const spotId = req.params.spotId
+
+    const idCheck = await Spot.findByPk(spotId)
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    let ownerSpot = await Spot.findOne({
+        where: {
+            ownerId: userId,
+            id: spotId
+
+        },
+        raw: true
+    })
+
+    if (ownerSpot) {
+        let spotBookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            },
+            raw: true
+        })
+
+        let orderedBookings = []
+
+        for (let booking of spotBookings) {
+
+            let bookedUser = await User.findOne({
+                where: { id: booking.userId },
+                attributes: ["id", "firstName", "lastName"],
+
+                raw: true
+            })
+
+            let bookingProper = {
+                User: bookedUser,
+                id: booking.id,
+                spotId: booking.spotId,
+                userId: booking.userId,
+                startDate: booking.startDate,
+                endDate: booking.endDate,
+                createdAt: booking.createdAt,
+                updatedAt: booking.updatedAt
+            }
+
+            orderedBookings.push(bookingProper)
+
+        }
+
+        res.json({ Bookings: orderedBookings })
+
+    }
+
+    if (!ownerSpot) {
+
+        let spotBookings = await Booking.findAll({
+            where: {
+                spotId: spotId
+            },
+            attributes: ["spotId", "startDate", "endDate"],
+            raw: true
+        })
+
+        res.json({ Bookings: spotBookings })
+
+    }
+
+})
+
+
+// Create a Booking from a Spot based on the Spot's id
+
+router.post('/:spotId/bookings', async (req, res) => {
+
+    const userId = req.user.id
+    const spotId = req.params.spotId
+
+    const idCheck = await Spot.findByPk(spotId)
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    const { startDate, endDate } = req.body
+    // console.log(startDate)
+
+    //no adding booking in the past
+    const today = new Date()
+    const date = new Date().toISOString().slice(0, 10)
+
+    // console.log("current date", date)
+    // console.log("attempted start date", startDate)
+
+    if (date >= startDate) {
+        const error = new Error(`Cannot create a booking in the past`)
+        error.status = "403"
+        throw error;
+    }
+
+    if (startDate >= endDate) {
+        let error = new Error(`Validation Error`)
+        error.status = '400'
+        error.errors = {
+            endDate: "endDate cannot come before startDate"
+        }
+        throw error
+    }
+
+    let spotBookings = await Booking.findAll({
+        where: {
+            spotId: spotId
+        },
+        attributes: ["spotId", "startDate", "endDate"],
+        raw: true
+    })
+
+
+    for (let booking of spotBookings) {
+
+        let aStartDate = booking.startDate
+        let aEndDate = booking.endDate
+
+        // console.log("end:", aEndDate, "start:", aStartDate)
+        // console.log("is our start g or e to this start:", startDate >= aStartDate)
+        // console.log("is our start l or e to this end:", startDate <= aEndDate)
+        //error fixed, need to format as date only
+
+        if ((startDate >= aStartDate) && (startDate <= aEndDate)) {
+            // console.log('!!!!!!!!!!!!!!')
+            const error = new Error(`Sorry, this spot is already booked for the specified dates`)
+            error.status = "403"
+            error.errors = {
+                startDate: "Start date conflicts with an existing booking",
+            }
+            throw error;
+        }
+
+
+        if ((endDate >= aStartDate) && (endDate <= aEndDate)) {
+            const error = new Error(`Sorry, this spot is already booked for the specified dates`)
+            error.status = "403"
+            error.errors = {
+                endDate: "End date conflicts with an existing booking",
+            }
+            throw error;
+        }
+
+    }
+
+
+    let newBooking = await Booking.create({
+        spotId,
+        userId,
+        startDate,
+        endDate
+    })
+
+
+    res.json(newBooking)
 
 })
 
