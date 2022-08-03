@@ -6,14 +6,13 @@ const { User, Spot, Booking, Review, Image, sequelize } = require('../../db/mode
 const jwt = require('jsonwebtoken');
 const { Op } = require("sequelize");
 const { raw } = require('express');
+const { check } = require('express-validator');
 
 const router = express.Router();
 
 // Get all Reviews of the Current User
-router.get('/current', async (req, res) => {
-    const { token } = req.cookies;
-    let decodedUser = jwt.decode(token)
-    let userId = parseInt(decodedUser.data.id)
+router.get('/current', restoreUser, async (req, res) => {
+    let userId = req.user.id
 
     const Reviews = await Review.findAll({
         where: { userId: userId },
@@ -32,10 +31,9 @@ router.get('/current', async (req, res) => {
 
 // Add an Image to a Review based on the Review's id
 
-router.post('/:reviewId/images', async (req, res) => {
-    const { token } = req.cookies;
-    let decodedUser = jwt.decode(token)
-    let userId = parseInt(decodedUser.data.id)
+router.post('/:reviewId/images', restoreUser, async (req, res) => {
+
+    let userId = req.user.id
 
     const reviewId = req.params.reviewId
 
@@ -76,10 +74,9 @@ router.post('/:reviewId/images', async (req, res) => {
     res.json(responseImage)
 })
 
-router.put('/:reviewId', async (req, res) => {
-    const { token } = req.cookies;
-    let decodedUser = jwt.decode(token)
-    let userId = parseInt(decodedUser.data.id)
+router.put('/:reviewId', restoreUser, async (req, res) => {
+
+    let userId = req.user.id
 
     let reviewId = req.params.reviewId
 
@@ -111,6 +108,39 @@ router.put('/:reviewId', async (req, res) => {
 
     res.json(reviewEdit)
 
+
+})
+
+router.delete('/:reviewId', restoreUser, async (req, res) => {
+
+    const userId = req.user.id
+    const reviewId = req.params.reviewId
+
+    let checkId = await Review.findOne({
+        where: {
+            id: reviewId
+        }
+    })
+
+    if (!checkId) {
+        const error = new Error(`Review couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+    if (checkId.userId !== userId) {
+        const error = new Error(`Forbidden`)
+        error.status = "403"
+        throw error;
+    }
+
+
+
+    checkId.destroy()
+
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
 
 })
 

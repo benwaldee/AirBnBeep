@@ -11,9 +11,7 @@ const router = express.Router();
 // ### Get all Spots owned by the Current User
 router.get('/current', restoreUser, async (req, res) => {
     const { user } = req
-    // const { token } = req.cookies
-    // let decodedUser = jwt.decode(token)
-    // let userId = parseInt(decodedUser.data.id)
+
 
     const spotBad = await Spot.findAll({
 
@@ -207,10 +205,9 @@ router.get('/', async (req, res) => {
 
 
 // ### Add an Image to a Spot based on the Spot's id
-router.post('/:spotId/images', async (req, res) => {
-    const { token } = req.cookies
-    let decodedUser = jwt.decode(token)
-    let userId = parseInt(decodedUser.data.id)
+router.post('/:spotId/images', restoreUser, async (req, res) => {
+
+    let userId = req.user.id
 
     const { url } = req.body
     const spotId = req.params.spotId
@@ -264,10 +261,10 @@ router.post('/', async (req, res) => {
 
 })
 
-router.put('/:spotId', async (req, res) => {
-    const { token } = req.cookies;
-    let decodedUser = jwt.decode(token)
-    let ownerId = parseInt(decodedUser.data.id)
+//edit a spot
+router.put('/:spotId', restoreUser, async (req, res) => {
+
+    let ownerId = req.user.id
 
     let spotId = req.params.spotId
 
@@ -303,10 +300,10 @@ router.put('/:spotId', async (req, res) => {
     res.json(idCheck)
 })
 
-router.delete('/:spotId', async (req, res) => {
-    const { token } = req.cookies;
-    let decodedUser = jwt.decode(token)
-    let ownerId = parseInt(decodedUser.data.id)
+//delete a spot
+router.delete('/:spotId', restoreUser, async (req, res) => {
+
+    let ownerId = req.user.id
 
     let spotId = req.params.spotId
 
@@ -357,10 +354,9 @@ router.get('/:spotId/reviews', async (req, res) => {
 })
 
 //Create a Review for a Spot based on the Spot's id
-router.post('/:spotId/reviews', async (req, res) => {
-    const { token } = req.cookies;
-    let decodedUser = jwt.decode(token)
-    let userId = parseInt(decodedUser.data.id)
+router.post('/:spotId/reviews', restoreUser, async (req, res) => {
+
+    let userId = req.user.id
 
     let spotId = req.params.spotId
     const idCheck = await Spot.findByPk(spotId)
