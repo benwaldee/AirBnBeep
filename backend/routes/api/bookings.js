@@ -145,7 +145,8 @@ router.put('/:bookingId', async (req, res) => {
 
     //no editing in the past
     const today = new Date()
-    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const date = new Date().toISOString().slice(0, 10)
+    // let date = "2022-08-10"
 
     if (date >= oldBooking.startDate) {
         const error = new Error(`Past bookings can't be modified`)
@@ -157,6 +158,8 @@ router.put('/:bookingId', async (req, res) => {
         where: { id: bookingId }
     })
 
+
+
     checkedBooking.startDate = startDate
     checkedBooking.endDate = endDate
 
@@ -167,6 +170,57 @@ router.put('/:bookingId', async (req, res) => {
 
 })
 
+
+//delete a booking
+
+router.delete('/:bookingId', async (req, res) => {
+
+    const userId = req.user.id
+    const bookingId = req.params.bookingId
+
+    let userBooking = await Booking.findOne({
+        where: { id: bookingId }
+    })
+
+    //check if booking exists
+
+    if (!userBooking) {
+        const error = new Error(`Booking couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    let checkUser = userBooking.toJSON()
+
+    //check if user is deleting not their booking
+    if (userId !== checkUser.userId) {
+        const error = new Error(`Forbidden`)
+        error.status = "403"
+        throw error;
+    }
+
+    const today = new Date()
+    const date = new Date().toISOString().slice(0, 10)
+    // const date = '2022-08-10'
+    // console.log(date)
+    // console.log(typeof (date))
+    //active booking cannot be deleted
+    if ((date >= checkUser.startDate) && (date <= checkUser.endDate)) {
+
+        const error = new Error(`Bookings that have been started can't be deleted`)
+        error.status = "403"
+        throw error;
+    }
+
+    userBooking.destroy()
+
+    res.json({
+        message: "Successfully deleted",
+        statusCode: 200
+    })
+
+
+})
 
 
 

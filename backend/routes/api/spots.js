@@ -491,7 +491,10 @@ router.post('/:spotId/bookings', async (req, res) => {
 
     //no adding booking in the past
     const today = new Date()
-    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    const date = new Date().toISOString().slice(0, 10)
+
+    // console.log("current date", date)
+    // console.log("attempted start date", startDate)
 
     if (date >= startDate) {
         const error = new Error(`Cannot create a booking in the past`)
