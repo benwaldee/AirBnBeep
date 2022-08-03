@@ -40,8 +40,10 @@ router.get('/current', restoreUser, async (req, res) => {
 
 
         })
-
-        Spotty.previewImage = prev.url
+        if (prev) {
+            Spotty.previewImage = prev.url
+        }
+        if (!prev) { Spotty.previewImage = null }
 
 
         let realBooking = {
@@ -62,6 +64,8 @@ router.get('/current', restoreUser, async (req, res) => {
 
     res.json({ Bookings: bookArr })
 })
+
+
 
 
 

@@ -471,4 +471,85 @@ router.get('/:spotId/bookings', async (req, res) => {
 
 })
 
+
+// Create a Booking from a Spot based on the Spot's id
+
+router.post('/:spotId/bookings', async (req, res) => {
+
+    const userId = req.user.id
+    const spotId = req.params.spotId
+
+    const idCheck = await Spot.findByPk(spotId)
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    const { startDate, endDate } = req.body
+    // console.log(startDate)
+
+    if (startDate >= endDate) {
+        let error = new Error(`Validation Error`)
+        error.status = '400'
+        error.errors = {
+            endDate: "endDate cannot be on or before startDate"
+        }
+        throw error
+    }
+
+    let spotBookings = await Booking.findAll({
+        where: {
+            spotId: spotId
+        },
+        attributes: ["spotId", "startDate", "endDate"],
+        raw: true
+    })
+
+
+    for (let booking of spotBookings) {
+
+        let aStartDate = booking.startDate
+        let aEndDate = booking.endDate
+
+        // console.log("end:", aEndDate, "start:", aStartDate)
+        // console.log("is our start g or e to this start:", startDate >= aStartDate)
+        // console.log("is our start l or e to this end:", startDate <= aEndDate)
+        //error fixed, need to format as date only
+
+        if ((startDate >= aStartDate) && (startDate <= aEndDate)) {
+            // console.log('!!!!!!!!!!!!!!')
+            const error = new Error(`Sorry, this spot is already booked for the specified dates`)
+            error.status = "403"
+            error.errors = {
+                startDate: "Start date conflicts with an existing booking",
+            }
+            throw error;
+        }
+
+
+        if ((endDate >= aStartDate) && (endDate <= aEndDate)) {
+            const error = new Error(`Sorry, this spot is already booked for the specified dates`)
+            error.status = "403"
+            error.errors = {
+                endDate: "End date conflicts with an existing booking",
+            }
+            throw error;
+        }
+
+    }
+
+
+    let newBooking = await Booking.create({
+        spotId,
+        userId,
+        startDate,
+        endDate
+    })
+
+
+    res.json(newBooking)
+
+})
+
 module.exports = router;
