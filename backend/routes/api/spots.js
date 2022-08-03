@@ -108,8 +108,11 @@ router.get('/:spotId', async (req, res) => {
         where: { id: req.params.spotId },
         raw: true,
     })
-
     if (!spot) { throw new Error(`Spot couldn't be found`) }
+    //
+    if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { spot.avgRating = null }
+    else { spot.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
+    //
 
     let Images = await Image.findAll({
         where: { spotId: req.params.spotId },
