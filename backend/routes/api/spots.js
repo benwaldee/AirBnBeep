@@ -10,7 +10,7 @@ const router = express.Router();
 
 // ### Get all Spots owned by the Current User
 router.get('/current', restoreUser, async (req, res) => {
-    const { user } = req
+    const userId = req.user.id
 
 
     const spotBad = await Spot.findAll({
@@ -32,7 +32,7 @@ router.get('/current', restoreUser, async (req, res) => {
         ],
         group: ['Spot.id'],
         raw: true,
-        where: { ownerId: user.id },
+        where: { ownerId: userId },
         order: [["id"]]
     })
 
