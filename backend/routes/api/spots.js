@@ -209,7 +209,7 @@ router.post('/:spotId/images', restoreUser, async (req, res) => {
 
     let userId = req.user.id
 
-    const { url } = req.body
+    const { url, previewImage } = req.body
     const spotId = req.params.spotId
 
     const idCheck = await Spot.findByPk(spotId)
@@ -221,6 +221,7 @@ router.post('/:spotId/images', restoreUser, async (req, res) => {
 
     let newImage = await Image.create({
         url,
+        previewImage,
         spotId,
         userId,
     })

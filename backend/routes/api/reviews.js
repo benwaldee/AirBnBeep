@@ -55,10 +55,11 @@ router.post('/:reviewId/images', restoreUser, async (req, res) => {
         throw error;
     }
 
-    let { url } = req.body
+    let { url, previewImage } = req.body
 
     let newReviewImage = await Image.create({
         url,
+        previewImage,
         reviewId,
         userId,
     })
