@@ -356,4 +356,45 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.json({ Reviews })
 })
 
+//Create a Review for a Spot based on the Spot's id
+router.post('/:spotId/reviews', async (req, res) => {
+    const { token } = req.cookies;
+    let decodedUser = jwt.decode(token)
+    let userId = parseInt(decodedUser.data.id)
+
+    let spotId = req.params.spotId
+    const idCheck = await Spot.findByPk(spotId)
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    //user cannot post two reviews to same spot
+
+    const reviewCheck = await Review.findOne({
+        where: {
+            userID: userId,
+            spotId: spotId
+        }
+    })
+    if (reviewCheck) {
+        const error = new Error('User already has a review for this spot')
+        error.status = '403'
+        throw error
+    }
+
+    const { review, stars } = req.body
+
+    let newReview = await Review.create({
+        userId,
+        spotId,
+        review,
+        stars,
+    })
+
+    res.json(newReview)
+
+})
+
 module.exports = router;
