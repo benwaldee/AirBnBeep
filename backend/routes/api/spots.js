@@ -35,6 +35,7 @@ router.get('/current', restoreUser, async (req, res) => {
         group: ['Spot.id'],
         raw: true,
         where: { ownerId: user.id },
+        order: [["id"]]
     })
 
     let spotArr = []
@@ -149,7 +150,8 @@ router.get('/', async (req, res) => {
             },
         ],
         group: ['Spot.id'],
-        raw: true
+        raw: true,
+        order: [["id"]]
     })
 
     let spotArr = []
