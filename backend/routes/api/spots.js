@@ -370,7 +370,7 @@ router.post('/:spotId/reviews', restoreUser, async (req, res) => {
 
     const reviewCheck = await Review.findOne({
         where: {
-            userID: userId,
+            userId: userId,
             spotId: spotId
         }
     })
