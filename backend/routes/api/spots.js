@@ -108,7 +108,11 @@ router.get('/:spotId', async (req, res) => {
         where: { id: req.params.spotId },
         raw: true,
     })
-    if (!spot) { throw new Error(`Spot couldn't be found`) }
+    if (!spot) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
     //
     if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { spot.avgRating = null }
     else { spot.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
@@ -212,7 +216,11 @@ router.post('/:spotId/images', async (req, res) => {
     const spotId = req.params.spotId
 
     const idCheck = await Spot.findByPk(spotId)
-    if (!idCheck) { throw new Error("Spot couldn't be found") }
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
 
     let newImage = await Image.create({
         url,
@@ -267,8 +275,16 @@ router.put('/:spotId', async (req, res) => {
         where: { id: spotId },
         // raw: true
     })
-    if (!idCheck) { throw new Error("Spot couldn't be found") }
-    if (idCheck.ownerId !== ownerId) { throw new Error("Forbidden") }
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+    if (idCheck.ownerId !== ownerId) {
+        const error = new Error(`Forbidden`)
+        error.status = "403"
+        throw error;
+    }
 
     let { address, city, state, country, lat, lng, name, description, price } = req.body
 
@@ -298,8 +314,16 @@ router.delete('/:spotId', async (req, res) => {
         where: { id: spotId },
         // raw: true
     })
-    if (!idCheck) { throw new Error("Spot couldn't be found") }
-    if (idCheck.ownerId !== ownerId) { throw new Error("Forbidden") }
+    if (!idCheck) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+    if (idCheck.ownerId !== ownerId) {
+        const error = new Error(`Forbidden`)
+        error.status = "403"
+        throw error;
+    }
 
     await idCheck.destroy()
 
@@ -310,5 +334,26 @@ router.delete('/:spotId', async (req, res) => {
         })
 })
 
+// Get all Reviews by a Spot's id
+
+router.get('/:spotId/reviews', async (req, res) => {
+
+    const checkSpot = await Spot.findByPk(req.params.spotId)
+    if (!checkSpot) {
+        const error = new Error(`Spot couldn't be found`)
+        error.status = "404"
+        throw error;
+    }
+
+    const Reviews = await Review.findAll({
+        where: { userId: req.params.spotId },
+        include: [
+            { model: User, attributes: ["id", "firstName", "lastName"] },
+            { model: Image, as: "Images", attributes: ["id", ["reviewId", "imageableId"], "url"] }
+        ]
+    })
+
+    res.json({ Reviews })
+})
 
 module.exports = router;
