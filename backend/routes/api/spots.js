@@ -489,11 +489,21 @@ router.post('/:spotId/bookings', async (req, res) => {
     const { startDate, endDate } = req.body
     // console.log(startDate)
 
+    //no adding booking in the past
+    const today = new Date()
+    const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    if (date >= startDate) {
+        const error = new Error(`Cannot create a booking in the past`)
+        error.status = "403"
+        throw error;
+    }
+
     if (startDate >= endDate) {
         let error = new Error(`Validation Error`)
         error.status = '400'
         error.errors = {
-            endDate: "endDate cannot be on or before startDate"
+            endDate: "endDate cannot come before startDate"
         }
         throw error
     }
