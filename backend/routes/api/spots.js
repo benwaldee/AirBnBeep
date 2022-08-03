@@ -112,8 +112,8 @@ router.get('/:spotId', async (req, res) => {
         throw error;
     }
     //
-    if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { spot.avgRating = null }
-    else { spot.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
+    if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { spot.avgStarRating = null }
+    else { spot.avgStarRating = Number.parseFloat(spot.avgStarRating).toFixed(1) }
     //
 
     let Images = await Image.findAll({
