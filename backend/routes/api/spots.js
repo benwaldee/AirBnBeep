@@ -139,25 +139,154 @@ router.get('/:spotId', async (req, res) => {
 //get all spots
 router.get('/', async (req, res) => {
 
+    //pagination stuff
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    page = parseInt(page);
+    size = parseInt(size);
+
+
+
+
+    if (page < 0) {
+        res.status(400)
+        return res.json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: {
+                page: "Page must be greater than or equal to 0"
+
+            }
+        })
+    } if (size < 0) {
+        res.status(400)
+        return res.json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: {
+
+                size: "Size must be greater than or equal to 0"
+            }
+        })
+    }
+
+
+
+    if (minLat !== undefined) {
+        if (Number.isNaN(parseFloat(minLat)) || !(minLat.includes('.'))) {
+            res.status(400)
+            return res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: {
+                    minLat: "Minimum latitude is invalid"
+                }
+            })
+        }
+    }
+    if (maxLat !== undefined) {
+        if (Number.isNaN(parseFloat(maxLat)) || !(maxLat.includes('.'))) {
+            res.status(400)
+            return res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: {
+                    maxLat: "Maximum latitude is invalid"
+                }
+            })
+        }
+    }
+    if (maxLng !== undefined) {
+        if (Number.isNaN(parseFloat(maxLng)) || !(maxLng.includes('.'))) {
+            res.status(400)
+            return res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: {
+                    maxLng: "Minimum longitude is invalid",
+                }
+            })
+        }
+    }
+    if (minLng !== undefined) {
+        if (Number.isNaN(parseFloat(minLng)) || !(minLng.includes('.'))) {
+            res.status(400)
+            return res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: {
+                    minLng: "Maximum longitude is invalid",
+                }
+            })
+        }
+    }
+    if (minPrice !== undefined) {
+        if (Number.isNaN(parseFloat(minPrice)) || (parseFloat(minPrice) < 0)) {
+            res.status(400)
+            return res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: {
+                    minPrice: "Maximum price must be greater than or equal to 0"
+                }
+            })
+        }
+    }
+    if (maxPrice !== undefined) {
+        if (Number.isNaN(parseFloat(maxPrice)) || (parseFloat(maxPrice) < 0)) {
+            res.status(400)
+            return res.json({
+                message: "Validation Error",
+                statusCode: 400,
+                errors: {
+                    maxPrice: "Minimum price must be greater than or equal to 0"
+                }
+            })
+        }
+    }
+
+
+
+    //all but pagination
+    let where = {}
+
+    if (minLat) { where.lat = { [Op.gt]: parseFloat(minLat) } }
+    if (maxLat) { where.lat = { [Op.lt]: parseFloat(maxLat) } }
+    if (minLng) { where.lng = { [Op.gt]: parseFloat(minLng) } }
+    if (maxLng) { where.lng = { [Op.lt]: parseFloat(maxLng) } }
+    if (minPrice) { where.price = { [Op.gt]: parseFloat(minPrice) } }
+    if (maxPrice) { where.price = { [Op.lt]: parseFloat(maxPrice) } }
+
+
+
+
+    if (Number.isNaN(page) || page < 1) page = 0;
+    if (Number.isNaN(size) || size < 1) size = 20;
+
 
     const spotBad = await Spot.findAll({
 
-        attributes: {
-            include: [
-                [
-                    sequelize.fn("AVG", sequelize.col("Reviews.stars")),
-                    "avgRating"
-                ],
+        where,
 
-            ]
-        },
-        include: [
-            {
-                model: Review,
-                attributes: []
-            },
-        ],
-        group: ['Spot.id'],
+        limit: size,
+        offset: size * (page - 1),
+        // include: [
+        //     {
+        //         model: Review,
+        //         attributes: []
+        //     },
+
+        // ],
+        // attributes: {
+        //     include: [
+        //         [
+        //             sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+        //             "avgRating"
+        //         ],
+
+        //     ]
+        // },
+        // group: ['Spot.id'],
         raw: true,
         order: [["id"]]
     })
@@ -179,8 +308,28 @@ router.get('/', async (req, res) => {
         Spots.price = spot.price
         Spots.createdAt = spot.createdAt
         Spots.updatedAt = spot.updatedAt
-        if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { Spots.avgRating = null }
-        else { Spots.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
+        // if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { Spots.avgRating = null }
+        // else { Spots.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
+
+        let avgRatingArr = await Review.findAll({
+            where: { spotId: spot.id },
+            attributes: {
+                include: [
+                    [
+                        sequelize.fn("AVG", sequelize.col("stars")),
+                        "avgRating"
+                    ]
+                ]
+            },
+            raw: true
+        })
+
+        let { avgRating } = avgRatingArr[0]
+
+
+        if (isNaN(Number.parseFloat(avgRating).toFixed(1))) { Spots.avgRating = null }
+        else { Spots.avgRating = Number.parseFloat(avgRating).toFixed(1) }
+
 
         let images = await Image.findAll({
             where: { spotId: spot.id },
@@ -200,7 +349,11 @@ router.get('/', async (req, res) => {
 
 
 
-    res.json({ Spots: spotArr })
+    res.json({
+        Spots: spotArr,
+        page: page,
+        size: size
+    })
 })
 
 
