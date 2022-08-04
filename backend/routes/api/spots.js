@@ -263,13 +263,19 @@ router.get('/', async (req, res) => {
     if (Number.isNaN(page) || page < 1) page = 0;
     if (Number.isNaN(size) || size < 1) size = 20;
 
+    let offset = null
+
+    if (page > 0) {
+        offset = size * (page - 1)
+    }
+
 
     const spotBad = await Spot.findAll({
 
         where,
 
         limit: size,
-        offset: size * (page - 1),
+        offset: offset,
         // include: [
         //     {
         //         model: Review,
