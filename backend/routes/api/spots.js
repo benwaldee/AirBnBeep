@@ -298,30 +298,30 @@ router.get('/', async (req, res) => {
         Spots.createdAt = spot.createdAt
         Spots.updatedAt = spot.updatedAt
 
-        // let avgRatingArr = await Review.findAll({
-        //     where: { spotId: spot.id },
-        //     attributes: {
-        //         include: [
-        //             [
-        //                 sequelize.fn("AVG", sequelize.col("stars")),
-        //                 "avgRating"
-        //             ],
-        //             [
-        //                 sequelize.fn("COUNT", sequelize.col("id")),
-        //                 "count"
-        //             ],
-        //         ]
-        //     },
-        //     raw: true
-        // })
+
+        let avgRatingArr = await Review.findAll({
+            where: { spotId: spot.id },
+            attributes: [
+
+                [
+                    sequelize.fn("AVG", sequelize.col("stars")),
+                    "avgRating"
+                ]
+
+            ],
+
+            raw: true
+        })
+
+        // console.log(avgRatingArr)
 
 
 
-        // let { avgRating } = avgRatingArr[0]
+        let { avgRating } = avgRatingArr[0]
 
 
-        // if (isNaN(Number.parseFloat(avgRating).toFixed(1))) { Spots.avgRating = null }
-        // else { Spots.avgRating = Number.parseFloat(avgRating).toFixed(1) }
+        if (isNaN(Number.parseFloat(avgRating).toFixed(1))) { Spots.avgRating = null }
+        else { Spots.avgRating = Number.parseFloat(avgRating).toFixed(1) }
 
 
         let images = await Image.findAll({
