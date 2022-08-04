@@ -111,8 +111,10 @@ router.get('/:spotId', async (req, res) => {
         error.status = "404"
         throw error;
     }
+    console.log(spot)
+
     //
-    if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { spot.avgStarRating = null }
+    if (isNaN(Number.parseFloat(spot.avgStarRating).toFixed(1))) { spot.avgStarRating = null }
     else { spot.avgStarRating = Number.parseFloat(spot.avgStarRating).toFixed(1) }
     //
 
