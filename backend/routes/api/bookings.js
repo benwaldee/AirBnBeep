@@ -107,7 +107,7 @@ router.put('/:bookingId', async (req, res) => {
         where: {
             spotId: oldBooking.spotId
         },
-        attributes: ["spotId", "startDate", "endDate"],
+        attributes: ["spotId", "startDate", "endDate", "userId"],
         raw: true
     })
 
@@ -122,7 +122,7 @@ router.put('/:bookingId', async (req, res) => {
         // console.log("is our start l or e to this end:", startDate <= aEndDate)
         //error fixed, need to format as date only
 
-        if ((startDate >= aStartDate) && (startDate <= aEndDate)) {
+        if ((startDate >= aStartDate) && (startDate <= aEndDate) && (userId !== booking.userId)) {
             // console.log('!!!!!!!!!!!!!!')
             const error = new Error(`Sorry, this spot is already booked for the specified dates`)
             error.status = "403"
@@ -133,7 +133,7 @@ router.put('/:bookingId', async (req, res) => {
         }
 
 
-        if ((endDate >= aStartDate) && (endDate <= aEndDate)) {
+        if ((endDate >= aStartDate) && (endDate <= aEndDate) && (userId !== booking.userId)) {
             const error = new Error(`Sorry, this spot is already booked for the specified dates`)
             error.status = "403"
             error.errors = {
