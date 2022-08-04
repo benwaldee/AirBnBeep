@@ -314,7 +314,6 @@ router.get('/', async (req, res) => {
                     ],
                 ]
             },
-            group: ["id"],
             raw: true
         })
 
