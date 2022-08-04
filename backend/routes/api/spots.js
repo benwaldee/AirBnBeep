@@ -138,6 +138,8 @@ router.get('/:spotId', async (req, res) => {
 
 //get all spots
 router.get('/', async (req, res) => {
+
+
     const spotBad = await Spot.findAll({
 
         attributes: {
