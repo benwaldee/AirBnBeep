@@ -276,23 +276,6 @@ router.get('/', async (req, res) => {
 
         limit: size,
         offset: offset,
-        // include: [
-        //     {
-        //         model: Review,
-        //         attributes: []
-        //     },
-
-        // ],
-        // attributes: {
-        //     include: [
-        //         [
-        //             sequelize.fn("AVG", sequelize.col("Reviews.stars")),
-        //             "avgRating"
-        //         ],
-
-        //     ]
-        // },
-        // group: ['Spot.id'],
         raw: true,
         order: [["id"]]
     })
@@ -327,6 +310,7 @@ router.get('/', async (req, res) => {
                     ]
                 ]
             },
+            group: ["id"],
             raw: true
         })
 
