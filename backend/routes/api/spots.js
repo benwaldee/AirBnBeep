@@ -297,33 +297,32 @@ router.get('/', async (req, res) => {
         Spots.price = spot.price
         Spots.createdAt = spot.createdAt
         Spots.updatedAt = spot.updatedAt
-        // if (isNaN(Number.parseFloat(spot.avgRating).toFixed(1))) { Spots.avgRating = null }
-        // else { Spots.avgRating = Number.parseFloat(spot.avgRating).toFixed(1) }
-
-        let avgRatingArr = await Review.findAll({
-            where: { spotId: spot.id },
-            attributes: {
-                include: [
-                    [
-                        sequelize.fn("AVG", sequelize.col("stars")),
-                        "avgRating"
-                    ],
-                    [
-                        sequelize.fn("COUNT", sequelize.col("id")),
-                        "count"
-                    ],
-                ]
-            },
-            raw: true
-        })
 
 
+        // let avgRatingArr = await Review.findAll({
+        //     where: { spotId: spot.id },
+        //     attributes: {
+        //         include: [
+        //             [
+        //                 sequelize.fn("AVG", sequelize.col("stars")),
+        //                 "avgRating"
+        //             ],
+        //             [
+        //                 sequelize.fn("COUNT", sequelize.col("id")),
+        //                 "count"
+        //             ],
+        //         ]
+        //     },
+        //     raw: true
+        // })
 
-        let { avgRating } = avgRatingArr[0]
 
 
-        if (isNaN(Number.parseFloat(avgRating).toFixed(1))) { Spots.avgRating = null }
-        else { Spots.avgRating = Number.parseFloat(avgRating).toFixed(1) }
+        // let { avgRating } = avgRatingArr[0]
+
+
+        // if (isNaN(Number.parseFloat(avgRating).toFixed(1))) { Spots.avgRating = null }
+        // else { Spots.avgRating = Number.parseFloat(avgRating).toFixed(1) }
 
 
         let images = await Image.findAll({
