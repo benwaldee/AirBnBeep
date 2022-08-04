@@ -309,7 +309,7 @@ router.get('/', async (req, res) => {
                         "avgRating"
                     ],
                     [
-                        sequelize.fn("count", sequelize.col("id")),
+                        sequelize.fn("COUNT", sequelize.col("id")),
                         "count"
                     ],
                 ]
@@ -317,7 +317,7 @@ router.get('/', async (req, res) => {
             raw: true
         })
 
-        console.log(avgRatingArr)
+
 
         let { avgRating } = avgRatingArr[0]
 
