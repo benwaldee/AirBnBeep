@@ -675,7 +675,9 @@ router.post('/:spotId/bookings', async (req, res) => {
         let aStartDate = booking.startDate
         let aEndDate = booking.endDate
 
-        // console.log("end:", aEndDate, "start:", aStartDate)
+        console.log(spotBookings)
+        console.log("end:", aEndDate, "start:", aStartDate)
+        console.log(endDate, startDate)
         // console.log("is our start g or e to this start:", startDate >= aStartDate)
         // console.log("is our start l or e to this end:", startDate <= aEndDate)
         //error fixed, need to format as date only
@@ -696,6 +698,16 @@ router.post('/:spotId/bookings', async (req, res) => {
             error.status = "403"
             error.errors = {
                 endDate: "End date conflicts with an existing booking",
+            }
+            throw error;
+        }
+
+        if ((startDate < aStartDate) && (endDate > aEndDate)) {
+            const error = new Error(`Sorry, this spot is already booked for the specified dates`)
+            error.status = "403"
+            error.errors = {
+                endDate: "End date conflicts with an existing booking",
+                startDate: "Start date conflicts with an existing booking",
             }
             throw error;
         }
