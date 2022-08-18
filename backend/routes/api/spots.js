@@ -248,7 +248,7 @@ router.get('/', async (req, res) => {
     }
 
 
-
+    //doesnt work - reassigns lat and lng and price
     //all but pagination
     let where = {}
 
@@ -259,7 +259,7 @@ router.get('/', async (req, res) => {
     if (minPrice) { where.price = { [Op.gt]: parseFloat(minPrice) } }
     if (maxPrice) { where.price = { [Op.lt]: parseFloat(maxPrice) } }
 
-
+    console.log(where)
 
 
     if (Number.isNaN(page) || page < 1) page = 0;
