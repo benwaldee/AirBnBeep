@@ -64,19 +64,12 @@ function LoginFormPage() {
                     <span className='or'>or</span>
                     <span className='line'></span>
                 </div>
-                <div className='continues'>
-                    <div className='fbDiv'>
+                <div className='demo'>
+                    <div className='demoUser'>
                         <img></img>
-                        <div>Continue with Facebook</div>
+                        <div>Login with Demo User</div>
                     </div>
-                    <div className='gDiv'>
-                        <img></img>
-                        <div>Continue with Google</div>
-                    </div>
-                    <div className='apDiv'>
-                        <img></img>
-                        <div>Continue with Apple</div>
-                    </div>
+
 
 
                 </div>
