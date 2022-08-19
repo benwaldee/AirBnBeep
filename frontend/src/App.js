@@ -15,6 +15,9 @@ function App() {
 
   return isLoaded && (
     <Switch>
+      <Route path='/' exact={true}>
+        AirbnbBeep
+      </Route>
       <Route path="/login">
         <LoginFormPage />
       </Route>
