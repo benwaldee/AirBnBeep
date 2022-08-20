@@ -31,10 +31,14 @@ const setTokenCookie = (res, user) => {
 const restoreUser = (req, res, next) => {
     // token parsed from cookies
     const { token } = req.cookies;
+
+    console.log(token)
+
     req.user = null;
 
     return jwt.verify(token, secret, null, async (err, jwtPayload) => {
         if (err) {
+            // console.log('i hit this err')
             return next();
         }
 
@@ -55,7 +59,12 @@ const restoreUser = (req, res, next) => {
 
 // If there is no current user, return an error
 const requireAuth = function (req, _res, next) {
-    if (req.user) return next();
+    if (req.user) {
+        // console.log('i am user')
+        return next();
+    }
+
+    // console.log('i am unauth')
 
     const err = new Error('Unauthorized');
     err.title = 'Unauthorized';

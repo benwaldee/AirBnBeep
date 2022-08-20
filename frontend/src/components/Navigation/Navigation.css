@@ -1,0 +1,42 @@
+li {
+    color: black
+}
+
+body {
+    margin: 0px;
+}
+
+.logoDiv {
+    /* background-color: bisque; */
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    caret-color: white;
+    margin-right: 50px;
+}
+
+.logo {
+    width: 150px;
+    height: 50px;
+    /* object-fit: cover; */
+}
+
+
+
+.inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: aqua; */
+    width: 1550px;
+    margin-left: 200px;
+    margin-right: 200px;
+    padding: 10px
+}
+
+.outer {
+    display: flex;
+    justify-content: center;
+    /* background-color: red; */
+    border-bottom: solid 1px rgba(208, 206, 206, 0.4);
+}

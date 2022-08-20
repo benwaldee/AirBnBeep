@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from "./store/session";
+import Navigation from "./components/Navigation";
+import './index.css'
 
 function App() {
   const dispatch = useDispatch();
@@ -12,15 +13,15 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return isLoaded && (
-    <Switch>
-      <Route path='/' exact={true}>
-        Airbnbeep
-      </Route>
-      <Route path="/login">
-        <LoginFormPage />
-      </Route>
-    </Switch>
+  return (
+    <>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
+        <Switch>
+
+        </Switch>
+      )}
+    </>
   );
 }
 

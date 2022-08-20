@@ -2,20 +2,20 @@
 import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 import './LoginForm.css';
 
 function LoginFormPage() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
+    // const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    if (sessionUser) return (
-        <Redirect to="/" />
-    );
+    // if (sessionUser) return (
+    //     <Redirect to="/" />
+    // );
 
 
 
@@ -29,10 +29,17 @@ function LoginFormPage() {
             });
     }
 
+    // const demoFunc = (e) => {
+
+    //     setCredential('demouser')
+    //     setPassword('password')
+    //     handleSubmit(e)
+    // }
+
     return (
         <div className='outer_div'>
             <div className='inner_div'>
-                <div className='logtitle'>Log in or sign up</div>
+                <div className='logtitle'>Log in</div>
                 <div className='welcome'>Welcome to Airbnbeep</div>
                 <form className='form' onSubmit={handleSubmit}>
                     <ul>
@@ -64,19 +71,15 @@ function LoginFormPage() {
                     <span className='or'>or</span>
                     <span className='line'></span>
                 </div>
-                <div className='continues'>
-                    <div className='fbDiv'>
+                <div className='demo'>
+                    <div className='demoUser'>
                         <img></img>
-                        <div>Continue with Facebook</div>
+                        <button onClick={(e) => {
+                            setCredential('alanturing')
+                            setPassword('aturing77')
+                        }}>Login with Demo User</button>
                     </div>
-                    <div className='gDiv'>
-                        <img></img>
-                        <div>Continue with Google</div>
-                    </div>
-                    <div className='apDiv'>
-                        <img></img>
-                        <div>Continue with Apple</div>
-                    </div>
+
 
 
                 </div>
