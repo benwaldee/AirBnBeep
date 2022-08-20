@@ -34,7 +34,7 @@ function LoginFormPage() {
         <div className='outer_div'>
             <div className='inner_div'>
                 <div className='logtitle'>Log in</div>
-                <div className='welcome'>Welcome to Airbnbeep</div>
+                <div className='welcome'>Welcome to AirBnBeep</div>
                 <form className='form' onSubmit={handleSubmit}>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
