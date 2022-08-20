@@ -6,7 +6,7 @@ import './NoUser.css'
 import menuIcon from './menuIcon.PNG'
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal'
-import { useModalOn } from '../../context/modalOn'
+// import { useModalOn } from '../../context/modalOn'
 
 
 
@@ -14,10 +14,10 @@ function NoUser() {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
-    const { modalOn, setModalOn } = useModalOn()
+    // const { modalOn, setModalOn } = useModalOn()
 
     const openMenu = () => {
-        // if (showMenu) return;
+        if (showMenu) return;
         setShowMenu(!showMenu);
     };
 
@@ -25,7 +25,7 @@ function NoUser() {
 
     useEffect(() => {
         if (!showMenu) return;
-        if (modalOn) return
+        // if (modalOn) return
 
         const ignore1 = document.getElementById('loginme')
         const ignore2 = document.getElementById('signupme')
@@ -37,11 +37,8 @@ function NoUser() {
 
 
             if (e.target === ignore1 || e.target === ignore2) {
-
-
                 return
             }
-
             setShowMenu(false);
         };
 
@@ -49,7 +46,7 @@ function NoUser() {
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu, modalOn]);
+    }, [showMenu]);
 
     // console.log(showMenu)
 

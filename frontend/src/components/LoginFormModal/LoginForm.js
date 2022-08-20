@@ -29,12 +29,6 @@ function LoginFormPage() {
             });
     }
 
-    // const demoFunc = (e) => {
-
-    //     setCredential('demouser')
-    //     setPassword('password')
-    //     handleSubmit(e)
-    // }
 
     return (
         <div className='outer_div'>

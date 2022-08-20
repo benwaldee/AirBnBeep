@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import SignupForm from './SignupForm';
-import { useModalOn } from '../../context/modalOn'
+// import { useModalOn } from '../../context/modalOn'
 
 function SignupFormModal() {
     const [showModal, setShowModal] = useState(false);
-    const { modalOn, setModalOn } = useModalOn()
+    // const { modalOn, setModalOn } = useModalOn()
     return (
         <>
             <button id='signupme' onClick={() => {
-                setModalOn(true)
+                // setModalOn(true)
                 setShowModal(true)
 
             }}>Signup</button>
             {showModal && (
                 <Modal onClose={() => {
-                    setModalOn(false)
+                    // setModalOn(false)
                     setShowModal(false)
 
                 }}>
