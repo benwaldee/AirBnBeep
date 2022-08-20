@@ -2,37 +2,56 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import './ProfileButton.css'
+import './NoUser.css'
 import menuIcon from './menuIcon.PNG'
-import UserMenu from "../Menu.js/UserMenu";
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal'
+import { useModalOn } from '../../context/modalOn'
 
 
 
-function ProfileButton({ user }) {
+function NoUser() {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
+    const { modalOn, setModalOn } = useModalOn()
+
     const openMenu = () => {
-        if (showMenu) return;
-        setShowMenu(true);
+        // if (showMenu) return;
+        setShowMenu(!showMenu);
     };
+
+    // console.log('rerender comp', 'modal is', modalOn)
 
     useEffect(() => {
         if (!showMenu) return;
+        if (modalOn) return
 
-        const closeMenu = () => {
+        const ignore1 = document.getElementById('loginme')
+        const ignore2 = document.getElementById('signupme')
+        // const ignore3 = document.getElementById('ex1')
+
+
+        const closeMenu = (e) => {
+
+
+
+            if (e.target === ignore1 || e.target === ignore2) {
+
+
+                return
+            }
+
             setShowMenu(false);
         };
+
 
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
-    }, [showMenu]);
+    }, [showMenu, modalOn]);
 
-    const logout = (e) => {
-        e.preventDefault();
-        dispatch(sessionActions.logout());
-    };
+    // console.log(showMenu)
 
     return (
         <>
@@ -47,10 +66,13 @@ function ProfileButton({ user }) {
                 </span>
             </div>
             {showMenu && (
-                <UserMenu />
+                <div>
+                    <LoginFormModal />
+                    <SignupFormModal />
+                </div>
             )}
         </>
     );
 }
 
-export default ProfileButton;
+export default NoUser;
