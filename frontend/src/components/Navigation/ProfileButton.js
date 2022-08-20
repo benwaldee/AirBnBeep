@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css'
 import menuIcon from './menuIcon.PNG'
-import UserMenu from "../Menu.js/UserMenu";
+import UserMenu from "../Menu/UserMenu";
 
 
 

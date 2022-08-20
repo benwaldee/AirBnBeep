@@ -9,6 +9,7 @@ import SignupFormModal from '../SignupFormModal'
 import { Modal, useModalContext } from '../../context/Modal';
 import LoginForm from '../LoginFormModal/LoginForm';
 import SignupForm from '../SignupFormModal/SignupForm';
+import NoUserMenu from '../Menu/NoUserMenu'
 
 
 function NoUser() {
@@ -57,10 +58,7 @@ function NoUser() {
                 </span>
             </div>
             {showMenu && (
-                <div>
-                    <LoginFormModal />
-                    <SignupFormModal />
-                </div>
+                <NoUserMenu />
             )}
             {showLoginModal && clickedLogin && (
                 <Modal onClose={() => {
