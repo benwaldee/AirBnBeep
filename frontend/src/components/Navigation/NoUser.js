@@ -6,49 +6,43 @@ import './NoUser.css'
 import menuIcon from './menuIcon.PNG'
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal'
-// import { useModalOn } from '../../context/modalOn'
-
+import { Modal, useModalContext } from '../../context/Modal';
+import LoginForm from '../LoginFormModal/LoginForm';
+import SignupForm from '../SignupFormModal/SignupForm';
 
 
 function NoUser() {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
-
-    // const { modalOn, setModalOn } = useModalOn()
+    const [clickedLogin, setClickedLogin] = useState(false);
+    const [clickedSignUp, setClickedSignUp] = useState(false);
+    const { showLoginModal, setShowLoginModal } = useModalContext();
+    const { showSignUpModal, setShowSignUpModal } = useModalContext();
 
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(!showMenu);
     };
 
-    // console.log('rerender comp', 'modal is', modalOn)
 
     useEffect(() => {
         if (!showMenu) return;
-        // if (modalOn) return
 
-        const ignore1 = document.getElementById('loginme')
-        const ignore2 = document.getElementById('signupme')
-        // const ignore3 = document.getElementById('ex1')
-
+        const loginMe = document.getElementById('loginme')
+        const signUpMe = document.getElementById('signupme')
 
         const closeMenu = (e) => {
 
-
-
-            if (e.target === ignore1 || e.target === ignore2) {
-                return
-            }
+            if (e.target === loginMe) { setClickedLogin(true) }
+            if (e.target === signUpMe) { setClickedSignUp(true) }
             setShowMenu(false);
         };
-
 
         document.addEventListener('click', closeMenu);
 
         return () => document.removeEventListener("click", closeMenu);
     }, [showMenu]);
 
-    // console.log(showMenu)
 
     return (
         <>
@@ -67,6 +61,22 @@ function NoUser() {
                     <LoginFormModal />
                     <SignupFormModal />
                 </div>
+            )}
+            {showLoginModal && clickedLogin && (
+                <Modal onClose={() => {
+                    setShowLoginModal(false)
+                }}>
+                    <LoginForm />
+                </Modal>
+            )}
+            {showSignUpModal && clickedSignUp && (
+                <Modal onClose={() => {
+                    // setModalOn(false)
+                    setShowSignUpModal(false)
+
+                }}>
+                    <SignupForm />
+                </Modal>
             )}
         </>
     );
