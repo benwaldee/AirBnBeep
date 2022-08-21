@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import './index.css'
+import NavBorder from './components/NavBorder/NavBorder'
 
 function App() {
   const dispatch = useDispatch();
@@ -16,9 +17,12 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <NavBorder />
       {isLoaded && (
         <Switch>
-
+          <Route path='/about'>
+            TODO: make about page
+          </Route>
         </Switch>
       )}
     </>

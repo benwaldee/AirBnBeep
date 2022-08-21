@@ -29,6 +29,7 @@ body {
     justify-content: space-between;
     /* background-color: aqua; */
     width: 1550px;
+    height: 60px;
     margin-left: 200px;
     margin-right: 200px;
     padding: 10px
@@ -38,5 +39,6 @@ body {
     display: flex;
     justify-content: center;
     /* background-color: red; */
-    border-bottom: solid 1px rgba(208, 206, 206, 0.4);
+
+    position: relative;
 }

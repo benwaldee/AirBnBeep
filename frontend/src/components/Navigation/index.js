@@ -25,25 +25,24 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <NoUser />
-            // <>
-            //     <LoginFormModal />
-            //     <SignupFormModal />
-            // </>
         );
     }
 
     return (
-        <div className='outer'>
-            <div className='inner'>
-                <div className='logoDiv' onClick={homeClick}>
-                    <img className='logo' src={img}></img>
+        <>
+            <div className='outer'>
+                <div className='inner'>
+                    <div className='logoDiv' onClick={homeClick}>
+                        <img className='logo' src={img}></img>
 
-                </div>
-                <div className='fileDiv' >
-                    {isLoaded && sessionLinks}
+                    </div>
+                    <div className='fileDiv' >
+                        {isLoaded && sessionLinks}
+                    </div>
                 </div>
             </div>
-        </div>
+
+        </>
     );
 }
 

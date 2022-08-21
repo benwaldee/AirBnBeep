@@ -8,10 +8,10 @@ function SignupFormModal() {
 
     return (
         <>
-            <button id='signupme' onClick={() => {
+            <button className='menubutton' id='signupme' onClick={() => {
                 setShowSignUpModal(true)
 
-            }}>Signup</button>
+            }}>Sign up</button>
 
         </>
     );

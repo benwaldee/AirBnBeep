@@ -10,7 +10,7 @@ function LoginFormModal() {
 
     return (
         <>
-            <button id='loginme' onClick={() => {
+            <button className='menubutton' id='loginme' onClick={() => {
                 setShowLoginModal(true)
                 // console.log('model opened', 'modal is', showModal)
             }}>Log In</button>

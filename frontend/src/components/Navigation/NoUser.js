@@ -46,7 +46,7 @@ function NoUser() {
 
 
     return (
-        <>
+        <div className='outerNoUser'>
             <div className='profile' onClick={openMenu}>
                 <span>
                     <img className='menuIcon' src={menuIcon}>
@@ -76,7 +76,7 @@ function NoUser() {
                     <SignupForm />
                 </Modal>
             )}
-        </>
+        </div>
     );
 }
 
