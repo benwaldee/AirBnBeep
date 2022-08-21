@@ -9,6 +9,9 @@ import UserMenu from "../Menu/UserMenu";
 
 
 function ProfileButton({ user }) {
+
+    console.log('i rendered')
+
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
@@ -35,7 +38,7 @@ function ProfileButton({ user }) {
     };
 
     return (
-        <>
+        <div className='outerProfileButton'>
             <div className='profile' onClick={openMenu}>
                 <span>
                     <img className='menuIcon' src={menuIcon}>
@@ -49,7 +52,7 @@ function ProfileButton({ user }) {
             {showMenu && (
                 <UserMenu />
             )}
-        </>
+        </div>
     );
 }
 

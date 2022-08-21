@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './UserMenu.css'
+import { Link } from 'react-router-dom'
 
 
 
@@ -17,10 +18,22 @@ function UserMenu({ user }) {
     };
 
     return (
+        <div className='userMenuOuter'>
+            <div className='userMenuInner'>
+                <div className='logoutDiv'>
+                    <button className='logout' onClick={logout}>Log Out</button>
+                </div>
 
-        <div className='userMenu'>
-            <button className='logout' onClick={logout}>Log Out</button>
+                <div className="userMenuAboutDiv">
+                    <div className="userMenuAbout" >
+                        <Link to='/about' className='userMenuAboutLink'>
+                            About
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </div>
+
 
     );
 }

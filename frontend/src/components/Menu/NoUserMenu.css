@@ -8,7 +8,7 @@
     z-index: 1;
     margin-top: 10px;
     background-color: white;
-
+    caret-color: transparent;
 }
 
 .menubutton {
@@ -19,34 +19,36 @@
     font-size: 14px;
     margin-left: 14px;
     margin-top: 20px;
-
+    caret-color: transparent;
 }
 
 #loginme {
     font-weight: bolder;
     color: rgb(71, 71, 71);
+    caret-color: transparent;
 }
 
 .about {
     background-color: white;
     border: 0px;
-    cursor: pointer;
+    /* cursor: pointer; */
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
     font-size: 14px;
     margin-left: 20px;
     margin-top: 20px;
     /* padding-top: 20px; */
 
-
+    caret-color: transparent;
 }
 
 .border {
     border-top: solid 1px rgba(208, 206, 206, 0.5);
     margin-top: 20px;
+    caret-color: transparent;
 }
 
 .aboutLink {
     text-decoration: none;
     color: black;
-
+    caret-color: transparent;
 }
