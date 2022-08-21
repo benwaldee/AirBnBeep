@@ -2,3 +2,7 @@
 .scroll {
     padding: 50px
 }
+
+html {
+    overflow-y: scroll;
+}
