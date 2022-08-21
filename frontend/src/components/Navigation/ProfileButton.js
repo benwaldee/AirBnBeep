@@ -4,11 +4,14 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './ProfileButton.css'
 import menuIcon from './menuIcon.PNG'
-import UserMenu from "../Menu.js/UserMenu";
+import UserMenu from "../Menu/UserMenu";
 
 
 
 function ProfileButton({ user }) {
+
+    console.log('i rendered')
+
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
 
@@ -35,7 +38,7 @@ function ProfileButton({ user }) {
     };
 
     return (
-        <>
+        <div className='outerProfileButton'>
             <div className='profile' onClick={openMenu}>
                 <span>
                     <img className='menuIcon' src={menuIcon}>
@@ -49,7 +52,7 @@ function ProfileButton({ user }) {
             {showMenu && (
                 <UserMenu />
             )}
-        </>
+        </div>
     );
 }
 

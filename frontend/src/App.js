@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import './index.css'
 
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,9 +17,49 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+
       {isLoaded && (
         <Switch>
-
+          <Route path='/about'>
+            TODO: make about page
+            <div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div>
+          </Route>
         </Switch>
       )}
     </>

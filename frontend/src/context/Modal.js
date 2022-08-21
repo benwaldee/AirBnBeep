@@ -4,10 +4,13 @@ import ReactDOM from 'react-dom';
 import './Modal.css';
 
 const ModalContext = React.createContext();
+export const useModalContext = () => useContext(ModalContext)
 
 export function ModalProvider({ children }) {
     const modalRef = useRef();
     const [value, setValue] = useState();
+    const [showLoginModal, setShowLoginModal] = useState(false);
+    const [showSignUpModal, setShowSignUpModal] = useState(false);
 
     useEffect(() => {
         setValue(modalRef.current);
@@ -15,7 +18,13 @@ export function ModalProvider({ children }) {
 
     return (
         <>
-            <ModalContext.Provider value={value}>
+            <ModalContext.Provider value={{
+                value,
+                showLoginModal,
+                setShowLoginModal,
+                showSignUpModal,
+                setShowSignUpModal
+            }}>
                 {children}
             </ModalContext.Provider>
             <div ref={modalRef} />
@@ -34,6 +43,6 @@ export function Modal({ onClose, children }) {
                 {children}
             </div>
         </div>,
-        modalNode
+        document.getElementById('modal-root')
     );
 }
