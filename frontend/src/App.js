@@ -22,28 +22,41 @@ function App() {
         <Switch>
           <Route path='/about'>
             TODO: make about page
-            <div>
+            <div className='scroll'>
               scroll test
-            </div>
-            <div>
+            </div><div className='scroll'>
               scroll test
-            </div>
-            <div>
+            </div><div className='scroll'>
               scroll test
-            </div>
-            <div>
+            </div><div className='scroll'>
               scroll test
-            </div><div>
+            </div><div className='scroll'>
               scroll test
-            </div><div>
+            </div><div className='scroll'>
               scroll test
-            </div><div>
+            </div><div className='scroll'>
               scroll test
-            </div><div>
+            </div><div className='scroll'>
               scroll test
-            </div><div>
+            </div><div className='scroll'>
               scroll test
-            </div><div>
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
+              scroll test
+            </div><div className='scroll'>
               scroll test
             </div>
           </Route>
