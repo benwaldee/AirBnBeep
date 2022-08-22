@@ -5,26 +5,159 @@
 .outer_div {
     display: flex;
     justify-content: center;
-
-
+    background-color: transparent;
 }
 
 .inner_div {
     text-align: center;
-    width: fit-content;
-    border: 1px solid black;
-    padding-left: 100px;
-    padding-right: 100px;
+    width: 520px;
+    height: 420px;
+    /* border: 1px solid black; */
+    /* padding-left: 100px;
+    padding-right: 100px; */
     padding-top: 20px;
     padding-bottom: 20px;
+    /* background-color: aqua; */
+    border-radius: 2%;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: white;
 }
 
 .form {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
-li {
+.wrapLoginModal {
+    border-bottom: 1px solid rgba(208, 206, 206, 0.4);
+    padding-bottom: 20px;
+    /* background-color: brown; */
+    width: 520px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nudgeLogin {
+    width: 10px;
+    height: 10px;
+    /* background-color: aqua; */
+    margin-left: 30px;
+}
+
+.loginFormX {
+    height: 18px;
+    width: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+.logtitle {
+    font-weight: bolder;
+    color: rgb(71, 71, 71);
+    caret-color: transparent;
+}
+
+.wrapWelcomeLogin {
+    text-align: start;
+    margin-top: 30px;
+    margin-left: 20px;
+    font-size: larger;
+    font-weight: bolder;
+    color: rgb(71, 71, 71);
+
+}
+
+#loginCred {
+    border: 1px solid rgba(208, 206, 206, 1);
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-right: 283px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: start;
+    font-size: 15px;
+}
+
+#loginPword {
+    border-left: 1px solid rgba(208, 206, 206, 1);
+    border-right: 1px solid rgba(208, 206, 206, 1);
+    border-bottom: 1px solid rgba(208, 206, 206, 1);
+    border-top: transparent;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-right: 283px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: start;
+    font-size: 15px;
+}
+
+#submitLogin {
+    margin-top: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 207px;
+    padding-right: 207px;
+    background-image: linear-gradient(to right, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    border: transparent;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#submitDemo {
+    margin-top: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 201px;
+    padding-right: 201px;
+    background-image: linear-gradient(to right, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    border: transparent;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.line {
+    padding-left: 105px;
+    padding-right: 105px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 7px;
+    border-bottom: 1px solid rgba(208, 206, 206, 0.5);
+    /* background-color: aqua; */
+}
+
+
+.orWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+#errorDivLogin {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: start;
+    margin-left: 15px;
+}
+
+.oneErrorDivLogin {
+    font-size: small;
+    padding-top: 3px;
     color: red;
+}
+
+#errorImgLogin {
+    height: 20px;
+    width: 20px;
+
 }

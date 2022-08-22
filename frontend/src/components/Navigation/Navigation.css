@@ -28,8 +28,8 @@ body {
     flex-direction: row;
     justify-content: space-between;
     /* background-color: aqua; */
-    width: 1550px;
     height: 55px;
+    width: 1550px;
     margin-left: 200px;
     margin-right: 200px;
     padding: 10px
