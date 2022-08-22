@@ -123,7 +123,7 @@ function SignupFormPage() {
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
-                            placeholder=" Username"
+                            placeholder="Username"
                         />
                     </div>
                     <div>

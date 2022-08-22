@@ -74,7 +74,8 @@
     border: 1px solid rgba(208, 206, 206, 1);
     padding-top: 17px;
     padding-bottom: 17px;
-    padding-right: 283px;
+    padding-right: 275px;
+    padding-left: 10px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     text-align: start;
@@ -92,7 +93,8 @@
 
     padding-top: 17px;
     padding-bottom: 17px;
-    padding-right: 283px;
+    padding-right: 275px;
+    padding-left: 10px;
     /* border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px; */
     text-align: start;
@@ -115,7 +117,8 @@
     border-top: 1px solid transparent;
     padding-top: 17px;
     padding-bottom: 17px;
-    padding-right: 283px;
+    padding-right: 275px;
+    padding-left: 10px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     text-align: start;
