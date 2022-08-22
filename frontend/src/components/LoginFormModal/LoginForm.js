@@ -91,8 +91,8 @@ function LoginFormPage() {
                 <div className='demo'>
                     <div className='demoUser'>
                         <button id='submitDemo' onClick={(e) => {
-                            setCredential('alanturing')
-                            setPassword('aturing77')
+                            setCredential('johnbon')
+                            setPassword('johnbon99!')
                         }}>Demo User</button>
                     </div>
 

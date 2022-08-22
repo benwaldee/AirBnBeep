@@ -18,6 +18,7 @@ const SpotCard = ({ spot }) => {
                         <div className="spotCardAvgRating">{spot.avgRating}</div>
                     </div>
                 </div>
+                <div className='spotCardName' >{spot.name}</div>
                 <div className="priceWrapperSpotCard">
                     <div className='spotCardPrice'>${spot.price} </div>
                     <div>night</div>
