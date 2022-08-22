@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import './index.css'
+import AllSpotsGrid from './components/AllSpotsGrid/AllSpotsGrid'
 
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
 
       {isLoaded && (
         <Switch>
+          <Route path='/' exact={true}>
+            <AllSpotsGrid />
+          </Route>
           <Route path='/about'>
             TODO: make about page
           </Route>
