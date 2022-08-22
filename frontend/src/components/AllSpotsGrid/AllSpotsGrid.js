@@ -19,7 +19,7 @@ const AllSpotsGrid = () => {
             <div id='innerAllSpotsDiv'>
                 {spotArr?.map((spot) => {
                     return (
-                        <SpotCard spot={spot} />
+                        <SpotCard key={spot.id} spot={spot} />
                     )
                 })}
             </div>
