@@ -2,6 +2,7 @@ import { getAllSpotsThunk } from "../../store/spots"
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import SpotCard from './SpotCard'
+import './AllSpotsGrid.css'
 
 const AllSpotsGrid = () => {
 
@@ -16,7 +17,7 @@ const AllSpotsGrid = () => {
     return (
         <div id='outerAllSpotsDiv'>
             <div id='innerAllSpotsDiv'>
-                {spotArr.map((spot) => {
+                {spotArr?.map((spot) => {
                     return (
                         <SpotCard spot={spot} />
                     )

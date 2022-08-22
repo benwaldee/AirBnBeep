@@ -62,19 +62,19 @@ module.exports = {
         endDate: '2022-09-17T04:33:12.000Z',
       },
       {
-        spotId: 8,
+        spotId: 1,
         userId: 9,
         startDate: '2022-01-07T04:32:12.000Z',
         endDate: '2022-01-17T04:33:12.000Z',
       },
       {
-        spotId: 9,
+        spotId: 1,
         userId: 10,
         startDate: '2022-01-17T04:33:12.000Z',
         endDate: '2022-01-17T04:13:12.000Z',
       },
       {
-        spotId: 10,
+        spotId: 1,
         userId: 1,
         startDate: '2022-03-17T04:33:12.000Z',
         endDate: '2022-03-30T04:33:12.000Z',

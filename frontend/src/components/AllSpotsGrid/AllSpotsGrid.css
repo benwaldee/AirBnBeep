@@ -1,0 +1,13 @@
+#outerAllSpotsDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#innerAllSpotsDiv {
+    width: 1550px;
+    margin-left: 200px;
+    margin-right: 260px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
