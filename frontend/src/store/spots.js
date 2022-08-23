@@ -6,7 +6,7 @@ const GET_ALL_SPOTS = 'spots/getall';
 const GET_USER_SPOTS = 'spots/getuserspots'
 const ADD_SPOT = 'spots/add'
 const DELETE_SPOT = 'spots/delete'
-
+const UPDATE_SPOT = 'spots/update'
 
 //actions
 
