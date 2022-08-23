@@ -11,7 +11,7 @@
 .inner_divSignup {
     text-align: center;
     width: 520px;
-    height: 540px;
+    height: fit-content;
     /* border: 1px solid black; */
     /* padding-left: 100px;
     padding-right: 100px; */
