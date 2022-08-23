@@ -23,8 +23,8 @@ function NoUserMenu() {
                 </div>
                 <div className="border">
                     <div className="about" >
-                        <Link to='/about' className='aboutLink'>
-                            About
+                        <Link to='/' className='aboutLink'>
+                            Home
                         </Link>
                     </div>
                 </div>

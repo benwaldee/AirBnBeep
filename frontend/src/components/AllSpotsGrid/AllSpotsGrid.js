@@ -12,7 +12,11 @@ const AllSpotsGrid = () => {
         dispatch(getAllSpotsThunk())
     }, [])
 
-    let spotArr = useSelector((state) => state.spots.Spots)
+    let spotObj = useSelector((state) => state?.spots?.allSpots)
+
+    let spotArr
+    if (spotObj) { spotArr = Object.values(spotObj) }
+
 
     return (
         <div id='outerAllSpotsDiv'>

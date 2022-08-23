@@ -11,6 +11,7 @@ export function ModalProvider({ children }) {
     const [value, setValue] = useState();
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [showSignUpModal, setShowSignUpModal] = useState(false);
+    const [showLoginFormHost, setShowLoginFormHost] = useState(false)
 
     useEffect(() => {
         setValue(modalRef.current);
@@ -23,7 +24,7 @@ export function ModalProvider({ children }) {
                 showLoginModal,
                 setShowLoginModal,
                 showSignUpModal,
-                setShowSignUpModal
+                setShowSignUpModal, showLoginFormHost, setShowLoginFormHost
             }}>
                 {children}
             </ModalContext.Provider>

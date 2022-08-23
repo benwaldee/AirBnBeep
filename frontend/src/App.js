@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import './index.css'
 import AllSpotsGrid from './components/AllSpotsGrid/AllSpotsGrid'
+import Host from "./components/Host/Host";
 
 
 function App() {
@@ -24,9 +25,12 @@ function App() {
           <Route path='/' exact={true}>
             <AllSpotsGrid />
           </Route>
-          <Route path='/about'>
-            TODO: make about page
+          <Route path='/host'>
+            <Host />
           </Route>
+          {/* <Route path='/about'>
+            TODO: make about page
+          </Route> */}
         </Switch>
       )}
     </>

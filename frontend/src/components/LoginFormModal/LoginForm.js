@@ -13,10 +13,11 @@ function LoginFormPage() {
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
-    const { showLoginModal, setShowLoginModal } = useModalContext();
+    const { showLoginModal, setShowLoginModal, showLoginFormHost, setShowLoginFormHost } = useModalContext();
 
     const onX = () => {
         setShowLoginModal(false)
+        setShowLoginFormHost(false)
     }
 
     const handleSubmit = (e) => {
