@@ -5,11 +5,13 @@ import React, { useState, useEffect } from 'react';
 import AddSpotForm from './AddSpotForm'
 import SmallSpotCard from './SmallSpotCard';
 import { Modal, useModalContext } from '../../context/Modal';
+import EditSpotForm from './EditSpotForm';
 
 const Host = () => {
     const { showLoginFormHost, setShowLoginFormHost } = useModalContext();
     const [showAddSpot, setShowAddSpot] = useState(false)
     const [renderToggle, setRenderToggle] = useState(false)
+    const [clickedEdit, setClickedEdit] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -21,6 +23,10 @@ const Host = () => {
         setShowLoginFormHost(false)
     }, [])
 
+    const addSpotFunc = () => {
+        setClickedEdit(false)
+        setShowAddSpot(!showAddSpot)
+    }
 
 
     let userSpotObj = useSelector((state) => state?.spots?.allUserSpots)
@@ -34,11 +40,22 @@ const Host = () => {
                 <div className='addSpotInner'>
                     <div className="today">Start today.</div>
                     <div className="hostSoon">List your mobile spot today! Just add a few details to create a dream getaway. </div>
-                    <div className='listingButton' onClick={() => setShowAddSpot(!showAddSpot)}>Add a listing</div>
+                    <div className='listingButton' onClick={addSpotFunc}>Add a listing</div>
                 </div>
             </div>
-            {showAddSpot && <AddSpotForm showAddSpot={showAddSpot} setShowAddSpot={setShowAddSpot} />}
+            {showAddSpot && < AddSpotForm
+                showAddSpot={showAddSpot}
+                setShowAddSpot={setShowAddSpot}
 
+            />}
+            {clickedEdit && <EditSpotForm
+                clickedEdit={clickedEdit}
+                setClickedEdit={setClickedEdit}
+                setRenderToggle={setRenderToggle}
+                renderToggle={renderToggle}
+                showAddSpot={showAddSpot}
+                setShowAddSpot={setShowAddSpot}
+            />}
             <div className='userSpotsTitleOuter'>
                 <div className='userSpotsTitle'> Your listings</div>
             </div>
@@ -46,11 +63,24 @@ const Host = () => {
                 <div className='userSpotsInner'>
                     {userSpotArr?.map((spot) => {
                         return (
-                            <SmallSpotCard key={spot.id} spot={spot} setRenderToggle={setRenderToggle} renderToggle={renderToggle} />
+                            <SmallSpotCard
+                                key={spot.id}
+                                spot={spot}
+                                setRenderToggle={setRenderToggle}
+                                renderToggle={renderToggle}
+                                clickedEdit={clickedEdit}
+                                setClickedEdit={setClickedEdit}
+                                showAddSpot={showAddSpot}
+                                setShowAddSpot={setShowAddSpot}
+
+                            />
                         )
                     })}
                 </div>
             </div>
+
+
+
         </>
     )
 }

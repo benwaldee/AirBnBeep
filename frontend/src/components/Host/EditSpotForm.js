@@ -1,54 +1,64 @@
-import { addSpotThunk } from '../../store/spots'
+import { editSpotThunk } from '../../store/spots'
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import img from '../LoginFormModal/x.jpg'
 import exclImg from '../LoginFormModal/excl.PNG'
 import './AddSpotForm.css'
 
-const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit, }) => {
+
+const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderToggle, showAddSpot, setShowAddSpot }) => {
+
+    let spotID = parseInt(clickedEdit)
+
+    const userSpots = useSelector((state) => state.spots.allUserSpots)
+
+    const editingSpot = userSpots[spotID]
 
     const dispatch = useDispatch();
 
-    const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [city, setCity] = useState("");
-    const [country, setCountry] = useState("");
-    const [state, setState] = useState("");
-    const [address, setAddress] = useState("");
+    const [name, setName] = useState(editingSpot.name);
+    const [price, setPrice] = useState(editingSpot.price);
+    const [description, setDescription] = useState(editingSpot.description);
+    const [city, setCity] = useState(editingSpot.city);
+    const [country, setCountry] = useState(editingSpot.country);
+    const [state, setState] = useState(editingSpot.state);
+    const [address, setAddress] = useState(editingSpot.address);
     // const [previewImage, setPreviewImage] = useState("");
     const [errors, setErrors] = useState([]);
     const [charCount, setCharCount] = useState(0)
 
     const onX = () => {
-        setShowAddSpot(false)
+        setClickedEdit(false)
     }
+
+    // const valueFill = (stateVar, spotVar) => {
+    //     if (stateVar === '') return stateVar
+    //     if (stateVar) return stateVar
+    //     if (!stateVar) return spotVar
+    // }
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setShowAddSpot(false)
+
         setErrors([]);
-        dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
+        dispatch(editSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0, spotID: editingSpot.id }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
                     setErrors(data.errors)
-                    // for (let error of data.errors) {
-                    //     if (error === 'Password must be 6 characters or more.') {
-                    //         setPassword('')
-                    //         setConfirmPassword('')
-                    //     }
 
-                    // }
                 };
             });
 
-
-        setShowAddSpot(false)
+        setRenderToggle(!renderToggle)
+        setClickedEdit(false)
 
         return
     }
+
 
 
     return (
@@ -56,7 +66,7 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
             <div className="inner_divAddSpot">
                 <div className='wrapAddSpot'>
                     <img className='addSpotX' onClick={onX} src={img}></img>
-                    <div className='addSpotTitle'>Create a Listing</div>
+                    <div className='addSpotTitle'>Edit listing for {editingSpot.name}</div>
                     <div className='nudgeAddSpot'></div>
                 </div>
                 <div id='errorDivAddSpot'>
@@ -160,7 +170,7 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
                             placeholder="Link for Preview Image"
                         />
                     </div> */}
-                    <button id='submitAddSpot' type="submit">Create Listing!</button>
+                    <button id='submitAddSpot' type="submit">Save</button>
                 </form>
             </div>
         </div>
@@ -168,4 +178,4 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
 }
 
 
-export default AddSpotForm
+export default EditSpotForm

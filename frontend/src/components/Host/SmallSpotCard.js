@@ -6,9 +6,10 @@ import { deleteSpotThunk } from '../../store/spots';
 import { useDispatch } from 'react-redux';
 import { Alert } from 'react'
 
-const SmallSpotCard = ({ spot, setRenderToggle, renderToggle }) => {
+const SmallSpotCard = ({ spot, setRenderToggle, renderToggle, clickedEdit, setClickedEdit, showAddSpot, setShowAddSpot }) => {
 
     const [clickedDelete, setClickedDelete] = useState(false)
+
 
     const dispatch = useDispatch()
 
@@ -19,6 +20,16 @@ const SmallSpotCard = ({ spot, setRenderToggle, renderToggle }) => {
         setRenderToggle(!renderToggle)
         setClickedDelete(false)
 
+    }
+
+    const clickingEdit = () => {
+        setShowAddSpot(false)
+        setClickedDelete(false)
+
+        if (clickedEdit) {
+            return
+        }
+        else setClickedEdit(spot.id)
     }
 
     return (
@@ -39,12 +50,13 @@ const SmallSpotCard = ({ spot, setRenderToggle, renderToggle }) => {
                     <div>night</div>
                 </div>
                 <div className='spotButtons'>
-                    <div id='editSpot'>Edit</div>
-                    {!clickedDelete && <div className='deleteSpot' onClick={() => setClickedDelete(true)}>Delete</div>}
-                    {clickedDelete && <div className='deleteSpot' onClick={deleteSpot}>DELETE</div>}
+                    <div id='editSpot' onClick={clickingEdit}>Edit</div>
+                    {!clickedDelete && <div className='deleteSpot' onClick={() => {
+                        setClickedDelete(true)
+                        setClickedEdit(false)
+                    }}>Delete</div>}
+                    {clickedDelete && <div className='deleteSpot' onClick={deleteSpot}>Continue</div>}
                     {clickedDelete && <div className='cancelDeleteSpot' onClick={() => setClickedDelete(false)}>Cancel</div>}
-
-
                 </div>
             </div>
         </div>
