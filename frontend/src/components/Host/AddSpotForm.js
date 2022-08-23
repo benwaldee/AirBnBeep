@@ -128,7 +128,7 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot }) => {
                     <div>
                         <input
                             id='addSpotPrice'
-                            type="text"
+                            type="number"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             required

@@ -25,7 +25,7 @@ const Host = () => {
                 <div className='addSpotInner'>
                     <div className="today">Start today.</div>
                     <div className="hostSoon">List your mobile spot today! Just add a few details to create a dream getaway. </div>
-                    <div className='listingButton' onClick={() => setShowAddSpot(true)}>Add a listing</div>
+                    <div className='listingButton' onClick={() => setShowAddSpot(!showAddSpot)}>Add a listing</div>
                 </div>
             </div>
 

@@ -25,13 +25,14 @@
     box-shadow: 0px 0px 12px rgb(170, 170, 170);
     padding: 15px;
     margin-top: 10px;
+    caret-color: transparent;
 }
 
 .formAddSpot {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    caret-color: transparent;
 }
 
 .wrapAddSpot {
@@ -41,6 +42,7 @@
     width: 520px;
     display: flex;
     justify-content: space-between;
+    caret-color: transparent;
 }
 
 .nudgeAddSpot {
@@ -55,7 +57,7 @@
     width: 25px;
     cursor: pointer;
     margin-left: 10px;
-
+    caret-color: transparent;
 }
 
 .addSpotTitle {
@@ -119,6 +121,12 @@
     border-bottom-right-radius: 5px;
     text-align: start;
     font-size: 15px;
+}
+
+#addSpotPrice::-webkit-outer-spin-button,
+#addSpotPrice::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #submitAddSpot {
