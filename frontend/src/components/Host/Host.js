@@ -3,6 +3,7 @@ import { getUserSpotsThunk } from "../../store/spots"
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import AddSpotForm from './AddSpotForm'
+import SmallSpotCard from './SmallSpotCard';
 
 const Host = () => {
 
@@ -28,8 +29,20 @@ const Host = () => {
                     <div className='listingButton' onClick={() => setShowAddSpot(!showAddSpot)}>Add a listing</div>
                 </div>
             </div>
-
             {showAddSpot && <AddSpotForm showAddSpot={showAddSpot} setShowAddSpot={setShowAddSpot} />}
+
+            <div className='userSpotsTitleOuter'>
+                <div className='userSpotsTitle'> Your listings</div>
+            </div>
+            <div className='userSpotsOuter'>
+                <div className='userSpotsInner'>
+                    {userSpotArr?.map((spot) => {
+                        return (
+                            <SmallSpotCard spot={spot} />
+                        )
+                    })}
+                </div>
+            </div>
         </>
     )
 }
