@@ -4,9 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import AddSpotForm from './AddSpotForm'
 import SmallSpotCard from './SmallSpotCard';
+import { Modal, useModalContext } from '../../context/Modal';
 
 const Host = () => {
-
+    const { showLoginFormHost, setShowLoginFormHost } = useModalContext();
     const [showAddSpot, setShowAddSpot] = useState(false)
 
     const dispatch = useDispatch()
@@ -14,6 +15,10 @@ const Host = () => {
     useEffect(() => {
         dispatch(getUserSpotsThunk())
     }, [showAddSpot])
+
+    useEffect(() => {
+        setShowLoginFormHost(false)
+    }, [])
 
     let userSpotObj = useSelector((state) => state?.spots?.allUserSpots)
 
