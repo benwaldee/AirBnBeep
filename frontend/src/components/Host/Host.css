@@ -54,7 +54,7 @@
 }
 
 .listingButton:hover {
-    box-shadow: 0px 0px 12px rgb(170, 170, 170);
+    box-shadow: 0px 0px 12px rgb(255, 255, 255);
 }
 
 .userSpotsInner {
@@ -66,6 +66,7 @@
 .userSpotsOuter {
     display: flex;
     justify-content: center;
+    margin-bottom: 100px;
 }
 
 .userSpotsTitle {

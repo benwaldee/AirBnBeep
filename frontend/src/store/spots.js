@@ -39,6 +39,8 @@ const deleteSpotAction = (spotId) => {
 }
 
 const editSpotAction = (editSpot) => {
+
+    console.log('editSPot in act', editSpot)
     return {
         type: UPDATE_SPOT,
         payload: editSpot
@@ -63,7 +65,7 @@ export const getUserSpotsThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots/current');
     const spots = await response.json();
 
-    console.log('spots thunk fetch return', spots)
+    // console.log('spots thunk fetch return', spots)
 
     dispatch(getUserSpotsAction(spots));
     return response;
@@ -109,6 +111,8 @@ export const editSpotThunk = ({ name, price, description, city, country, state, 
         body: JSON.stringify(editOb)
     });
     const editSpot = await response.json();
+
+    // console.log('editSPot in thunk ebfore act', editSpot)
     dispatch(editSpotAction(editSpot));
     return response;
 };
@@ -157,7 +161,13 @@ const spotsReducer = (state = initialState, action) => {
 
         case UPDATE_SPOT:
             spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+
+
+            // console.log('editSPot in reducer', action)
+
             spots.allSpots[action.payload.id] = action.payload
+            spots.allUserSpots[action.payload.id] = action.payload
+
             return spots
 
         default:

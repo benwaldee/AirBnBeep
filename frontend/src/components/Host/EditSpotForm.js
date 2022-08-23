@@ -25,7 +25,7 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
     const [address, setAddress] = useState(editingSpot.address);
     // const [previewImage, setPreviewImage] = useState("");
     const [errors, setErrors] = useState([]);
-    const [charCount, setCharCount] = useState(0)
+    const [charCount, setCharCount] = useState(editingSpot.description.length)
 
     const onX = () => {
         setClickedEdit(false)
