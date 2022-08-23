@@ -44,7 +44,7 @@ export const getUserSpotsThunk = () => async (dispatch) => {
 
 //reducer
 
-const initialState = { allSpots: null };
+const initialState = { allSpots: null, allUserSpots: null };
 
 const spotsReducer = (state = initialState, action) => {
 
@@ -52,7 +52,7 @@ const spotsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case GET_ALL_SPOTS:
-            spots = { ...state }
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
             let allSpots = {}
             for (let spot of action.payload.Spots) {
                 allSpots[spot.id] = spot
@@ -61,7 +61,7 @@ const spotsReducer = (state = initialState, action) => {
             return spots
         case GET_USER_SPOTS:
 
-            spots = { ...state }
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
             let allUserSpots = {}
             for (let spot of action.payload.Spots) {
                 allUserSpots[spot.id] = spot
