@@ -53,7 +53,7 @@ export const getUserSpotsThunk = () => async (dispatch) => {
 
 export const addSpotThunk = ({ name, price, description, city, country, state, address, lat, lng }) => async (dispatch) => {
 
-    const postObj = { name, price, description, city, country, state, address, lat, lng }
+    const postOb = { name, price, description, city, country, state, address, lat, lng }
 
 
     const response = await csrfFetch('/api/spots', {
@@ -61,7 +61,7 @@ export const addSpotThunk = ({ name, price, description, city, country, state, a
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(postObj)
+        body: JSON.stringify(postOb)
     });
     const newSpot = await response.json();
     dispatch(addSpotAction(newSpot));
