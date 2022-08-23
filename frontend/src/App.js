@@ -28,9 +28,9 @@ function App() {
           <Route path='/host'>
             <Host />
           </Route>
-          <Route path='/about'>
+          {/* <Route path='/about'>
             TODO: make about page
-          </Route>
+          </Route> */}
         </Switch>
       )}
     </>
