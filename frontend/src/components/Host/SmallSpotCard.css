@@ -88,16 +88,28 @@
 }
 
 #editSpot:hover,
-#deleteSpot:hover {
+.deleteSpot:hover,
+.cancelDeleteSpot:hover {
     background-color: rgba(170, 170, 170, 0.4);
 
 }
 
-#deleteSpot {
+.deleteSpot {
     cursor: pointer;
     padding: 4px 10px;
 
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgb(170, 170, 170);
     caret-color: transparent;
+}
+
+.cancelDeleteSpot {
+    cursor: pointer;
+    padding: 4px 10px;
+
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgb(170, 170, 170);
+    caret-color: transparent;
+    width: 50px;
+    color: red;
 }
