@@ -11,6 +11,7 @@
 
 #outerSpotCardDiv {
     margin: 15px 15px 35px 15px;
+    cursor: pointer;
 }
 
 .spotCardLocation {
