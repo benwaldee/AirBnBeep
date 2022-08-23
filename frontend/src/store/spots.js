@@ -5,6 +5,7 @@ import { csrfFetch } from './csrf';
 const GET_ALL_SPOTS = 'spots/getall';
 const GET_USER_SPOTS = 'spots/getuserspots'
 const ADD_SPOT = 'spots/add'
+const DELETE_SPOT = 'spots/delete'
 
 
 //actions
@@ -30,6 +31,13 @@ const addSpotAction = (newSpot) => {
     }
 }
 
+const deleteSpotAction = (spotId) => {
+    return {
+        type: DELETE_SPOT,
+        payload: spotId
+    }
+}
+
 //thunks
 
 export const getAllSpotsThunk = () => async (dispatch) => {
@@ -47,6 +55,9 @@ export const getUserSpotsThunk = () => async (dispatch) => {
 
     const response = await csrfFetch('/api/spots/current');
     const spots = await response.json();
+
+    console.log('spots thunk fetch return', spots)
+
     dispatch(getUserSpotsAction(spots));
     return response;
 };
@@ -67,6 +78,17 @@ export const addSpotThunk = ({ name, price, description, city, country, state, a
     dispatch(addSpotAction(newSpot));
     return response;
 };
+
+export const deleteSpotThunk = (spotId) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+    });
+    const deleted = await response.json();
+    dispatch(deleteSpotAction(spotId));
+    return response;
+};
+
 
 
 
@@ -102,6 +124,15 @@ const spotsReducer = (state = initialState, action) => {
             spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
             spots.allSpots[action.payload.id] = action.payload
             return spots
+
+        case DELETE_SPOT:
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+
+            delete spots.allSpots[action.payload]
+            delete spots.allUserSpots[action.payload]
+
+            return spots
+
         default:
             return state;
     }

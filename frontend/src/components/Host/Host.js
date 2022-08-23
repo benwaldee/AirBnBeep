@@ -9,16 +9,19 @@ import { Modal, useModalContext } from '../../context/Modal';
 const Host = () => {
     const { showLoginFormHost, setShowLoginFormHost } = useModalContext();
     const [showAddSpot, setShowAddSpot] = useState(false)
+    const [renderToggle, setRenderToggle] = useState(false)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getUserSpotsThunk())
-    }, [showAddSpot])
+    }, [showAddSpot, renderToggle])
 
     useEffect(() => {
         setShowLoginFormHost(false)
     }, [])
+
+
 
     let userSpotObj = useSelector((state) => state?.spots?.allUserSpots)
 
@@ -43,7 +46,7 @@ const Host = () => {
                 <div className='userSpotsInner'>
                     {userSpotArr?.map((spot) => {
                         return (
-                            <SmallSpotCard spot={spot} />
+                            <SmallSpotCard key={spot.id} spot={spot} setRenderToggle={setRenderToggle} renderToggle={renderToggle} />
                         )
                     })}
                 </div>
