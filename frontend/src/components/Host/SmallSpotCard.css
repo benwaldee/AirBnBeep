@@ -1,0 +1,115 @@
+* {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}
+
+.smallSpotCardImage {
+    height: 240px;
+    width: 240px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+#outerSmallSpotCardDiv {
+    margin: 15px 15px 15px 15px;
+
+}
+
+#innerSmallSpotCardDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 360px
+}
+
+.smallSpotCardLocation {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.priceWrapperSmallSpotCard {
+    display: flex;
+    flex-direction: row;
+    margin-top: 7px;
+    margin-bottom: 5px;
+}
+
+.smallSpotCardPrice {
+
+    margin-right: 4px;
+    font-weight: 700;
+    color: rgb(49, 49, 49);
+}
+
+.smallSpotCardTitleWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.smallSpotCardStar {
+    height: 20px;
+    width: 20px;
+    padding-top: 3px;
+}
+
+.smallSpotCardRatingWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.smallSpotCardAvgRating {
+    margin-right: 5px;
+    margin-left: 3px;
+    padding-top: 5px;
+}
+
+.smallSpotCardName {
+    color: rgb(85, 85, 85);
+}
+
+.spotButtons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+
+}
+
+#editSpot {
+    margin-right: 30px;
+    cursor: pointer;
+    padding: 4px 10px;
+    /* border: solid 1px black; */
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgb(170, 170, 170);
+    /* background-color: rgb(251, 79, 182); */
+    text-align: center;
+    caret-color: transparent;
+}
+
+#editSpot:hover,
+.deleteSpot:hover,
+.cancelDeleteSpot:hover {
+    background-color: rgba(170, 170, 170, 0.4);
+
+}
+
+.deleteSpot {
+    cursor: pointer;
+    padding: 4px 10px;
+
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgb(170, 170, 170);
+    caret-color: transparent;
+}
+
+.cancelDeleteSpot {
+    cursor: pointer;
+    padding: 4px 10px;
+
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgb(170, 170, 170);
+    caret-color: transparent;
+    width: 50px;
+    color: red;
+}

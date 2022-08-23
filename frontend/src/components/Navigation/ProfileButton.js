@@ -45,7 +45,7 @@ function ProfileButton({ user }) {
                     </img>
                 </span>
                 <span>
-                    <img className='noUser' src="https://icon-library.com/images/no-user-image-icon/no-user-image-icon-0.jpg">
+                    <img className='noUser' src="https://www.citypng.com/public/uploads/preview/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq.png">
                     </img>
                 </span>
             </div>

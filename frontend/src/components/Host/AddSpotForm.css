@@ -1,0 +1,190 @@
+* {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}
+
+.outer_divAddSpot {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+
+}
+
+.inner_divAddSpot {
+    text-align: center;
+    width: 520px;
+    height: fit-content;
+    /* border: 1px solid black; */
+    /* padding-left: 100px;
+    padding-right: 100px; */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    /* background-color: aqua; */
+    border-radius: 2%;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: white;
+    box-shadow: 0px 0px 12px rgb(170, 170, 170);
+    padding: 15px;
+    margin-top: 10px;
+    /* caret-color: transparent; */
+}
+
+.formAddSpot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* caret-color: transparent; */
+}
+
+.wrapAddSpot {
+    border-bottom: 1px solid rgba(208, 206, 206, 0.4);
+    padding-bottom: 20px;
+    /* background-color: brown; */
+    width: 520px;
+    display: flex;
+    justify-content: space-between;
+    caret-color: transparent;
+}
+
+.nudgeAddSpot {
+    width: 10px;
+    height: 10px;
+    /* background-color: aqua; */
+    margin-left: 30px;
+}
+
+.addSpotX {
+    height: 18px;
+    width: 25px;
+    cursor: pointer;
+    margin-left: 10px;
+    caret-color: transparent;
+}
+
+.addSpotTitle {
+    font-weight: bolder;
+    color: rgb(71, 71, 71);
+    caret-color: transparent;
+}
+
+
+
+#addSpotName {
+    border: 1px solid rgba(208, 206, 206, 1);
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-right: 275px;
+    padding-left: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: start;
+    font-size: 15px;
+}
+
+#addSpotAddress,
+#addSpotCity,
+#addSpotState,
+#addSpotCountry {
+    border-left: 1px solid rgba(208, 206, 206, 1);
+    border-right: 1px solid rgba(208, 206, 206, 1);
+    border-bottom: 1px solid rgba(208, 206, 206, 1);
+    border-top: 1px solid transparent;
+
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-right: 275px;
+    padding-left: 10px;
+    /* border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px; */
+    text-align: start;
+    font-size: 15px;
+}
+
+#addSpotName:focus,
+#addSpotAddress:focus,
+#addSpotCity:focus,
+#addSpotState:focus,
+#addSpotCountry:focus,
+#addSpotPrice:focus {
+    border: 1px solid rgb(0, 0, 0);
+}
+
+#addSpotPrice {
+    border-left: 1px solid rgba(208, 206, 206, 1);
+    border-right: 1px solid rgba(208, 206, 206, 1);
+    border-bottom: 1px solid rgba(208, 206, 206, 1);
+    border-top: 1px solid transparent;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-right: 275px;
+    padding-left: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: start;
+    font-size: 15px;
+}
+
+#addSpotPrice::-webkit-outer-spin-button,
+#addSpotPrice::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#submitAddSpot {
+    margin-top: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 207px;
+    padding-right: 207px;
+    background-image: linear-gradient(to right, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    border: transparent;
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+
+
+#errorDivAddSpot {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 15px;
+}
+
+.oneErrorDivAddSpot {
+    font-size: small;
+    padding-top: 3px;
+    color: red;
+}
+
+#errorImgAddSpot {
+    height: 20px;
+    width: 20px;
+
+}
+
+#alignIndAddSpot {
+    display: flex;
+    flex-direction: row;
+}
+
+#addSpotDescription {
+    margin-top: 10px;
+    width: 470px;
+    height: 100px;
+    resize: none;
+    font-size: 15px;
+
+    padding-top: 7px;
+}
+
+.charCount {
+    font-size: 12px;
+    color: rgb(156, 156, 156);
+    margin-left: 445px;
+}
