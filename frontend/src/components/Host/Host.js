@@ -15,7 +15,7 @@ const Host = () => {
 
     useEffect(() => {
         dispatch(getUserSpotsThunk())
-    }, [showAddSpot, renderToggle])
+    }, [showAddSpot])
 
     useEffect(() => {
         setShowLoginFormHost(false)
