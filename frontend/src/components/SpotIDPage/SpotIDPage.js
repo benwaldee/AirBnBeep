@@ -62,6 +62,10 @@ const SpotIDPage = () => {
 
     }, [showAddReview, showEdit])
 
+
+
+
+
     const handleSubmit = (e) => {
 
         e.preventDefault()
@@ -78,6 +82,8 @@ const SpotIDPage = () => {
         setReviewMessage('')
         setStars(0)
         setShowAddReview(false)
+
+
 
     }
 
@@ -98,6 +104,8 @@ const SpotIDPage = () => {
         setStarsEdit(starsEdit)
         setShowEdit(false)
 
+
+
     }
 
     const addReview = () => {
@@ -110,15 +118,19 @@ const SpotIDPage = () => {
         }
         setShowAddReview(!showAddReview)
 
+
+
     }
 
     const showEditFunc = (review) => {
 
-        console.log(review)
+        // console.log(review)
 
         setShowEdit(!showEdit)
         setStarsEdit(review.stars)
         setReviewMessageEdit(review.review)
+
+
     }
 
     const deleteReviewFunc = (revId) => {
@@ -126,6 +138,8 @@ const SpotIDPage = () => {
         dispatch(deleteReviewThunk(revId))
 
     }
+
+
 
 
     if (oneSpot && revObj) {
@@ -169,10 +183,13 @@ const SpotIDPage = () => {
 
                         </div>}
 
+
+
                         {revArr?.map((review) => {
                             return (
                                 <div className='reviewCardOuter' key={review.id}>
-                                    <div> {review.User?.firstName}</div>
+                                    {sessionUser.id === review.userId && <div> {sessionUser.firstName}</div>}
+                                    {sessionUser.id !== review.userId && <div> {review.User?.firstName}</div>}
                                     <div> {review.createdAt}</div>
                                     <div>{review.stars}</div>
                                     <div>{review.review}</div>
