@@ -104,6 +104,8 @@ export const addSpotThunk = ({ name, price, description, city, country, state, a
     const newSpot = await response.json();
     dispatch(addSpotAction(newSpot));
     return newSpot;
+
+
 };
 
 export const deleteSpotThunk = (spotId) => async (dispatch) => {
