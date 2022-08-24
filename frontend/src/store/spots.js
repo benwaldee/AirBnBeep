@@ -49,12 +49,12 @@ const editSpotAction = (editSpot) => {
     }
 }
 
-const addImageToSpotAction = (img) => {
+const addImageToSpotAction = ({ url, spotID }) => {
 
 
     return {
         type: ADD_IMAGE_TO_SPOT,
-        payload: img
+        payload: { url, spotID }
     }
 }
 
@@ -160,7 +160,7 @@ export const addImageToSpotThunk = ({ url, previewImage, spotID }) => async (dis
     const image = await response.json();
 
     // console.log('editSPot in thunk ebfore act', editSpot)
-    dispatch(addImageToSpotAction(image));
+    dispatch(addImageToSpotAction({ url: image.url, spotID: spotID }));
     return response;
 };
 
@@ -226,6 +226,7 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_IMAGE_TO_SPOT:
             //dont want image slcie of state so just update state
             spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots.allUserSpots[action.payload.spotID].previewImage = action.payload.url
             return spots
 
         default:

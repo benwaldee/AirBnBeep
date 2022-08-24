@@ -33,16 +33,10 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
         e.preventDefault();
 
         setErrors([]);
-        const newSpot = dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setErrors(data.errors)
-                };
-            });
+        dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
+            .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
 
 
-        dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id }))
 
         setShowAddSpot(false)
 
