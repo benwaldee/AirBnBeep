@@ -7,7 +7,7 @@ const GET_USER_SPOTS = 'spots/getuserspots'
 const ADD_SPOT = 'spots/add'
 const DELETE_SPOT = 'spots/delete'
 const UPDATE_SPOT = 'spots/update'
-// const GET_ONE_SPOT = 'spots/getonespot'
+const GET_ONE_SPOT = 'spots/getonespot'
 const ADD_IMAGE_TO_SPOT = 'spots/addimage'
 
 //actions
@@ -58,12 +58,12 @@ const addImageToSpotAction = ({ url, spotID }) => {
     }
 }
 
-// const getOneSpotAction = (oneSpot) => {
-//     return {
-//         type: GET_ONE_SPOT,
-//         payload: oneSpot
-//     }
-// }
+const getOneSpotAction = (oneSpot) => {
+    return {
+        type: GET_ONE_SPOT,
+        payload: oneSpot
+    }
+}
 
 //thunks
 
@@ -137,13 +137,13 @@ export const editSpotThunk = ({ name, price, description, city, country, state, 
     return editSpot;
 };
 
-// export const getSpotByIDThunk = (spotID) => async (dispatch) => {
+export const getSpotByIDThunk = (spotID) => async (dispatch) => {
 
-//     const response = await csrfFetch(`/api/spots/${spotID}`);
-//     const oneSpot = await response.json();
-//     dispatch(getOneSpotAction(oneSpot));
-//     return response;
-// };
+    const response = await csrfFetch(`/api/spots/${spotID}`);
+    const oneSpot = await response.json();
+    dispatch(getOneSpotAction(oneSpot));
+    return response;
+};
 
 export const addImageToSpotThunk = ({ url, previewImage, spotID }) => async (dispatch) => {
 
@@ -167,7 +167,7 @@ export const addImageToSpotThunk = ({ url, previewImage, spotID }) => async (dis
 
 //reducer
 
-const initialState = { allSpots: null, allUserSpots: null };
+const initialState = { allSpots: null, allUserSpots: null, oneSpot: null };
 
 const spotsReducer = (state = initialState, action) => {
 
@@ -175,7 +175,7 @@ const spotsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case GET_ALL_SPOTS:
-            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: null }
             let allSpots = {}
             for (let spot of action.payload.Spots) {
                 allSpots[spot.id] = spot
@@ -184,7 +184,7 @@ const spotsReducer = (state = initialState, action) => {
             return spots
         case GET_USER_SPOTS:
 
-            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: { ...state.oneSpot } }
             let allUserSpots = {}
             for (let spot of action.payload.Spots) {
                 allUserSpots[spot.id] = spot
@@ -194,13 +194,13 @@ const spotsReducer = (state = initialState, action) => {
             return spots
 
         case ADD_SPOT:
-            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: { ...state.oneSpot } }
             spots.allSpots[action.payload.id] = action.payload
             spots.allUserSpots[action.payload.id] = action.payload
             return spots
 
         case DELETE_SPOT:
-            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: { ...state.oneSpot } }
 
             delete spots.allSpots[action.payload]
             delete spots.allUserSpots[action.payload]
@@ -208,7 +208,7 @@ const spotsReducer = (state = initialState, action) => {
             return spots
 
         case UPDATE_SPOT:
-            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: { ...state.oneSpot } }
 
             // console.log('editSPot in reducer', action)
 
@@ -217,11 +217,11 @@ const spotsReducer = (state = initialState, action) => {
 
             return spots
 
-        // case GET_ONE_SPOT:
-        //     spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
-        //     spots.oneSpot = action.payload
+        case GET_ONE_SPOT:
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots }, oneSpot: { ...state.oneSpot } }
+            spots.oneSpot = action.payload
 
-        //     return spots
+            return spots
 
         case ADD_IMAGE_TO_SPOT:
             //dont want image slcie of state so just update state
