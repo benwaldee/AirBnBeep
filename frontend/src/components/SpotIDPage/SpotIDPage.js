@@ -7,15 +7,24 @@ import { getReviewsBySpotIDThunk } from '../../store/reviews'
 
 const SpotIDPage = () => {
 
+    const [showAddReview, setShowAddReview] = useState(false)
+    const [errors, setErrors] = useState([]);
+
     const history = useHistory()
 
     let { spotID } = useParams()
     spotID = parseInt(spotID)
 
+
     const dispatch = useDispatch()
 
     const oneSpot = useSelector((state) => state.spots?.oneSpot)
     const revObj = useSelector((state => state.reviews?.oneSpotReviews))
+    const sessionUser = useSelector((state) => state.sessionUser)
+    const allSpots = useSelector((state) => state.spots.allSpots)
+
+
+
 
     let revArr;
 
@@ -24,19 +33,24 @@ const SpotIDPage = () => {
         revArr = Object.values(revObj)
     }
 
-    console.log('my review array', revArr)
-
     useEffect(() => {
         dispatch(getSpotByIDThunk(spotID))
             .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-
-
-                };
-            })
+                if (!res.ok) {
+                    history.push('/404')
+                }
+            }
+            )
         dispatch(getReviewsBySpotIDThunk(spotID))
+            .catch(async (res) => {
+                if (!res.ok) {
+                    history.push('/404')
+                }
+            }
+            )
+
     }, [])
+
 
 
     if (oneSpot && revObj) {
@@ -56,9 +70,15 @@ const SpotIDPage = () => {
                     <div>{oneSpot?.description}</div>
                     <div className='reviewDiv'>
                         <div>Reviews</div>
+                        <div className='addReview' onClick={() => setShowAddReview(!showAddReview)}> Add a Review!</div>
+                        {showAddReview && <div className='addReviewForm'>
+                            form
+
+                        </div>}
+
                         {revArr?.map((review) => {
                             return (
-                                <div key='review.id'>
+                                <div key={review.id}>
                                     <div> {review.User.firstName}</div>
                                     <div> {review.createdAt}</div>
                                     <div>{review.stars}</div>

@@ -50,6 +50,11 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
             alert('Price cannot exceed $1000 per night')
             return
         }
+        if (price < 0) {
+            setPrice('')
+            alert('Price cannot be negative')
+            return
+        }
 
 
         dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
