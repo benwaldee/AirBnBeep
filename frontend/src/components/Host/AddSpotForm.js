@@ -25,14 +25,33 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
         setShowAddSpot(false)
     }
 
-
+    console.log('hi'.length)
 
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
-
         setErrors([]);
+        console.log(typeof (imageURL))
+        console.log(imageURL.includes('.png'))
+
+        let endURL = imageURL.slice(imageURL.length - 7, imageURL.length)
+
+        if (!endURL.includes('.png') && !endURL.includes('.jpg') && !endURL.includes('.jpeg') && !endURL.includes('svg')) {
+
+            setImageURL('')
+            alert('Image URL must end in .png .jpg .jpeg or .svg')
+            return
+
+        }
+
+        if (price > 1000) {
+            setPrice('')
+            alert('Price cannot exceed $1000 per night')
+            return
+        }
+
+
         dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
             .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
 
