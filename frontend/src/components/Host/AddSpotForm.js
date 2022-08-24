@@ -1,6 +1,6 @@
-import { addSpotThunk } from '../../store/spots'
+import { addSpotThunk, addImageToSpotThunk } from '../../store/spots'
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import img from '../LoginFormModal/x.jpg'
 import exclImg from '../LoginFormModal/excl.PNG'
 import './AddSpotForm.css'
@@ -19,36 +19,38 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
     // const [previewImage, setPreviewImage] = useState("");
     const [errors, setErrors] = useState([]);
     const [charCount, setCharCount] = useState(0)
+    const [imageURL, setImageURL] = useState('')
 
     const onX = () => {
         setShowAddSpot(false)
     }
 
 
-    const handleSubmit = (e) => {
+
+
+    const handleSubmit = async (e) => {
+
         e.preventDefault();
 
         setErrors([]);
-        dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
+        const newSpot = dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) {
                     setErrors(data.errors)
-                    // for (let error of data.errors) {
-                    //     if (error === 'Password must be 6 characters or more.') {
-                    //         setPassword('')
-                    //         setConfirmPassword('')
-                    //     }
-
-                    // }
                 };
             });
 
+
+        dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id }))
 
         setShowAddSpot(false)
 
         return
     }
+
+
+
 
 
     return (
@@ -123,6 +125,16 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
                             onChange={(e) => setCountry(e.target.value)}
                             required
                             placeholder="Country"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            id='addSpotImage'
+                            type="text"
+                            value={imageURL}
+                            onChange={(e) => setImageURL(e.target.value)}
+                            required
+                            placeholder="Preview image URL"
                         />
                     </div>
                     <div>

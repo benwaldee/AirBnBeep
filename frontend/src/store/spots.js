@@ -8,6 +8,7 @@ const ADD_SPOT = 'spots/add'
 const DELETE_SPOT = 'spots/delete'
 const UPDATE_SPOT = 'spots/update'
 // const GET_ONE_SPOT = 'spots/getonespot'
+const ADD_IMAGE_TO_SPOT = 'spots/addimage'
 
 //actions
 
@@ -45,6 +46,15 @@ const editSpotAction = (editSpot) => {
     return {
         type: UPDATE_SPOT,
         payload: editSpot
+    }
+}
+
+const addImageToSpotAction = (img) => {
+
+
+    return {
+        type: ADD_IMAGE_TO_SPOT,
+        payload: img
     }
 }
 
@@ -93,7 +103,7 @@ export const addSpotThunk = ({ name, price, description, city, country, state, a
     });
     const newSpot = await response.json();
     dispatch(addSpotAction(newSpot));
-    return response;
+    return newSpot;
 };
 
 export const deleteSpotThunk = (spotId) => async (dispatch) => {
@@ -133,6 +143,25 @@ export const editSpotThunk = ({ name, price, description, city, country, state, 
 //     return response;
 // };
 
+export const addImageToSpotThunk = ({ url, previewImage, spotID }) => async (dispatch) => {
+
+    const addImgtoSpotOb = { url, previewImage }
+
+
+    const response = await csrfFetch(`/api/spots/${spotID}/images`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addImgtoSpotOb)
+    });
+    const image = await response.json();
+
+    // console.log('editSPot in thunk ebfore act', editSpot)
+    dispatch(addImageToSpotAction(image));
+    return response;
+};
+
 
 //reducer
 
@@ -165,6 +194,7 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_SPOT:
             spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
             spots.allSpots[action.payload.id] = action.payload
+            spots.allUserSpots[action.payload.id] = action.payload
             return spots
 
         case DELETE_SPOT:
@@ -190,6 +220,11 @@ const spotsReducer = (state = initialState, action) => {
         //     spots.oneSpot = action.payload
 
         //     return spots
+
+        case ADD_IMAGE_TO_SPOT:
+            //dont want image slcie of state so just update state
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            return spots
 
         default:
             return state;

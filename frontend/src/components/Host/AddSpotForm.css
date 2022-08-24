@@ -83,7 +83,8 @@
 #addSpotAddress,
 #addSpotCity,
 #addSpotState,
-#addSpotCountry {
+#addSpotCountry,
+#addSpotImage {
     border-left: 1px solid rgba(208, 206, 206, 1);
     border-right: 1px solid rgba(208, 206, 206, 1);
     border-bottom: 1px solid rgba(208, 206, 206, 1);
@@ -104,7 +105,8 @@
 #addSpotCity:focus,
 #addSpotState:focus,
 #addSpotCountry:focus,
-#addSpotPrice:focus {
+#addSpotPrice:focus,
+#addSpotImage:focus {
     border: 1px solid rgb(0, 0, 0);
 }
 
