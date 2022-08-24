@@ -3,14 +3,19 @@ import { useParams, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getAllSpotsThunk, getSpotByIDThunk } from '../../store/spots'
-import { getReviewsBySpotIDThunk, addReviewThunk } from '../../store/reviews'
+import { getReviewsBySpotIDThunk, addReviewThunk, editReviewThunk } from '../../store/reviews'
 
 
 const SpotIDPage = () => {
     const [stars, setStars] = useState(5)
     const [reviewMessage, setReviewMessage] = useState('')
+    const [starsEdit, setStarsEdit] = useState(5)
+
+    const [reviewMessageEdit, setReviewMessageEdit] = useState('')
     const [showAddReview, setShowAddReview] = useState(false)
+
     const [errors, setErrors] = useState([]);
+    const [showEdit, setShowEdit] = useState(false)
 
     const history = useHistory()
 
@@ -21,7 +26,11 @@ const SpotIDPage = () => {
     const dispatch = useDispatch()
 
     const oneSpot = useSelector((state) => state.spots?.oneSpot)
-    const revObj = useSelector((state => state.reviews?.oneSpotReviews))
+    const revObj = useSelector((state => {
+        if (oneSpot) { return state.reviews?.oneSpotReviews }
+        else return
+    }
+    ))
     const sessionUser = useSelector((state) => state.session.user)
     const allSpots = useSelector((state) => state.spots.allSpots)
 
@@ -51,7 +60,7 @@ const SpotIDPage = () => {
             }
             )
 
-    }, [])
+    }, [showAddReview, showEdit])
 
     const handleSubmit = (e) => {
 
@@ -72,6 +81,25 @@ const SpotIDPage = () => {
 
     }
 
+    const handleEditSubmit = (e, revId) => {
+
+        e.preventDefault()
+
+        const editRev = {
+            userId: sessionUser.id,
+            spotId: spotID,
+            stars: starsEdit,
+            review: reviewMessageEdit,
+            revId
+        }
+        dispatch(editReviewThunk(editRev))
+
+        setReviewMessageEdit(reviewMessageEdit)
+        setStarsEdit(starsEdit)
+        setShowEdit(false)
+
+    }
+
     const addReview = () => {
 
         for (let rev of revArr) {
@@ -82,6 +110,15 @@ const SpotIDPage = () => {
         }
         setShowAddReview(!showAddReview)
 
+    }
+
+    const showEditFunc = (review) => {
+
+        console.log(review)
+
+        setShowEdit(!showEdit)
+        setStarsEdit(review.stars)
+        setReviewMessageEdit(review.review)
     }
 
 
@@ -128,11 +165,40 @@ const SpotIDPage = () => {
 
                         {revArr?.map((review) => {
                             return (
-                                <div key={review.id}>
+                                <div className='reviewCardOuter' key={review.id}>
                                     <div> {review.User?.firstName}</div>
                                     <div> {review.createdAt}</div>
                                     <div>{review.stars}</div>
                                     <div>{review.review}</div>
+                                    {sessionUser.id === review.userId &&
+                                        <div>
+                                            <button onClick={() => showEditFunc(review)}>Edit</button>
+                                            <button>Delete</button>
+                                        </div>
+                                    }
+                                    {sessionUser.id === review.userId && showEdit &&
+
+                                        <form onSubmit={(e) => handleEditSubmit(e, review.id)}>
+                                            <textarea
+                                                placeholder='review'
+                                                maxLength='250'
+                                                required
+                                                value={reviewMessageEdit}
+                                                onChange={(e) => setReviewMessageEdit(e.target.value)}
+                                            />
+                                            <input
+                                                type='number'
+                                                placeholder='stars'
+                                                min={1}
+                                                max={5}
+                                                required
+                                                value={starsEdit}
+                                                onChange={(e) => setStarsEdit(e.target.value)}
+                                            />
+                                            <button >Save</button>
+                                        </form>
+
+                                    }
                                 </div>
                             )
                         })}

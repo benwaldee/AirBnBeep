@@ -8,6 +8,8 @@
 .reviewDiv {
     margin-top: 20px;
     border: solid 1px black;
+    margin-left: 20px;
+    margin-bottom: 50px;
 }
 
 .addReview {
@@ -15,4 +17,9 @@
     border: solid 1px black;
     padding: 5px;
     width: 150px
+}
+
+.reviewCardOuter {
+    margin: 10px;
+    background-color: aqua;
 }

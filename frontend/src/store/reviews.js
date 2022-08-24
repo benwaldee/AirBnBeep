@@ -4,7 +4,7 @@ import { csrfFetch } from './csrf';
 
 const GET_REVIEWS_BY_SPOTID = 'reviews/spotID';
 const ADD_REVIEW = 'reviews/add';
-
+const EDIT_REVIEW = 'reviews/edit';
 //actions
 
 
@@ -20,6 +20,13 @@ const addReviewAction = (postedRev) => {
     return {
         type: ADD_REVIEW,
         payload: postedRev
+    }
+}
+
+const editReviewAction = (editedRev) => {
+    return {
+        type: EDIT_REVIEW,
+        payload: editedRev
     }
 }
 
@@ -57,6 +64,27 @@ export const addReviewThunk = ({ userId, spotId, stars, review, }) => async (dis
     return response;
 };
 
+export const editReviewThunk = ({ userId, spotId, stars, review, revId }) => async (dispatch) => {
+
+    const editOb = {
+        userId,
+        spotId,
+        stars,
+        review
+    }
+
+    const response = await csrfFetch(`/api/reviews/${revId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editOb)
+    });
+    const editedRev = await response.json();
+    dispatch(editReviewAction(editedRev));
+    return response;
+};
+
 
 
 //reducer
@@ -81,6 +109,12 @@ const reviewsReducer = (state = initialState, action) => {
             return reviews
 
         case ADD_REVIEW:
+            reviews = { ...state, oneSpotReviews: { ...state.oneSpotReviews } }
+            reviews.oneSpotReviews[action.payload.id] = action.payload
+
+            return reviews
+
+        case EDIT_REVIEW:
             reviews = { ...state, oneSpotReviews: { ...state.oneSpotReviews } }
             reviews.oneSpotReviews[action.payload.id] = action.payload
 
