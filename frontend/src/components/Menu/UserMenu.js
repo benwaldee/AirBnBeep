@@ -17,8 +17,8 @@ function UserMenu({ user }) {
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
+        history.replace('/')
         setShowLoginModal(false)
-        history.push('/')
     };
 
     return (
