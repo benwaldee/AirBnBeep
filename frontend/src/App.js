@@ -7,7 +7,7 @@ import Navigation from "./components/Navigation";
 import './index.css'
 import AllSpotsGrid from './components/AllSpotsGrid/AllSpotsGrid'
 import Host from "./components/Host/Host";
-
+import SpotIDPage from "./components/SpotIDPage/SpotIDPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,9 +28,9 @@ function App() {
           <Route path='/host'>
             <Host />
           </Route>
-          {/* <Route path='/about'>
-            TODO: make about page
-          </Route> */}
+          <Route path='/spots/:spotID'>
+            <SpotIDPage />
+          </Route>
         </Switch>
       )}
     </>

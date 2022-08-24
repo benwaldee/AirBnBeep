@@ -1,4 +1,4 @@
-import { editSpotThunk } from '../../store/spots'
+import { editSpotThunk, addImageToSpotThunk } from '../../store/spots'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import img from '../LoginFormModal/x.jpg'
@@ -26,6 +26,7 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
     // const [previewImage, setPreviewImage] = useState("");
     const [errors, setErrors] = useState([]);
     const [charCount, setCharCount] = useState(editingSpot.description.length)
+    const [imageURL, setImageURL] = useState(editingSpot.previewImage)
 
     const onX = () => {
         setClickedEdit(false)
@@ -40,18 +41,29 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        setShowAddSpot(false)
-
         setErrors([]);
-        dispatch(editSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0, spotID: editingSpot.id }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setErrors(data.errors)
+        // console.log(typeof (imageURL))
+        // console.log(imageURL.includes('.png'))
 
-                };
-            });
+        let endURL = imageURL.slice(imageURL.length - 7, imageURL.length)
+
+        if (!endURL.includes('.png') && !endURL.includes('.webp') && !endURL.includes('.jpg') && !endURL.includes('.jpeg') && !endURL.includes('svg')) {
+
+            setImageURL('')
+            alert('Image URL must end in .png .jpg .jpeg or .svg')
+            return
+
+        }
+
+        if (price > 1000) {
+            setPrice('')
+            alert('Price cannot exceed $1000 per night')
+            return
+        }
+
+
+        dispatch(editSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0, spotID: editingSpot.id }))
+            .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
 
         setRenderToggle(!renderToggle)
         setClickedEdit(false)
@@ -133,6 +145,16 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
                             onChange={(e) => setCountry(e.target.value)}
                             required
                             placeholder="Country"
+                        />
+                    </div>
+                    <div>
+                        <input
+                            id='addSpotImage'
+                            type="text"
+                            value={imageURL}
+                            onChange={(e) => setImageURL(e.target.value)}
+                            required
+                            placeholder="Preview image URL"
                         />
                     </div>
                     <div>

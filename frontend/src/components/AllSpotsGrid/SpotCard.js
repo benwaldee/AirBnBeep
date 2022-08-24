@@ -3,12 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import './SpotCard.css'
 import star from './star.PNG'
+import { useHistory } from 'react-router-dom'
 
 
 const SpotCard = ({ spot }) => {
 
+    const history = useHistory()
+
+    const openSpotIDPage = () => {
+
+        history.push(`/spots/${spot.id}`)
+    }
+
     return (
-        <div id='outerSpotCardDiv'>
+        <div id='outerSpotCardDiv' onClick={openSpotIDPage}>
             <div id='innerSpotCardDiv'>
                 <img className='spotCardImage' src={spot.previewImage}></img>
                 <div className='spotCardTitleWrapper'>

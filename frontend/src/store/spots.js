@@ -7,6 +7,8 @@ const GET_USER_SPOTS = 'spots/getuserspots'
 const ADD_SPOT = 'spots/add'
 const DELETE_SPOT = 'spots/delete'
 const UPDATE_SPOT = 'spots/update'
+// const GET_ONE_SPOT = 'spots/getonespot'
+const ADD_IMAGE_TO_SPOT = 'spots/addimage'
 
 //actions
 
@@ -47,6 +49,22 @@ const editSpotAction = (editSpot) => {
     }
 }
 
+const addImageToSpotAction = ({ url, spotID }) => {
+
+
+    return {
+        type: ADD_IMAGE_TO_SPOT,
+        payload: { url, spotID }
+    }
+}
+
+// const getOneSpotAction = (oneSpot) => {
+//     return {
+//         type: GET_ONE_SPOT,
+//         payload: oneSpot
+//     }
+// }
+
 //thunks
 
 export const getAllSpotsThunk = () => async (dispatch) => {
@@ -85,7 +103,9 @@ export const addSpotThunk = ({ name, price, description, city, country, state, a
     });
     const newSpot = await response.json();
     dispatch(addSpotAction(newSpot));
-    return response;
+    return newSpot;
+
+
 };
 
 export const deleteSpotThunk = (spotId) => async (dispatch) => {
@@ -114,6 +134,33 @@ export const editSpotThunk = ({ name, price, description, city, country, state, 
 
     // console.log('editSPot in thunk ebfore act', editSpot)
     dispatch(editSpotAction(editSpot));
+    return editSpot;
+};
+
+// export const getSpotByIDThunk = (spotID) => async (dispatch) => {
+
+//     const response = await csrfFetch(`/api/spots/${spotID}`);
+//     const oneSpot = await response.json();
+//     dispatch(getOneSpotAction(oneSpot));
+//     return response;
+// };
+
+export const addImageToSpotThunk = ({ url, previewImage, spotID }) => async (dispatch) => {
+
+    const addImgtoSpotOb = { url, previewImage }
+
+
+    const response = await csrfFetch(`/api/spots/${spotID}/images`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addImgtoSpotOb)
+    });
+    const image = await response.json();
+
+    // console.log('editSPot in thunk ebfore act', editSpot)
+    dispatch(addImageToSpotAction({ url: image.url, spotID: spotID }));
     return response;
 };
 
@@ -149,6 +196,7 @@ const spotsReducer = (state = initialState, action) => {
         case ADD_SPOT:
             spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
             spots.allSpots[action.payload.id] = action.payload
+            spots.allUserSpots[action.payload.id] = action.payload
             return spots
 
         case DELETE_SPOT:
@@ -162,12 +210,23 @@ const spotsReducer = (state = initialState, action) => {
         case UPDATE_SPOT:
             spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
 
-
             // console.log('editSPot in reducer', action)
 
             spots.allSpots[action.payload.id] = action.payload
             spots.allUserSpots[action.payload.id] = action.payload
 
+            return spots
+
+        // case GET_ONE_SPOT:
+        //     spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+        //     spots.oneSpot = action.payload
+
+        //     return spots
+
+        case ADD_IMAGE_TO_SPOT:
+            //dont want image slcie of state so just update state
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots.allUserSpots[action.payload.spotID].previewImage = action.payload.url
             return spots
 
         default:
