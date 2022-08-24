@@ -6,6 +6,7 @@ import AddSpotForm from './AddSpotForm'
 import SmallSpotCard from './SmallSpotCard';
 import { Modal, useModalContext } from '../../context/Modal';
 import EditSpotForm from './EditSpotForm';
+import { Link, Redirect, useHistory } from 'react-router-dom'
 
 const Host = () => {
     const { showLoginFormHost, setShowLoginFormHost } = useModalContext();
@@ -13,13 +14,20 @@ const Host = () => {
     const [renderToggle, setRenderToggle] = useState(false)
     const [clickedEdit, setClickedEdit] = useState(false)
 
+    const sessionUser = useSelector(state => state.session.user);
+
     const dispatch = useDispatch()
+    const history = useHistory()
+
 
     useEffect(() => {
         dispatch(getUserSpotsThunk())
     }, [showAddSpot])
 
     useEffect(() => {
+        if (!sessionUser) {
+            history.push('/')
+        }
         setShowLoginFormHost(false)
     }, [])
 

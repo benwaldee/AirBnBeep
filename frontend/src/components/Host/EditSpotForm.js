@@ -61,6 +61,11 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
             return
         }
 
+        if (price < 0) {
+            setPrice('')
+            alert('Price cannot be negative')
+            return
+        }
 
         dispatch(editSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0, spotID: editingSpot.id }))
             .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
