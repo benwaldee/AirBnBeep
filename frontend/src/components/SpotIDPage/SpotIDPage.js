@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getAllSpotsThunk, getSpotByIDThunk } from '../../store/spots'
-import { getReviewsBySpotIDThunk, addReviewThunk, editReviewThunk } from '../../store/reviews'
+import { getReviewsBySpotIDThunk, addReviewThunk, editReviewThunk, deleteReviewThunk } from '../../store/reviews'
 
 
 const SpotIDPage = () => {
@@ -121,6 +121,12 @@ const SpotIDPage = () => {
         setReviewMessageEdit(review.review)
     }
 
+    const deleteReviewFunc = (revId) => {
+
+        dispatch(deleteReviewThunk(revId))
+
+    }
+
 
     if (oneSpot && revObj) {
         return (
@@ -173,7 +179,7 @@ const SpotIDPage = () => {
                                     {sessionUser.id === review.userId &&
                                         <div>
                                             <button onClick={() => showEditFunc(review)}>Edit</button>
-                                            <button>Delete</button>
+                                            <button onClick={() => deleteReviewFunc(review.id)}>Delete</button>
                                         </div>
                                     }
                                     {sessionUser.id === review.userId && showEdit &&
