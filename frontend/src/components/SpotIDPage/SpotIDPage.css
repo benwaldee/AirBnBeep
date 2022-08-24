@@ -3,3 +3,9 @@
     width: 300px;
     object-fit: contain;
 }
+
+
+.reviewDiv {
+    margin-top: 20px;
+    border: solid 1px black;
+}
