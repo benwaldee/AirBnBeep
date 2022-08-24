@@ -134,7 +134,7 @@ export const editSpotThunk = ({ name, price, description, city, country, state, 
 
     // console.log('editSPot in thunk ebfore act', editSpot)
     dispatch(editSpotAction(editSpot));
-    return response;
+    return editSpot;
 };
 
 // export const getSpotByIDThunk = (spotID) => async (dispatch) => {

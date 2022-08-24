@@ -32,12 +32,12 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
 
         e.preventDefault();
         setErrors([]);
-        console.log(typeof (imageURL))
-        console.log(imageURL.includes('.png'))
+        // console.log(typeof (imageURL))
+        // console.log(imageURL.includes('.png'))
 
         let endURL = imageURL.slice(imageURL.length - 7, imageURL.length)
 
-        if (!endURL.includes('.png') && !endURL.includes('.jpg') && !endURL.includes('.jpeg') && !endURL.includes('svg')) {
+        if (!endURL.includes('.png') && !endURL.includes('.webp') && !endURL.includes('.jpg') && !endURL.includes('.jpeg') && !endURL.includes('svg')) {
 
             setImageURL('')
             alert('Image URL must end in .png .jpg .jpeg or .svg')

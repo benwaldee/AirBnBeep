@@ -72,7 +72,7 @@
     border: 1px solid rgba(208, 206, 206, 1);
     padding-top: 17px;
     padding-bottom: 17px;
-    padding-right: 275px;
+    width: 465px;
     padding-left: 10px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -92,7 +92,7 @@
 
     padding-top: 17px;
     padding-bottom: 17px;
-    padding-right: 275px;
+    width: 465px;
     padding-left: 10px;
     /* border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px; */
@@ -117,7 +117,7 @@
     border-top: 1px solid transparent;
     padding-top: 17px;
     padding-bottom: 17px;
-    padding-right: 275px;
+    width: 465px;
     padding-left: 10px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
