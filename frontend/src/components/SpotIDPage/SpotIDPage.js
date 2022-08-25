@@ -235,7 +235,7 @@ const SpotIDPage = () => {
                         <div className='siLoc'>{oneSpot?.city}, {oneSpot?.state}, {oneSpot?.country} </div>
 
                     </div>
-                    <img className='spotIDImage' src={oneSpot?.Images[oneSpot.Images.length - 1].url} />
+                    <img className='spotIDImage' src={oneSpot?.Images[oneSpot.Images.length - 1]?.url} />
                     <div className='siHost'>Mobile listing hosted by {oneSpot?.Owner.firstName}</div>
                     <div className='cleanLine'></div>
                     <p>{oneSpot?.description}</p>
