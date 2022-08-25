@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { getAllSpotsThunk, getSpotByIDThunk } from '../../store/spots'
 import { getReviewsBySpotIDThunk, addReviewThunk, editReviewThunk, deleteReviewThunk } from '../../store/reviews'
-
+import { Modal, useModalContext } from '../../context/Modal';
 
 const SpotIDPage = () => {
     const [stars, setStars] = useState(5)
@@ -16,6 +16,7 @@ const SpotIDPage = () => {
 
     const [errors, setErrors] = useState([]);
     const [showEdit, setShowEdit] = useState(false)
+    const { showLoginFormSpotCard, setShowLoginFormSpotCard } = useModalContext();
 
     const history = useHistory()
 
@@ -25,24 +26,21 @@ const SpotIDPage = () => {
 
     const dispatch = useDispatch()
 
-    const oneSpot = useSelector((state) => state.spots?.oneSpot)
-    const revObj = useSelector((state => {
-        if (oneSpot) { return state.reviews?.oneSpotReviews }
-        else return
-    }
-    ))
+
     const sessionUser = useSelector((state) => state.session.user)
     const allSpots = useSelector((state) => state.spots.allSpots)
 
+    useEffect(() => {
+        if (!sessionUser) {
+            history.push('/')
+        }
+        setShowLoginFormSpotCard(false)
+    }, [])
 
 
 
-    let revArr;
 
-    if (revObj) {
 
-        revArr = Object.values(revObj)
-    }
 
     useEffect(() => {
         dispatch(getSpotByIDThunk(spotID))
@@ -63,7 +61,18 @@ const SpotIDPage = () => {
     }, [showAddReview, showEdit])
 
 
+    const oneSpot = useSelector((state) => state.spots?.oneSpot)
+    const revObj = useSelector((state => {
+        if (oneSpot) { return state.reviews?.oneSpotReviews }
+        else return
+    }
+    ))
+    let revArr;
 
+    if (revObj) {
+
+        revArr = Object.values(revObj)
+    }
 
 
     const handleSubmit = (e) => {
@@ -142,7 +151,7 @@ const SpotIDPage = () => {
 
 
 
-    if (oneSpot && revObj) {
+    if (oneSpot && revArr) {
         return (
             <div className='spotIDOuterDiv'>
                 <div className='spotIDInnerDiv'>

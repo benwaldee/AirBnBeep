@@ -9,7 +9,7 @@ import { Modal, useModalContext } from '../../context/Modal';
 
 
 function UserMenu({ user }) {
-    const { showLoginModal, setShowLoginModal } = useModalContext();
+    const { showLoginModal, setShowLoginModal, setShowLoginFormSpotCard } = useModalContext();
     const dispatch = useDispatch()
 
     const history = useHistory()
@@ -19,6 +19,7 @@ function UserMenu({ user }) {
         dispatch(sessionActions.logout());
         history.replace('/')
         setShowLoginModal(false)
+        setShowLoginFormSpotCard(false)
     };
 
     return (
