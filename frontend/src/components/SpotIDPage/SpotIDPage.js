@@ -6,6 +6,7 @@ import { getAllSpotsThunk, getSpotByIDThunk } from '../../store/spots'
 import { getReviewsBySpotIDThunk, addReviewThunk, editReviewThunk, deleteReviewThunk } from '../../store/reviews'
 import { Modal, useModalContext } from '../../context/Modal';
 import star from './star.PNG'
+import exclImg from '../LoginFormModal/excl.PNG'
 
 
 const SpotIDPage = () => {
@@ -20,6 +21,7 @@ const SpotIDPage = () => {
     const [showEdit, setShowEdit] = useState(false)
     const [toggle, setToggle] = useState(false)
     const [charCount, setCharCount] = useState(0)
+    const [charCountEdit, setCharCountEdit] = useState(0)
 
 
     const { showLoginFormSpotCard, setShowLoginFormSpotCard } = useModalContext();
@@ -89,14 +91,17 @@ const SpotIDPage = () => {
 
         e.preventDefault()
 
-        if (reviewMessage.length < 50) {
-            alert('Review must be more than 50 characters')
-            return
+        let errArrS = []
+        setErrors([])
+
+        if (reviewMessage.length < 20) {
+            errArrS.push('Review must be at least 20 characters')
+
         }
 
         if (stars < 1) {
-            alert('Please provide rating')
-            return
+            errArrS.push('Please provide a rating')
+
         }
 
         const addRev = {
@@ -106,30 +111,42 @@ const SpotIDPage = () => {
             review: reviewMessage
 
         }
-        dispatch(addReviewThunk(addRev))
 
-        setReviewMessage('')
-        setStars(0)
-        setShowAddReview(false)
-        setCharCount(0)
-        setStars(0)
+        if (errArrS.length > 0) {
 
+            setErrors(errArrS)
+            return
+        }
+        if (errArrS.length === 0) {
+            dispatch(addReviewThunk(addRev))
 
-        dispatch(getSpotByIDThunk(spotID))
-        dispatch(getReviewsBySpotIDThunk(spotID))
+            setReviewMessage('')
+            setStars(0)
+            setShowAddReview(false)
+            setCharCount(0)
+            setStars(0)
+            setErrors([])
+
+            dispatch(getSpotByIDThunk(spotID))
+            dispatch(getReviewsBySpotIDThunk(spotID))
+        }
     }
 
     const handleEditSubmit = (e, revId) => {
 
         e.preventDefault()
 
-        if (stars < 1) {
-            alert('Please provide rating')
-            return
+        let errArrSE = []
+        setErrors([])
+
+        if (reviewMessageEdit.length < 20) {
+            errArrSE.push('Review must be at least 20 characters')
+
         }
-        if (reviewMessageEdit.length < 50) {
-            alert('Review must be more than 50 characters')
-            return
+
+        if (stars < 1) {
+            errArrSE.push('Please provide a rating')
+
         }
 
         const editRev = {
@@ -139,16 +156,24 @@ const SpotIDPage = () => {
             review: reviewMessageEdit,
             revId
         }
-        dispatch(editReviewThunk(editRev))
+        if (errArrSE.length > 0) {
+            setErrors(errArrSE)
+            return
+        }
+        if (errArrSE.length === 0) {
+            dispatch(editReviewThunk(editRev))
 
-        setReviewMessageEdit(reviewMessageEdit)
-        setStarsEdit(starsEdit)
-        setShowEdit(false)
-        setStars(0)
+            setReviewMessageEdit(reviewMessageEdit)
+            setStarsEdit(starsEdit)
+            setShowEdit(false)
+            setStars(0)
+            setCharCountEdit(0)
+            setErrors([])
 
-
-        dispatch(getSpotByIDThunk(spotID))
-        dispatch(getReviewsBySpotIDThunk(spotID))
+            dispatch(getSpotByIDThunk(spotID))
+            dispatch(getReviewsBySpotIDThunk(spotID))
+            return
+        }
     }
 
     const addReview = () => {
@@ -172,7 +197,7 @@ const SpotIDPage = () => {
         setShowEdit(!showEdit)
         setStarsEdit(review.stars)
         setReviewMessageEdit(review.review)
-
+        setCharCountEdit(review.review.length)
 
     }
 
@@ -221,6 +246,19 @@ const SpotIDPage = () => {
                         {showAddReview && <div className='addReviewForm'>
 
                             <form className='formAddReview' onSubmit={handleSubmit}>
+                                <div className='errorDivAddSpot'>
+
+                                    {errors.map((error, idx) => {
+                                        return (
+                                            <div className='alignAddSpot'>
+                                                <span>
+                                                    <img id='errorImgLogin' src={exclImg}></img>
+                                                </span>
+                                                <div className='oneErrorDivLogin' key={idx}>{error}</div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
                                 <textarea
                                     id='addReviewMessage'
                                     placeholder='Write review here!'
@@ -273,7 +311,7 @@ const SpotIDPage = () => {
                                         <i id='cardStar' class="fa-solid fa-star"></i>
                                         <div className='revStars'>{review.stars}</div>
                                     </div>
-                                    <div>{review.review}</div>
+                                    <div className='revText'>{review.review}</div>
                                     {sessionUser.id === review.userId &&
                                         <div>
                                             <button className='revEditButton' onClick={() => showEditFunc(review)}>Edit</button>
@@ -283,6 +321,19 @@ const SpotIDPage = () => {
                                     {sessionUser.id === review.userId && showEdit && <div className='addReviewForm'>
 
                                         <form className='formAddReview' onSubmit={(e) => handleEditSubmit(e, review.id)}>
+                                            <div className='errorDivAddSpot'>
+
+                                                {errors.map((error, idx) => {
+                                                    return (
+                                                        <div className='alignAddSpot'>
+                                                            <span>
+                                                                <img id='errorImgLogin' src={exclImg}></img>
+                                                            </span>
+                                                            <div className='oneErrorDivLogin' key={idx}>{error}</div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
                                             <textarea
                                                 id='addReviewMessage'
                                                 placeholder='Edit review'
@@ -292,10 +343,10 @@ const SpotIDPage = () => {
                                                 value={reviewMessageEdit}
                                                 onChange={(e) => {
                                                     setReviewMessageEdit(e.target.value)
-                                                    setCharCount(e.target.value.length)
+                                                    setCharCountEdit(e.target.value.length)
                                                 }}
                                             />
-                                            <div className='charCountReview'>{charCount}/500</div>
+                                            <div className='charCountReview'>{charCountEdit}/500</div>
 
 
                                             <div className='starDiv'>

@@ -25,46 +25,62 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
         setShowAddSpot(false)
     }
 
-    console.log('hi'.length)
 
 
     const handleSubmit = async (e) => {
 
         e.preventDefault();
+        let errArr = []
         setErrors([]);
-        // console.log(typeof (imageURL))
-        // console.log(imageURL.includes('.png'))
 
-        let endURL = imageURL.slice(imageURL.length - 7, imageURL.length)
 
-        if (!endURL.includes('.png') && !endURL.includes('.webp') && !endURL.includes('.jpg') && !endURL.includes('.jpeg') && !endURL.includes('svg')) {
-
+        if (!imageURL.endsWith('.png') && !imageURL.endsWith('.webp') && !imageURL.endsWith('.jpg') && !imageURL.endsWith('.jpeg') && !imageURL.endsWith('.svg')) {
             setImageURL('')
-            alert('Image URL must end in .png .jpg .jpeg or .svg')
-            return
+            errArr.push('Image URL must end in .png .jpg .jpeg or .svg')
 
+        }
+
+        if (name.length < 5) {
+            setName('')
+            errArr.push('Name must be longer than 5 characters')
+        }
+
+        if (address.length < 3 || !address.includes(" ")) {
+            setAddress('')
+            errArr.push('Please enter valid address')
         }
 
         if (price > 1000) {
             setPrice('')
-            alert('Price cannot exceed $1000 per night')
-            return
+            errArr.push('Price cannot exceed $1000 per night')
+
         }
         if (price < 0) {
             setPrice('')
-            alert('Price cannot be negative')
-            return
+            errArr.push('Price cannot be negative')
+
         }
 
 
-        dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
-            .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
 
 
 
-        setShowAddSpot(false)
+        if (errArr.length > 0) {
+            setErrors(errArr)
+            return
+        }
+        if (errArr.length === 0) {
+            dispatch(addSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0 }))
+                .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
 
-        return
+
+
+            setShowAddSpot(false)
+
+
+
+            return
+        }
     }
 
 
@@ -79,20 +95,21 @@ const AddSpotForm = ({ showAddSpot, setShowAddSpot, clickedEdit, setClickedEdit,
                     <div className='addSpotTitle'>Create a Listing</div>
                     <div className='nudgeAddSpot'></div>
                 </div>
-                <div id='errorDivAddSpot'>
+
+                <div className='errorDivAddSpot'>
 
                     {errors.map((error, idx) => {
                         return (
-                            <div id='alignIndAddSpot'>
+                            <div className='alignAddSpot'>
                                 <span>
-                                    <img id='errorImgAddSpot' src={exclImg}></img>
+                                    <img id='errorImgLogin' src={exclImg}></img>
                                 </span>
-                                <div className='oneErrorDivAddSpot' key={idx}>{error}</div>
+                                <div className='oneErrorDivLogin' key={idx}>{error}</div>
                             </div>
                         )
                     })}
-
                 </div>
+
                 <form className='formAddSpot' onSubmit={handleSubmit}>
                     <div>
                         <input

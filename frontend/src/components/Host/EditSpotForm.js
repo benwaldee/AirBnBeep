@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import img from '../LoginFormModal/x.jpg'
 import exclImg from '../LoginFormModal/excl.PNG'
 import './AddSpotForm.css'
+import './EditSpotForm.css'
 
 
 const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderToggle, showAddSpot, setShowAddSpot }) => {
@@ -41,39 +42,54 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        let errArrE = []
         setErrors([]);
-        // console.log(typeof (imageURL))
-        // console.log(imageURL.includes('.png'))
 
-        let endURL = imageURL.slice(imageURL.length - 7, imageURL.length)
 
-        if (!endURL.includes('.png') && !endURL.includes('.webp') && !endURL.includes('.jpg') && !endURL.includes('.jpeg') && !endURL.includes('svg')) {
-
+        if (!imageURL.endsWith('.png') && !imageURL.endsWith('.webp') && !imageURL.endsWith('.jpg') && !imageURL.endsWith('.jpeg') && !imageURL.endsWith('.svg')) {
             setImageURL('')
-            alert('Image URL must end in .png .jpg .jpeg or .svg')
-            return
+            errArrE.push('Image URL must end in .png .jpg .jpeg or .svg')
 
+        }
+
+        if (name.length < 5) {
+            setName('')
+            errArrE.push('Name must be longer than 5 characters')
+        }
+
+        if (address.length < 3 || !address.includes(" ")) {
+            setAddress('')
+            errArrE.push('Please enter valid address')
         }
 
         if (price > 1000) {
             setPrice('')
-            alert('Price cannot exceed $1000 per night')
-            return
-        }
+            errArrE.push('Price cannot exceed $1000 per night')
 
+        }
         if (price < 0) {
             setPrice('')
-            alert('Price cannot be negative')
-            return
+            errArrE.push('Price cannot be negative')
+
         }
 
-        dispatch(editSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0, spotID: editingSpot.id }))
-            .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
 
-        setRenderToggle(!renderToggle)
-        setClickedEdit(false)
 
-        return
+
+
+        if (errArrE.length > 0) {
+            setErrors(errArrE)
+            return
+        }
+        if (errArrE.length === 0) {
+
+            dispatch(editSpotThunk({ name, price, description, city, country, state, address, lat: 100.0, lng: 100.0, spotID: editingSpot.id }))
+                .then((newSpot) => dispatch(addImageToSpotThunk({ url: imageURL, previewImage: true, spotID: newSpot.id })));
+
+            setRenderToggle(!renderToggle)
+            setClickedEdit(false)
+            return
+        }
     }
 
 
@@ -86,19 +102,18 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
                     <div className='addSpotTitle'>Edit listing for {editingSpot.name}</div>
                     <div className='nudgeAddSpot'></div>
                 </div>
-                <div id='errorDivAddSpot'>
+                <div className='errorDivEditSpot'>
 
                     {errors.map((error, idx) => {
                         return (
-                            <div id='alignIndAddSpot'>
+                            <div id='alignAddSpot'>
                                 <span>
-                                    <img id='errorImgAddSpot' src={exclImg}></img>
+                                    <img id='errorImgLogin' src={exclImg}></img>
                                 </span>
-                                <div className='oneErrorDivAddSpot' key={idx}>{error}</div>
+                                <div className='oneErrorDivLogin' key={idx}>{error}</div>
                             </div>
                         )
                     })}
-
                 </div>
                 <form className='formAddSpot' onSubmit={handleSubmit}>
                     <div>
@@ -200,7 +215,7 @@ const EditSpotForm = ({ clickedEdit, setClickedEdit, renderToggle, setRenderTogg
                     <button id='submitAddSpot' type="submit">Save</button>
                 </form>
             </div>
-        </div>
+        </div >
     )
 }
 

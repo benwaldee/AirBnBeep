@@ -191,3 +191,15 @@
     color: rgb(156, 156, 156);
     margin-left: 445px;
 }
+
+.alignAddSpot {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.errorDivAddSpot {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
