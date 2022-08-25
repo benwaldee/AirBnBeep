@@ -173,6 +173,7 @@
 #alignIndAddSpot {
     display: flex;
     flex-direction: row;
+
 }
 
 #addSpotDescription {
