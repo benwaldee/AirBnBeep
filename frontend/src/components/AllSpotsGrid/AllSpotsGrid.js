@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import SpotCard from './SpotCard'
 import './AllSpotsGrid.css'
+import { Modal, useModalContext } from '../../context/Modal';
+import LoginForm from '../LoginFormModal/LoginForm';
 
 const AllSpotsGrid = () => {
 
+    const { showLoginFormSpotCard, setShowLoginFormSpotCard } = useModalContext();
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -28,6 +31,14 @@ const AllSpotsGrid = () => {
                     )
                 })}
             </div>
+            {!sessionUser && showLoginFormSpotCard && (
+                <Modal onClose={() => {
+                    setShowLoginFormSpotCard(false)
+
+                }}>
+                    <LoginForm />
+                </Modal>
+            )}
         </div>
     )
 }

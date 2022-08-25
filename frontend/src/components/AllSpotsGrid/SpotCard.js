@@ -5,7 +5,7 @@ import './SpotCard.css'
 import star from './star.PNG'
 import { useHistory } from 'react-router-dom'
 import { Modal, useModalContext } from '../../context/Modal';
-import LoginForm from '../LoginFormModal/LoginForm';
+
 
 const SpotCard = ({ spot, sessionUser }) => {
 
@@ -48,14 +48,7 @@ const SpotCard = ({ spot, sessionUser }) => {
 
             </div>
 
-            {!sessionUser && showLoginFormSpotCard && (
-                <Modal onClose={() => {
-                    setShowLoginFormSpotCard(false)
 
-                }}>
-                    <LoginForm />
-                </Modal>
-            )}
         </>
     )
 }
