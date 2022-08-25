@@ -269,3 +269,9 @@ p {
 .revDeleteButton:hover {
     background-color: rgba(170, 170, 170, 0.3);
 }
+
+.revText {
+    width: 450px;
+    height: fit-content;
+    overflow-wrap: break-word;
+}
