@@ -22,7 +22,7 @@ module.exports = {
         lat: 101.127928,
         lng: 12.218267,
         name: 'Acreage',
-        description: 'Spacious white sprinter van, designed with a half kitchen and master bed. Complete with shiplap ceilings and warm leather seats',
+        description: 'Spacious white sprinter van, designed with a half kitchen and master bed. Complete with shiplap ceilings and warm leather seats. The sense of space is truly immaculate, and words fail as you try to encompass the beauty.',
         price: 200,
       },
       {
@@ -34,7 +34,7 @@ module.exports = {
         lat: 101.127928,
         lng: 12.218267,
         name: 'Kensingway',
-        description: '2010 Mercedes Sprinter newly renovated. Designed with a rustic modern touch, compelte with a hlaf kitchen, half bath, and queen bed. Enjoy the awning and picnic table set to dine under the stars!',
+        description: '2010 Mercedes Sprinter newly renovated. Designed with a rustic modern touch, complete with a half kitchen, half bath, and queen bed. Enjoy the awning and picnic table set to dine under the stars!',
         price: 200,
       },
       {
@@ -46,7 +46,7 @@ module.exports = {
         lat: 701.127928,
         lng: 1.218267,
         name: 'HomeOnWheels',
-        description: 'Yellow painted modern sprinter van conversion. Features spacious seating and kitchen areas, as well as storage for bikes and outdoors gear. Perfect for an adventerous getaway!',
+        description: 'Yellow painted modern sprinter van conversion. Features spacious seating and kitchen areas, as well as storage for bikes and outdoors gear. Houses three people comfortably, and features a private bathroom space. Perfect for an adventerous getaway!',
         price: 150,
       },
       {
@@ -58,7 +58,7 @@ module.exports = {
         lat: 1501.127928,
         lng: 152.218267,
         name: 'Swigg',
-        description: 'Converted 2017 Mercedes-Benz Sprinter Cargo 4x4 2500 High Roof 170WB. Features an open plan with a driver-facing queen bed. Two-sided kitchen provides ample counterspace and the van doors located behind the bedgframe open up to provide light when parked!',
+        description: 'Converted 2017 Mercedes-Benz Sprinter Cargo 4x4 2500 High Roof 170WB. Features an open plan with a driver-facing queen bed. Two-sided kitchen provides ample counterspace and the van doors located behind the bedframe open up to provide light when parked!',
         price: 450,
       },
       {
@@ -82,7 +82,7 @@ module.exports = {
         lat: 1061.127928,
         lng: 127.218267,
         name: 'Oak',
-        description: 'Newly renovated white sprinter van. Features a full table and chair set for outdoor meals. Pet-friendly and kid-friendly. Fold out kitchen allows for ample cooking space when parked, and dual double beds with plenty of window light allow for a family experience!',
+        description: 'Newly renovated white sprinter van. Features a full table and chair set for outdoor meals. Pet-friendly and kid-friendly. Fold-out kitchen allows for ample cooking space when parked, and dual double beds with plenty of window light allow for a family experience!',
         price: 120,
       },
       {
@@ -94,7 +94,7 @@ module.exports = {
         lat: 1401.127928,
         lng: 1552.218267,
         name: 'Portlife',
-        description: 'Renovated sprinter van but it feels like home! Dark oak paneling is offset by white cabinetry and tilework. Dual bench and ktichen give way to a spacious king-sized bed. Hope you choose us for your van life getaway!',
+        description: 'Renovated sprinter van but it feels like home! Dark oak paneling is offset by white cabinetry and tilework. Dual bench and kitchen give way to a spacious king-sized bed. Hope you choose us for your van life getaway!',
         price: 280,
       },
       {
@@ -130,7 +130,7 @@ module.exports = {
         lat: 1441.127928,
         lng: 1442.218267,
         name: 'Shipfare',
-        description: 'This gorgeous newly renovated 2018 sprinter van could be your dream getaway! Shipland interor breaks into a minimal kitchen and maximal living space. Sturdey oak benches and a generous queen bed provide the experience of a lifetime. Enjoy your time at Shipfare!',
+        description: 'This gorgeous newly renovated 2018 sprinter van could be your dream getaway! Shiplap interor breaks into a minimal kitchen and maximal living space. Sturdy oak benches and a generous queen bed provide the experience of a lifetime. Enjoy your time at Shipfare!',
         price: 400,
       },
       {
@@ -142,7 +142,7 @@ module.exports = {
         lat: 101.127928,
         lng: 12.218267,
         name: 'Spilton',
-        description: 'Spacious white sprinter van, designed with a half kitchen and master bed. Complete with shiplap ceilings and warm leather seats',
+        description: 'Spacious white sprinter van, designed with a half kitchen and master bed. Complete with shiplap ceilings and warm leather seats.',
         price: 200,
       },
       {
@@ -154,7 +154,7 @@ module.exports = {
         lat: 101.127928,
         lng: 12.218267,
         name: 'Block Van',
-        description: '2010 Mercedes Sprinter newly renovated. Designed with a rustic modern touch, compelte with a hlaf kitchen, half bath, and queen bed. Enjoy the awning and picnic table set to dine under the stars!',
+        description: '2010 Mercedes Sprinter newly renovated. Designed with a rustic modern touch, complete with a half kitchen, half bath, and queen bed. Enjoy the awning and picnic table set to dine under the stars!',
         price: 200,
       },
       {
@@ -178,7 +178,7 @@ module.exports = {
         lat: 1501.127928,
         lng: 152.218267,
         name: 'ArtMobile',
-        description: 'Converted 2017 Mercedes-Benz Sprinter Cargo 4x4 2500 High Roof 170WB. Features an open plan with a driver-facing queen bed. Two-sided kitchen provides ample counterspace and the van doors located behind the bedgframe open up to provide light when parked!',
+        description: 'Converted 2017 Mercedes-Benz Sprinter Cargo 4x4 2500 High Roof 170WB. Features an open plan with a driver-facing queen bed. Two-sided kitchen provides ample counterspace and the van doors located behind the bedframe open up to provide light when parked!',
         price: 450,
       },
       {
@@ -214,7 +214,7 @@ module.exports = {
         lat: 1401.127928,
         lng: 1552.218267,
         name: 'Camp Season',
-        description: 'Renovated sprinter van but it feels like home! Dark oak paneling is offset by white cabinetry and tilework. Dual bench and ktichen give way to a spacious king-sized bed. Hope you choose us for your van life getaway!',
+        description: 'Renovated sprinter van but it feels like home! Dark oak paneling is offset by white cabinetry and tilework. Dual bench and kitchen give way to a spacious king-sized bed. Hope you choose us for your van life getaway!',
         price: 280,
       },
       {
@@ -250,7 +250,7 @@ module.exports = {
         lat: 1441.127928,
         lng: 1442.218267,
         name: 'Knox',
-        description: 'This gorgeous newly renovated 2018 sprinter van could be your dream getaway! Shipland interor breaks into a minimal kitchen and maximal living space. Sturdey oak benches and a generous queen bed provide the experience of a lifetime. Enjoy your time at Shipfare!',
+        description: 'This gorgeous newly renovated 2018 sprinter van could be your dream getaway! Shipland interor breaks into a minimal kitchen and maximal living space. Sturdy oak benches and a generous queen bed provide the experience of a lifetime. Enjoy your time at Shipfare!',
         price: 400,
       }
     ])
