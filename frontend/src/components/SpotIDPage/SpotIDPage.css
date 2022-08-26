@@ -263,11 +263,15 @@ p {
     caret-color: transparent;
     border: solid 0px white;
     background-color: white;
+    color: white;
+    font-weight: bold;
+    background-image: linear-gradient(to left, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(196, 47, 117) 57.5%, rgb(189, 30, 94) 100%);
 }
 
 .revEditButton:hover,
 .revDeleteButton:hover {
     background-color: rgba(170, 170, 170, 0.3);
+
 }
 
 .revText {

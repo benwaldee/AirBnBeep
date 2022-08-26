@@ -55,7 +55,7 @@ const SmallSpotCard = ({ spot, setRenderToggle, renderToggle, clickedEdit, setCl
                         setClickedDelete(true)
                         setClickedEdit(false)
                     }}>Delete</div>}
-                    {clickedDelete && <div className='deleteSpot' onClick={deleteSpot}>Continue</div>}
+                    {clickedDelete && <div className='deleteSpot' onClick={deleteSpot}>Really?</div>}
                     {clickedDelete && <div className='cancelDeleteSpot' onClick={() => setClickedDelete(false)}>Cancel</div>}
                 </div>
             </div>
