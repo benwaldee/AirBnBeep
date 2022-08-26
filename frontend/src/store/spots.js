@@ -9,8 +9,15 @@ const DELETE_SPOT = 'spots/delete'
 const UPDATE_SPOT = 'spots/update'
 const GET_ONE_SPOT = 'spots/getonespot'
 const ADD_IMAGE_TO_SPOT = 'spots/addimage'
+const CLEAR_USER_SPOTS = 'spots/clearuserspots'
 
 //actions
+
+const clearUserSpotsAction = () => {
+    return {
+        type: CLEAR_USER_SPOTS
+    }
+}
 
 const getAllSpotsAction = (spots) => {
     return {
@@ -78,15 +85,20 @@ export const getAllSpotsThunk = () => async (dispatch) => {
     return response;
 };
 
-export const getUserSpotsThunk = () => async (dispatch) => {
+export const getUserSpotsThunk = (logout = false) => async (dispatch) => {
 
-    const response = await csrfFetch('/api/spots/current');
-    const spots = await response.json();
+    if (!logout) {
+        const response = await csrfFetch('/api/spots/current');
+        const spots = await response.json();
 
-    // console.log('spots thunk fetch return', spots)
+        // console.log('spots thunk fetch return', spots)
 
-    dispatch(getUserSpotsAction(spots));
-    return response;
+        dispatch(getUserSpotsAction(spots));
+        return response;
+    }
+    if (logout) {
+        dispatch(clearUserSpotsAction())
+    }
 };
 
 export const addSpotThunk = ({ name, price, description, city, country, state, address, lat, lng }) => async (dispatch) => {
@@ -227,6 +239,11 @@ const spotsReducer = (state = initialState, action) => {
             //dont want image slcie of state so just update state
             spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
             spots.allUserSpots[action.payload.spotID].previewImage = action.payload.url
+            return spots
+
+        case CLEAR_USER_SPOTS:
+            spots = { ...state, allSpots: { ...state.allSpots }, allUserSpots: { ...state.allUserSpots } }
+            spots.allUserSpots = {}
             return spots
 
         default:

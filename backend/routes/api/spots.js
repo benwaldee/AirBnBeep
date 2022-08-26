@@ -276,7 +276,7 @@ router.get('/', async (req, res) => {
 
         where,
 
-        limit: size,
+        // limit: size,
         offset: offset,
         raw: true,
         order: [["id"]]

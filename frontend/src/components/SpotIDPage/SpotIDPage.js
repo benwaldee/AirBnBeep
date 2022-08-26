@@ -7,7 +7,7 @@ import { getReviewsBySpotIDThunk, addReviewThunk, editReviewThunk, deleteReviewT
 import { Modal, useModalContext } from '../../context/Modal';
 import star from './star.PNG'
 import exclImg from '../LoginFormModal/excl.PNG'
-
+import LoginForm from '../LoginFormModal/LoginForm';
 
 const SpotIDPage = () => {
     const [stars, setStars] = useState(0)
@@ -24,15 +24,16 @@ const SpotIDPage = () => {
     const [charCountEdit, setCharCountEdit] = useState(0)
 
 
-    const { showLoginFormSpotCard, setShowLoginFormSpotCard } = useModalContext();
 
+    const { showLoginFormSpotCard, setShowLoginFormSpotCard } = useModalContext();
 
 
     const history = useHistory()
 
     let { spotID } = useParams()
-    spotID = parseInt(spotID)
+    spotID = Number(spotID)
 
+    console.log(spotID)
 
     const dispatch = useDispatch()
 
@@ -41,12 +42,10 @@ const SpotIDPage = () => {
     const allSpots = useSelector((state) => state.spots.allSpots)
 
     useEffect(() => {
-        if (!sessionUser) {
-            history.push('/')
-        }
-        setShowLoginFormSpotCard(false)
-    }, [])
+        setShowAddReview(false)
+        setShowEdit(false)
 
+    }, [sessionUser])
 
 
 
@@ -90,6 +89,17 @@ const SpotIDPage = () => {
     const handleSubmit = (e) => {
 
         e.preventDefault()
+
+        if (!sessionUser) {
+            alert('Please log in to leave a review')
+            setReviewMessage('')
+            setStars(0)
+            setShowAddReview(false)
+            setCharCount(0)
+            setStars(0)
+            setErrors([])
+            return
+        }
 
         let errArrS = []
         setErrors([])
@@ -136,6 +146,17 @@ const SpotIDPage = () => {
 
         e.preventDefault()
 
+        if (!sessionUser) {
+            alert('Please log in to edit reviews')
+            setReviewMessageEdit(reviewMessageEdit)
+            setStarsEdit(starsEdit)
+            setShowEdit(false)
+            setStars(0)
+            setCharCountEdit(0)
+            setErrors([])
+            return
+        }
+
         let errArrSE = []
         setErrors([])
 
@@ -177,6 +198,13 @@ const SpotIDPage = () => {
     }
 
     const addReview = () => {
+        if (!sessionUser) {
+            // alert('login first')
+            // alert('Please log in to leave a review')
+            setShowAddReview(false)
+            setShowLoginFormSpotCard(true)
+            return
+        }
 
         for (let rev of revArr) {
             if (rev.userId === sessionUser.id) {
@@ -193,6 +221,12 @@ const SpotIDPage = () => {
     const showEditFunc = (review) => {
 
         // console.log(review)
+        if (!sessionUser) {
+            // alert('Please log in to edit reviews')
+            setShowAddReview(false)
+            setShowLoginFormSpotCard(true)
+            return
+        }
 
         setShowEdit(!showEdit)
         setStarsEdit(review.stars)
@@ -221,9 +255,17 @@ const SpotIDPage = () => {
     }
 
 
-    if (oneSpot && revArr && sessionUser) {
+    if (oneSpot && revArr) {
         return (
             <div className='spotIDOuterDiv'>
+                {!sessionUser && showLoginFormSpotCard && (
+                    <Modal onClose={() => {
+                        setShowLoginFormSpotCard(false)
+
+                    }}>
+                        <LoginForm />
+                    </Modal>
+                )}
                 <div className='spotIDInnerDiv'>
                     <div className='spotIDTitle'> {oneSpot?.name}</div>
                     <div className='subtitleDiv'>
@@ -243,7 +285,7 @@ const SpotIDPage = () => {
                     <div className='reviewDiv'>
                         <div className='reviewsTitle'>Reviews</div>
                         <div className='addReview' onClick={addReview}> Add a review</div>
-                        {showAddReview && <div className='addReviewForm'>
+                        {showAddReview && sessionUser && <div className='addReviewForm'>
 
                             <form className='formAddReview' onSubmit={handleSubmit}>
                                 <div className='errorDivAddSpot'>
@@ -303,8 +345,9 @@ const SpotIDPage = () => {
                                 <div className='reviewCardOuter' key={review.id}>
                                     <div className='nameDivRev'>
                                         <i class="fa-solid fa-circle-user"></i>
-                                        {sessionUser.id === review.userId && <div className='revName'> {sessionUser.firstName}</div>}
-                                        {sessionUser.id !== review.userId && <div className='revName'> {review.User?.firstName}</div>}
+                                        {sessionUser?.id === review.userId && <div className='revName'> {sessionUser.firstName}</div>}
+                                        {sessionUser?.id !== review.userId && <div className='revName'> {review.User?.firstName}</div>}
+                                        {/* {!sessionUser && <div className='revName'> {review.User?.firstName}</div>} */}
                                     </div>
                                     <div className='revDate'> {review.createdAt.slice(0, 10)}</div>
                                     <div className='revCardStarsDiv'>
@@ -312,13 +355,13 @@ const SpotIDPage = () => {
                                         <div className='revStars'>{review.stars}</div>
                                     </div>
                                     <div className='revText'>{review.review}</div>
-                                    {sessionUser.id === review.userId &&
+                                    {sessionUser?.id === review.userId &&
                                         <div>
                                             <button className='revEditButton' onClick={() => showEditFunc(review)}>Edit</button>
                                             <button className='revDeleteButton' onClick={() => deleteReviewFunc(review.id)}>Delete</button>
                                         </div>
                                     }
-                                    {sessionUser.id === review.userId && showEdit && <div className='addReviewForm'>
+                                    {sessionUser?.id === review.userId && showEdit && <div className='addReviewForm'>
 
                                         <form className='formAddReview' onSubmit={(e) => handleEditSubmit(e, review.id)}>
                                             <div className='errorDivAddSpot'>
