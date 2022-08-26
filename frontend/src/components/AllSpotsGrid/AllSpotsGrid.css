@@ -5,9 +5,20 @@
 }
 
 #innerAllSpotsDiv {
-    width: 1550px;
+    /* width: fit-content; */
     margin-left: 200px;
-    margin-right: 260px;
+    margin-right: 200px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+}
+
+
+@media screen and (max-width: 1700px) {
+    #innerAllSpotsDiv {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* width: fit-content; */
+        /* background-color: aqua; */
+
+    }
 }

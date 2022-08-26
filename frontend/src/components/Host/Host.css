@@ -60,13 +60,32 @@
 .userSpotsInner {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    width: fit-content
+    /* width: fit-content; */
+    /* background-color: aqua; */
+
 }
 
-.userSpotsOuter {
+@media screen and (max-width: 1500px) {
+    .userSpotsInner {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        /* width: fit-content; */
+        /* background-color: aqua; */
+
+    }
+}
+
+.userSpotsOuterX {
     display: flex;
     justify-content: center;
     margin-bottom: 100px;
+    /* width: fit-content; */
+    /* background-color: red; */
+}
+
+.oneMoreDiv {
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .userSpotsTitle {

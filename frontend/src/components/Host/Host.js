@@ -67,7 +67,8 @@ const Host = () => {
             <div className='userSpotsTitleOuter'>
                 <div className='userSpotsTitle'> Your listings</div>
             </div>
-            <div className='userSpotsOuter'>
+
+            <div className='userSpotsOuterX'>
                 <div className='userSpotsInner'>
                     {userSpotArr?.map((spot) => {
                         return (
