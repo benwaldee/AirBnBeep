@@ -52,10 +52,10 @@ This project is built with:
 ## How to run locally:
 
 1. Click the green "Code" button on the main page.
-2. If you do not have SSH set up, copy the inital link (click the two squares on the right of it).
+2. If you do not have SSH set up, copy the initial link (click the two squares on the right of it).
 3. If you do have SSH set up, switch to the SSH tab and copy that link.
 4. Once copied, open your terminal.
-5. Navigate to the folder where you would like the local copy to exist.
+5. Navigate to the folder where you would like the local repo to exist.
 6. Enter the command: git clone --paste your link here--
 8. Cd into the backend folder and run "npx dotenv sequelize db:migrate" to add migrations.
 9. Then run "npx dotenv sequelize db:seed:all" to add seed data.
