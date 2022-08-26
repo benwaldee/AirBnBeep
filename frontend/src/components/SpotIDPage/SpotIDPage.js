@@ -40,14 +40,11 @@ const SpotIDPage = () => {
     const sessionUser = useSelector((state) => state.session.user)
     const allSpots = useSelector((state) => state.spots.allSpots)
 
-    // useEffect(() => {
-    //     if (!sessionUser) {
-    //         history.push('/')
-    //     }
-    //     setShowLoginFormSpotCard(false)
-    // }, [])
 
-
+    // if (!sessionUser) {
+    //     setShowAddReview(false)
+    //     setShowEdit(false)
+    // }
 
 
 
@@ -91,7 +88,16 @@ const SpotIDPage = () => {
 
         e.preventDefault()
 
-
+        if (!sessionUser) {
+            alert('Please log in to leave a review')
+            setReviewMessage('')
+            setStars(0)
+            setShowAddReview(false)
+            setCharCount(0)
+            setStars(0)
+            setErrors([])
+            return
+        }
 
         let errArrS = []
         setErrors([])
@@ -138,6 +144,17 @@ const SpotIDPage = () => {
 
         e.preventDefault()
 
+        if (!sessionUser) {
+            alert('Please log in to edit reviews')
+            setReviewMessageEdit(reviewMessageEdit)
+            setStarsEdit(starsEdit)
+            setShowEdit(false)
+            setStars(0)
+            setCharCountEdit(0)
+            setErrors([])
+            return
+        }
+
         let errArrSE = []
         setErrors([])
 
@@ -181,7 +198,8 @@ const SpotIDPage = () => {
     const addReview = () => {
         if (!sessionUser) {
             // alert('login first')
-
+            // alert('Please log in to leave a review')
+            setShowAddReview(false)
             setShowLoginFormSpotCard(true)
             return
         }
@@ -201,6 +219,12 @@ const SpotIDPage = () => {
     const showEditFunc = (review) => {
 
         // console.log(review)
+        if (!sessionUser) {
+            // alert('Please log in to edit reviews')
+            setShowAddReview(false)
+            setShowLoginFormSpotCard(true)
+            return
+        }
 
         setShowEdit(!showEdit)
         setStarsEdit(review.stars)
@@ -259,7 +283,7 @@ const SpotIDPage = () => {
                     <div className='reviewDiv'>
                         <div className='reviewsTitle'>Reviews</div>
                         <div className='addReview' onClick={addReview}> Add a review</div>
-                        {showAddReview && <div className='addReviewForm'>
+                        {showAddReview && sessionUser && <div className='addReviewForm'>
 
                             <form className='formAddReview' onSubmit={handleSubmit}>
                                 <div className='errorDivAddSpot'>
