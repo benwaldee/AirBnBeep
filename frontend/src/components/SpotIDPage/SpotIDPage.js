@@ -424,7 +424,7 @@ const SpotIDPage = () => {
         )
     } else {
         return (
-            <div className="loading">Loading...</div>
+            <div className="loading"></div>
         )
     }
 }
