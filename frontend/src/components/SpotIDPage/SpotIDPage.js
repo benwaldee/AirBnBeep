@@ -31,8 +31,9 @@ const SpotIDPage = () => {
     const history = useHistory()
 
     let { spotID } = useParams()
-    spotID = parseInt(spotID)
+    spotID = Number(spotID)
 
+    console.log(spotID)
 
     const dispatch = useDispatch()
 
