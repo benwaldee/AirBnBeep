@@ -40,11 +40,12 @@ const SpotIDPage = () => {
     const sessionUser = useSelector((state) => state.session.user)
     const allSpots = useSelector((state) => state.spots.allSpots)
 
+    useEffect(() => {
+        setShowAddReview(false)
+        setShowEdit(false)
 
-    // if (!sessionUser) {
-    //     setShowAddReview(false)
-    //     setShowEdit(false)
-    // }
+    }, [sessionUser])
+
 
 
 
