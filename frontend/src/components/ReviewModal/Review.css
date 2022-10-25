@@ -1,0 +1,41 @@
+.Review_alert {
+    height: 95px;
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Review_x {
+    text-align: end;
+    font-size: large;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.Review_x:hover {
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.Review_text {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.Review_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 7px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.279);
+}
+
+.Review_name {
+    font-size: 19px;
+    margin-top: 10px;
+    margin-right: 10px;
+}
