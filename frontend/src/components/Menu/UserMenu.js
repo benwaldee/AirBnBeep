@@ -38,9 +38,16 @@ function UserMenu({ user }) {
 
                 <div className="userMenuAboutDiv">
                     <div className="userMenuAbout" >
-                        <Link to='/' className='userMenuAboutLink'>
-                            Home
-                        </Link>
+                        <div className='toplinkspace'>
+                            <Link to='/' className='aboutLink'>
+                                Home
+                            </Link>
+                        </div>
+                        <div className='bottomlinkspace'>
+                            <Link to='/about' className='aboutLink'>
+                                About
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

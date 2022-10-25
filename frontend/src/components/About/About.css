@@ -1,0 +1,40 @@
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 300px;
+    height: 150px;
+}
+
+.icon {
+    height: 50px;
+
+    width: 50px;
+}
+
+.About_right {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.social {
+    cursor: pointer;
+}
+
+.About_outer {
+    display: flex;
+    justify-content: center;
+}
+
+.h1 {
+    margin-bottom: 10px;
+}
+
+.About_subtitle {
+    margin-bottom: 10px;
+}
+
+.lineheight {
+    line-height: 25px;
+    color: black;
+}
