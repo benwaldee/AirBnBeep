@@ -1,9 +1,5 @@
-
-import React, { useState, useEffect } from 'react';
-
+import me from './me.png'
 import './About.css'
-
-
 
 const About = () => {
 
@@ -12,7 +8,7 @@ const About = () => {
     return (
         <div className='About_outer' >
             <div className='About_left'>
-                <img className='About_mainImg' src={""}></img>
+                <img className='About_mainImg' src={me}></img>
                 <div className='About_socials'>
                     <a target='_blank' href='https://www.linkedin.com/in/benwaldee/'>
                         <img className='icon social' src="https://skillicons.dev/icons?i=linkedin" />

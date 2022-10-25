@@ -19,11 +19,15 @@
 
 .social {
     cursor: pointer;
+    margin-right: 20px;
+
+
 }
 
 .About_outer {
     display: flex;
     justify-content: center;
+    margin-top: 60px;
 }
 
 .h1 {
@@ -37,4 +41,11 @@
 .lineheight {
     line-height: 25px;
     color: black;
+}
+
+.About_mainImg {
+    object-fit: cover;
+    width: 400px;
+    height: 600px;
+    margin-right: 50px;
 }
