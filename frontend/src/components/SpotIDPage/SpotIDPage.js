@@ -26,7 +26,7 @@ const SpotIDPage = () => {
 
 
 
-    const { showLoginFormSpotCard, setShowLoginFormSpotCard, showReviewModal, setShowReviewModal } = useModalContext();
+    const { showLoginFormSpotCard, setShowLoginFormSpotCard, showReviewModal, setShowReviewModal, searchToggle } = useModalContext();
 
 
     const history = useHistory()
@@ -69,7 +69,26 @@ const SpotIDPage = () => {
             }
             )
 
-    }, [showAddReview, showEdit, toggle])
+    }, [showAddReview, showEdit, toggle, searchToggle])
+
+    useEffect(() => {
+        dispatch(getSpotByIDThunk(spotID))
+            .catch(async (res) => {
+                if (!res.ok) {
+                    history.push('/404')
+                }
+            }
+            )
+        dispatch(getReviewsBySpotIDThunk(spotID))
+            .catch(async (res) => {
+                if (!res.ok) {
+                    history.push('/404')
+                }
+            }
+            )
+
+    }, [])
+
 
 
 

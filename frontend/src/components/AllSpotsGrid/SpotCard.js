@@ -4,18 +4,19 @@ import React, { useState, useEffect } from 'react';
 import './SpotCard.css'
 import star from './star.PNG'
 import { useHistory } from 'react-router-dom'
-
+import { Modal, useModalContext } from '../../context/Modal';
 
 
 const SpotCard = ({ spot, sessionUser }) => {
 
 
+    const { setUserSearch } = useModalContext();
 
     const history = useHistory()
 
     const openSpotIDPage = () => {
 
-
+        setUserSearch("")
 
         history.push(`/spots/${spot.id}`)
     }
