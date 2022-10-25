@@ -5,7 +5,7 @@ import * as sessionActions from '../../store/session';
 import './ProfileButton.css'
 import menuIcon from './menuIcon.PNG'
 import UserMenu from "../Menu/UserMenu";
-
+import green from "./green.png"
 
 
 function ProfileButton({ user }) {
@@ -45,7 +45,7 @@ function ProfileButton({ user }) {
                     </img>
                 </span>
                 <span>
-                    <img className='noUser' src="https://www.citypng.com/public/uploads/preview/hd-profile-user-round-green-icon-symbol-transparent-png-11639594320ayr6vyoidq.png">
+                    <img className='noUser' src={green}>
                     </img>
                 </span>
             </div>
