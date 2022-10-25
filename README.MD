@@ -2,7 +2,7 @@
 
 ## About AirBnBeep
 
-AirBnBeep is a web application designed to mimic AirBnb. It is a home for mobile vacation spots, such as RVs, Airstreams, sprinter-van conversions, and more! Check out the live site here: https://airbnbeep.herokuapp.com/
+AirBnBeep is a web application designed to mimic AirBnb. It is a home for mobile vacation spots, such as RVs, Airstreams, sprinter-van conversions, and more! Users can checkout spots as well as host their own. After clicking on a spot that a user is interested in, they can look at reviews, leave their own, and also book a spot for their travels. There is also a search feature in the navigation bar to allow users to find spots based on their names. Check out the live site here: https://airbnbeep.herokuapp.com/
 
 Below are the links to the project wiki pages:
 
