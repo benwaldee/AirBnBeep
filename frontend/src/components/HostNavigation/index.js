@@ -43,8 +43,8 @@ function Navigation({ isLoaded }) {
 
                     </div>
                     <div className='fileDiv' >
-                        {sessionUser && <Link className='hostLink' to='/host'> Switch to hosting </Link>}
 
+                        {sessionUser && <Link className='hostLink' to='/'> Go back home </Link>}
                         {!sessionUser && <div className='hostLink' onClick={() => setShowLoginFormHost(true)}> Become a Host </div>}
                         {!sessionUser && showLoginFormHost && (
                             <Modal onClose={() => {

@@ -14,6 +14,7 @@ export function ModalProvider({ children }) {
     const [showLoginFormHost, setShowLoginFormHost] = useState(false)
     const [showLoginFormSpotCard, setShowLoginFormSpotCard] = useState(false)
 
+
     useEffect(() => {
         setValue(modalRef.current);
     }, [])

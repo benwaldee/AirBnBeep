@@ -14,6 +14,8 @@ const Host = () => {
     const [renderToggle, setRenderToggle] = useState(false)
     const [clickedEdit, setClickedEdit] = useState(false)
 
+
+
     const sessionUser = useSelector(state => state.session.user);
 
     const dispatch = useDispatch()

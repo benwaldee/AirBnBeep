@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import HostNavigation from "./components/HostNavigation";
 import './index.css'
 import AllSpotsGrid from './components/AllSpotsGrid/AllSpotsGrid'
 import Host from "./components/Host/Host";
@@ -19,23 +20,29 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+
+
 
       {isLoaded && (
         <Switch>
           <Route path='/' exact={true}>
+            <Navigation isLoaded={isLoaded} />
             <AllSpotsGrid />
           </Route>
           <Route path='/host'>
+            <HostNavigation isLoaded={isLoaded} />
             <Host />
           </Route>
           <Route path='/spots/:spotID'>
+            <Navigation isLoaded={isLoaded} />
             <SpotIDPage />
           </Route>
           <Route path='/about'>
+            <Navigation isLoaded={isLoaded} />
             <About />
           </Route>
           <Route>
+            <Navigation isLoaded={isLoaded} />
             <div className="four">
               404 Page Not Found
             </div>
