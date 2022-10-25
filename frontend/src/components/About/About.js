@@ -20,7 +20,7 @@ const About = () => {
             </div>
             <div className='About_right'>
                 <h1 className='h1'> Hello world!</h1>
-                <div className='About_subtitle lineheight'>My name is Ben and this is my first website. You can acess the repo
+                <div className='About_subtitle lineheight'>My name is Ben and this is my first website. You can access the repo
                     <span> <a href='https://github.com/benwaldee/AirBnBeep' target='_blank'>here!</a></span></div>
 
                 <p className='lineheight'>
