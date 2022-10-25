@@ -21,11 +21,19 @@ function NoUserMenu() {
                 <div className='signbut'>
                     <SignupFormModal />
                 </div>
+
                 <div className="border">
                     <div className="about" >
-                        <Link to='/' className='aboutLink'>
-                            Home
-                        </Link>
+                        <div className='toplinkspace'>
+                            <Link to='/' className='aboutLink'>
+                                Home
+                            </Link>
+                        </div>
+                        <div className='bottomlinkspace'>
+                            <Link to='/about' className='aboutLink'>
+                                About
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

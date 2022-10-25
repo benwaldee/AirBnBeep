@@ -32,7 +32,7 @@ const restoreUser = (req, res, next) => {
     // token parsed from cookies
     const { token } = req.cookies;
 
-    console.log(token)
+    // console.log(token)
 
     req.user = null;
 

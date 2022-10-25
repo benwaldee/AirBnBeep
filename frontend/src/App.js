@@ -8,6 +8,7 @@ import './index.css'
 import AllSpotsGrid from './components/AllSpotsGrid/AllSpotsGrid'
 import Host from "./components/Host/Host";
 import SpotIDPage from "./components/SpotIDPage/SpotIDPage";
+import About from "./components/About/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,8 +32,16 @@ function App() {
           <Route path='/spots/:spotID'>
             <SpotIDPage />
           </Route>
+          <Route path='/about'>
+            <About />
+          </Route>
           <Route>
-            404 Page Not Found
+            <div className="four">
+              404 Page Not Found
+            </div>
+            <div className="fourlow">
+              Click the logo to return home!
+            </div>
           </Route>
         </Switch>
       )}

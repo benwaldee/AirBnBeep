@@ -49,7 +49,7 @@ const deleteSpotAction = (spotId) => {
 
 const editSpotAction = (editSpot) => {
 
-    console.log('editSPot in act', editSpot)
+    // console.log('editSPot in act', editSpot)
     return {
         type: UPDATE_SPOT,
         payload: editSpot
@@ -79,7 +79,7 @@ export const getAllSpotsThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/spots');
     const spots = await response.json();
 
-    console.log(spots)
+    // console.log(spots)
 
     dispatch(getAllSpotsAction(spots));
     return response;
