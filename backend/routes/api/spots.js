@@ -111,7 +111,7 @@ router.get('/:spotId', async (req, res) => {
         error.status = "404"
         throw error;
     }
-    console.log(spot)
+    // console.log(spot)
 
     //
     if (isNaN(Number.parseFloat(spot.avgStarRating).toFixed(1))) { spot.avgStarRating = null }
@@ -259,7 +259,7 @@ router.get('/', async (req, res) => {
     if (minPrice) { where.price = { [Op.gt]: parseFloat(minPrice) } }
     if (maxPrice) { where.price = { [Op.lt]: parseFloat(maxPrice) } }
 
-    console.log(where)
+    // console.log(where)
 
 
     if (Number.isNaN(page) || page < 1) page = 0;
@@ -675,9 +675,9 @@ router.post('/:spotId/bookings', async (req, res) => {
         let aStartDate = booking.startDate
         let aEndDate = booking.endDate
 
-        console.log(spotBookings)
-        console.log("end:", aEndDate, "start:", aStartDate)
-        console.log(endDate, startDate)
+        // console.log(spotBookings)
+        // console.log("end:", aEndDate, "start:", aStartDate)
+        // console.log(endDate, startDate)
         // console.log("is our start g or e to this start:", startDate >= aStartDate)
         // console.log("is our start l or e to this end:", startDate <= aEndDate)
         //error fixed, need to format as date only

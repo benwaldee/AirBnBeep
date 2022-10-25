@@ -41,7 +41,7 @@ router.post(
         user = user.toJSON()
         user.token = token
 
-        console.log(user)
+        // console.log(user)
 
 
         return res.json(

@@ -37,7 +37,7 @@ router.post(
             return next(err);
         }
 
-        console.log(user)
+        // console.log(user)
 
         const token = await setTokenCookie(res, user);
 

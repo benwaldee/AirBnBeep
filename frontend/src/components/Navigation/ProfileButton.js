@@ -10,7 +10,7 @@ import green from "./green.png"
 
 function ProfileButton({ user }) {
 
-    console.log('i rendered')
+    // console.log('i rendered')
 
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);

@@ -33,7 +33,7 @@ const SpotIDPage = () => {
     let { spotID } = useParams()
     spotID = Number(spotID)
 
-    console.log(spotID)
+    // console.log(spotID)
 
     const dispatch = useDispatch()
 
@@ -237,7 +237,7 @@ const SpotIDPage = () => {
 
     const deleteReviewFunc = (revId) => {
 
-        console.log('delete click')
+        // console.log('delete click')
         setShowEdit(false)
 
         dispatch(deleteReviewThunk(revId))
