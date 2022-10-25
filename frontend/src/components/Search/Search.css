@@ -1,0 +1,83 @@
+.Search_icon {
+    height: 30px;
+
+}
+
+.Search_outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.Search_input {
+    height: 25px;
+    margin-left: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.618);
+    border-radius: 5px;
+    padding: 5px;
+    width: 300px;
+    position: relative;
+}
+
+.Search_input:hover,
+.Search_input:focus {
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.Search_results {
+    position: absolute;
+    width: 300px;
+    top: 55px;
+    margin-left: 28px;
+}
+
+.Search_card {
+    cursor: pointer;
+    width: 310px;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.762);
+    text-decoration: none;
+    color: black;
+}
+
+.Search_cardNull {
+    cursor: not-allowed;
+    width: 310px;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.762);
+
+}
+
+
+.Search_cardImg {
+    height: 25px;
+    width: 25px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-left: 5px;
+}
+
+.Search_cardLower {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+
+}
+
+.Search_cardTitle {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.Search_cardSub {
+    font-size: 11px;
+    margin-left: 0px;
+}
