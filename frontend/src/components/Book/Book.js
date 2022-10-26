@@ -17,28 +17,43 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
     const [newEnd, setNewEnd] = useState(userBooking?.endDate)
     const [errors, setErrors] = useState([])
 
+    const [addStart, setAddStart] = useState("")
+    const [addEnd, setAddEnd] = useState("")
+
     const today = new Date();
     let min = today.toISOString().slice(0, 10)
-    console.log("min", min)
 
-    const handleSave = () => {
+    const handleSave = async () => {
         setErrors([])
 
-        dispatch(updateUserBookingThunk(Number(userBooking.id), { startDate: newStart, endDate: newEnd }))
+        let caught = false
+
+        await dispatch(updateUserBookingThunk(Number(userBooking.id), { startDate: newStart, endDate: newEnd }))
             .catch(async (res) => {
+
+                caught = true
+
                 const data = await res.json();
                 if (data && data.errors) {
-                    console.log(data.errors)
                     setErrors([Object.values(data.errors)[0]])
                     setNewStart(userBooking.startDate)
                     setNewEnd(userBooking.endDate)
 
+                }
 
-                } else {
-                    setToggleRender(!toggleRender)
+
+            })
+            .then(() => {
+
+                if (caught === false) {
                     setEditClick(false)
                 }
             })
+
+
+
+
+
     }
 
     const handleDelete = () => {
@@ -49,7 +64,11 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
 
     }
 
-    console.log("booked", booked)
+    const handleAdd = () => {
+
+    }
+
+
 
     return (
 
@@ -61,7 +80,43 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
                         <div className='Book_emptySub'>
                             Looks like you have no bookings. Would you like to book this spot?
                         </div>
+                        <div className='Book_emptyTimeCenter'>
 
+                            {errors?.map((error, idx) => {
+                                return (
+                                    <div key={error} id='alignIndSignup'>
+                                        <span>
+                                            <img id='errorImgSignup' src={exclImg}></img>
+                                        </span>
+                                        <div className='oneErrorDivSignup' key={idx}>{error}</div>
+                                    </div>
+                                )
+                            })}
+                            <div className='Book_editWrapLow'>
+                                <input
+                                    onKeyDown={(e) => e.preventDefault()}
+                                    required={true}
+                                    className='Book_editEle'
+                                    min={min}
+                                    type="date"
+                                    value={addStart}
+                                    onChange={(e) => setAddStart(e.target.value)}
+                                ></input>
+
+                                <div className='Book_editArrow'>→</div>
+                                <input
+                                    onKeyDown={(e) => e.preventDefault()}
+                                    required={true}
+                                    min={min}
+                                    className='Book_editEle'
+                                    type="date"
+                                    value={addEnd}
+                                    onChange={(e) => setAddEnd(e.target.value)}
+                                ></input>
+                                <div className='Book_addButton revEditButton' onClick={handleSave}> Add</div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             }
@@ -95,6 +150,8 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
                             setErrors([])
                             setDeleteClick(false)
                             setEditClick(!editClick)
+                            setNewStart(userBooking?.startDate)
+                            setNewEnd(userBooking?.endDate)
                         }}> Edit</div>
                         <div className='Book_button revEditButton' onClick={() => {
                             setEditClick(false)
@@ -123,7 +180,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
                             })}
                             <div className='Book_editWrapLow'>
                                 <input
-                                    onkeydown="return false"
+                                    onKeyDown={(e) => e.preventDefault()}
                                     required={true}
                                     className='Book_editEle'
                                     min={min}
@@ -134,7 +191,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
 
                                 <div className='Book_editArrow'>→</div>
                                 <input
-                                    onkeydown="return false"
+                                    onKeyDown={(e) => e.preventDefault()}
                                     required={true}
                                     min={min}
                                     className='Book_editEle'

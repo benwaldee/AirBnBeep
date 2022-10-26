@@ -167,3 +167,20 @@
 .Book_deleteButton:hover {
     background-color: rgb(235, 1, 1);
 }
+
+.Book_addButton {
+    width: 70px;
+    margin: 0px;
+    margin-left: 10px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    background-image: none;
+    color: black;
+}
+
+.Book_addButton:hover {
+    background-color: rgb(209, 209, 209);
+}
