@@ -44,13 +44,13 @@ const Bookings = () => {
             </div>
             <div className="Bookings_outer">
                 {userBookings?.map(booking => (
-                    <div key={booking.id} className='Bookings_card' onClick={() => handleBookingClick(booking.spotId)}>
-                        <img className='Bookings_cardImage' src={booking.Spot.previewImage}></img>
+                    <div key={booking?.id} className='Bookings_card' onClick={() => handleBookingClick(booking?.spotId)}>
+                        <img className='Bookings_cardImage' src={booking?.Spot?.previewImage}></img>
                         <div className='Bookings_cardLow'>
-                            <div className='Bookings_cardSpot'>{booking.Spot.name} </div>
-                            <div className='Bookings_cardLocation'>{booking.Spot.city},{booking.Spot.state}</div>
-                            <div className='Bookings_cardStart'><span className='bolded'> CHECK IN:</span> {booking.startDate.slice(0, 10)}</div>
-                            <div className='Bookings_cardEnd'><span className='bolded'> CHECK OUT:</span> {booking.endDate.slice(0, 10)}</div>
+                            <div className='Bookings_cardSpot'>{booking?.Spot?.name} </div>
+                            <div className='Bookings_cardLocation'>{booking?.Spot?.city},{booking?.Spot?.state}</div>
+                            <div className='Bookings_cardStart'><span className='bolded'> CHECK IN:</span> {booking?.startDate?.slice(0, 10)}</div>
+                            <div className='Bookings_cardEnd'><span className='bolded'> CHECK OUT:</span> {booking?.endDate?.slice(0, 10)}</div>
                         </div>
                     </div>
                 ))}
