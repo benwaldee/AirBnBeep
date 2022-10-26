@@ -3,10 +3,10 @@ import { getAllSpotsThunk } from "../../store/spots"
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
-import { updateUserBookingThunk, deleteUserBookingThunk } from "../../store/bookings"
+import { updateUserBookingThunk, deleteUserBookingThunk, addUserBookingThunk } from "../../store/bookings"
 import exclImg from '../LoginFormModal/excl.PNG'
 
-const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender }) => {
+const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, spotID }) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -21,7 +21,9 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
     const [addEnd, setAddEnd] = useState("")
 
     const today = new Date();
-    let min = today.toISOString().slice(0, 10)
+    let min = today.toISOString().slice(0, 8)
+    let last = Number(today.toISOString().slice(8, 10)) + 1
+    min = min + last
 
     const handleSave = async () => {
         setErrors([])
@@ -64,8 +66,35 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
 
     }
 
-    const handleAdd = () => {
+    const handleAdd = async () => {
 
+        setErrors([])
+        let caught = false
+
+        if (addStart === "" || addEnd === "") {
+            setErrors(["Please select a start and end date"])
+
+            return
+        }
+
+        await dispatch(addUserBookingThunk(spotID, { startDate: addStart, endDate: addEnd }))
+            .catch(async (res) => {
+                caught = true
+                const data = await res.json();
+                if (data && data.errors) {
+                    setErrors([Object.values(data.errors)[0]])
+                    setAddStart("")
+                    setAddEnd("")
+                }
+            })
+            .then(() => {
+                if (caught === false) {
+                    setBooked("future")
+                    setAddStart("")
+                    setAddEnd("")
+                }
+            })
+        setToggleRender(!toggleRender)
     }
 
 
@@ -80,8 +109,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
                         <div className='Book_emptySub'>
                             Looks like you have no bookings. Would you like to book this spot?
                         </div>
-                        <div className='Book_emptyTimeCenter'>
-
+                        <div className='Book_addErr'>
                             {errors?.map((error, idx) => {
                                 return (
                                     <div key={error} id='alignIndSignup'>
@@ -92,6 +120,10 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
                                     </div>
                                 )
                             })}
+                        </div>
+                        <div className='Book_emptyTimeCenterAdd'>
+
+
                             <div className='Book_editWrapLow'>
                                 <input
                                     onKeyDown={(e) => e.preventDefault()}
@@ -113,7 +145,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender })
                                     value={addEnd}
                                     onChange={(e) => setAddEnd(e.target.value)}
                                 ></input>
-                                <div className='Book_addButton revEditButton' onClick={handleSave}> Add</div>
+                                <div className='Book_addButton revEditButton' onClick={handleAdd}> Add</div>
                             </div>
 
                         </div>

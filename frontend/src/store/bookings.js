@@ -5,6 +5,7 @@ import { csrfFetch } from './csrf';
 const GET_USER_BOOKINGS = 'bookings/userID';
 const UPDATE_BOOKING = 'bookings/update'
 const DELETE_BOOKING = 'bookings/delete'
+const ADD_BOOKING = 'bookings/add'
 
 //actions
 
@@ -27,6 +28,13 @@ const deleteUserBooking = (id) => {
     return {
         type: DELETE_BOOKING,
         payload: id
+    }
+}
+
+const addUserBooking = (newBooking) => {
+    return {
+        type: ADD_BOOKING,
+        payload: newBooking
     }
 }
 
@@ -58,6 +66,22 @@ export const updateUserBookingThunk = (id, updateObj) => async (dispatch) => {
     const newBooking = await response.json();
 
     dispatch(updateUserBooking(newBooking));
+    return response;
+};
+
+
+export const addUserBookingThunk = (spotID, addObj) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/spots/${spotID}/bookings`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addObj)
+    });
+    const newBooking = await response.json();
+
+    dispatch(addUserBooking(newBooking));
     return response;
 };
 
@@ -96,6 +120,10 @@ const bookingsReducer = (state = initialState, action) => {
         case DELETE_BOOKING:
             bookings = { ...state, userBookings: { ...state.userBookings } }
             delete bookings.userBookings[action.payload]
+            return bookings
+        case ADD_BOOKING:
+            bookings = { ...state, userBookings: { ...state.userBookings } }
+            bookings.userBookings[action.payload.id] = action.payload
             return bookings
         default:
             return state;

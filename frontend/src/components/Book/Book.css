@@ -67,6 +67,17 @@
     border-radius: 10px;
 }
 
+.Book_emptyTimeCenterAdd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(to left, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(196, 47, 117) 57.5%, rgb(189, 30, 144) 75%, rgb(120, 18, 98) 100%);
+    /* border: 3px solid rgb(255, 132, 0); */
+    margin: 0px 50px 30px 50px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
 .Book_emptyTime {
     font-size: 35px;
     color: white;
@@ -183,4 +194,12 @@
 
 .Book_addButton:hover {
     background-color: rgb(209, 209, 209);
+}
+
+.Book_addErr {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }

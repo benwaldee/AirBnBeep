@@ -503,7 +503,9 @@ const SpotIDPage = () => {
                             <div className='SpotIDPage_bookCenter'>
                                 {loaded && <Book userBooking={userBooking} booked={booked}
                                     setBooked={setBooked}
-                                    setToggleRender={setToggleRender} toggleRender={toggleRender} />}
+                                    setToggleRender={setToggleRender} toggleRender={toggleRender}
+                                    spotID={spotID}
+                                />}
                             </div>
                         </div>
                     </div>
