@@ -1,6 +1,6 @@
 .Book_outer {
     border: solid 1px rgba(156, 156, 156, 0.4);
-    height: 550px;
+    height: fit-content;
     width: 500px;
     margin-top: 20px;
     margin-left: 50px;
@@ -84,6 +84,16 @@
     align-items: center;
     border: solid 1px rgba(81, 81, 81, 0.4);
     padding: 10px;
+    margin: 20px;
+}
+
+.Book_editSpacer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    align-items: center;
+
+    padding: 0px;
     margin: 20px;
 }
 

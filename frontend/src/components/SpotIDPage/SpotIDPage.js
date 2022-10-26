@@ -25,7 +25,7 @@ const SpotIDPage = () => {
     const [toggle, setToggle] = useState(false)
     const [charCount, setCharCount] = useState(0)
     const [charCountEdit, setCharCountEdit] = useState(0)
-
+    const [toggleRender, setToggleRender] = useState(false)
 
 
     const { showLoginFormSpotCard, setShowLoginFormSpotCard, showReviewModal, setShowReviewModal, searchToggle } = useModalContext();
@@ -477,7 +477,8 @@ const SpotIDPage = () => {
                             </div>
                             <div className='SpotIDPage_bookCenter'>
                                 {loaded && <Book userBooking={userBooking} booked={booked}
-                                    setBooked={setBooked} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate} />}
+                                    setBooked={setBooked} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
+                                    setToggleRender={setToggleRender} toggleRender={toggleRender} />}
                             </div>
                         </div>
                     </div>

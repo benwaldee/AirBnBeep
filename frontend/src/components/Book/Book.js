@@ -1,10 +1,12 @@
 import './Book.css'
-import { getAllSpotsThunk } from "../../store/spots"
+// import { getAllSpotsThunk } from "../../store/spots"
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
+import { updateUserBookingThunk } from "../../store/bookings"
+import exclImg from '../LoginFormModal/excl.PNG'
 
-const Book = ({ userBooking, booked, setBooked, endDate, setEndDate, startDate, setStartDate }) => {
+const Book = ({ userBooking, booked, setBooked, endDate, setEndDate, startDate, setStartDate, setToggleRender, toggleRender }) => {
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -13,28 +15,23 @@ const Book = ({ userBooking, booked, setBooked, endDate, setEndDate, startDate, 
     const [deleteClick, setDeleteClick] = useState(false)
     const [newStart, setNewStart] = useState(startDate || "")
     const [newEnd, setNewEnd] = useState(endDate || "")
-    const [errors, setErrors] = useState()
+    const [errors, setErrors] = useState([])
 
     const handleSave = () => {
 
 
-        dispatch(updateUserBookingThunk({}))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) {
-                    setErrors(data.errors)
-                    for (let error of data.errors) {
-                        if (error === 'Password must be 6 characters or more.') {
-                            setPassword('')
-                            setConfirmPassword('')
-                        }
-                    }
-                }
+        // dispatch(updateUserBookingThunk({ startDate: newEnd, endDate: newEnd }))
+        //     .catch(async (res) => {
+        //         const data = await res.json();
+        //         if (data && data.errors) {
+        //             setErrors(data.errors)
+        //         }
+        //     })
 
+        setToggleRender(!toggleRender)
+        setEditClick(false)
 
-                console.log(newEnd, newStart)
-
-            })
+        console.log(newEnd, newStart)
     }
 
     return (
@@ -59,9 +56,19 @@ const Book = ({ userBooking, booked, setBooked, endDate, setEndDate, startDate, 
                         <div className='Book_button revEditButton' onClick={() => setEditClick(!editClick)}> Edit</div>
                         <div className='Book_button revEditButton' onClick={() => setDeleteClick(!deleteClick)}> Delete</div>
                     </div>
-
+                    {!editClick && <div className='Book_editSpacer'></div>}
                     {editClick &&
                         <div className='Book_editWrap'>
+                            {errors?.map((error, idx) => {
+                                return (
+                                    <div id='alignIndSignup'>
+                                        <span>
+                                            <img id='errorImgSignup' src={exclImg}></img>
+                                        </span>
+                                        <div className='oneErrorDivSignup' key={idx}>{error}</div>
+                                    </div>
+                                )
+                            })}
                             <input
                                 className='Book_editEle'
                                 type="date"
