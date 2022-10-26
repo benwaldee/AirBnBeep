@@ -75,16 +75,28 @@
     width: 70px;
     margin: 0px;
     margin-left: 10px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Book_editWrap {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     margin-top: 30px;
     align-items: center;
     border: solid 1px rgba(81, 81, 81, 0.4);
     padding: 10px;
     margin: 20px;
+}
+
+.Book_editWrapLow {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
 }
 
 .Book_editSpacer {
@@ -101,4 +113,32 @@
     margin: 5px;
     height: 30px;
     width: 200px;
+}
+
+.Book_deleteWrap {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    margin-top: 30px;
+    align-items: center;
+    border: solid 1px rgba(81, 81, 81, 0.4);
+    padding: 10px;
+    margin: 20px;
+}
+
+.Book_deleteButton {
+    width: 70px;
+    margin: 0px;
+    margin-left: 10px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(206, 1, 1);
+    background-image: none;
+
+}
+
+.Book_deleteButton:hover {
+    background-color: rgb(235, 1, 1);
 }

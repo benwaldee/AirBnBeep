@@ -77,8 +77,7 @@ const SpotIDPage = () => {
 
     const [loaded, setLoaded] = useState(false)
     const [booked, setBooked] = useState(false)
-    const [startDate, setStartDate] = useState("")
-    const [endDate, setEndDate] = useState("")
+
 
     useEffect(() => {
         dispatch(getSpotByIDThunk(spotID))
@@ -101,25 +100,51 @@ const SpotIDPage = () => {
 
     }, [])
 
-    let userBooking = useSelector(state => state?.bookings?.userBookings)
-    if (userBooking) {
-        userBooking = Object.values(userBooking)
-    }
+
+
+
+    let userBooking = Object.values(useSelector(state => state?.bookings?.userBookings))
+        .filter(booking => Number(booking.spotId) === spotID)[0]
+
+
 
     useEffect(() => {
+        //four scenarios
+
+        //no booking - should be able to book
+        //booking in the past - should be able to book
+        //booking in the future - should be able to edit or delete booking
+        //bookin in the present - should know they have a booking
+
+        //user cannot make multiple bookings for the same spot. prevent users from hogging a place
+
 
         if (userBooking) {
-            for (let booking of userBooking) {
-                if (Number(booking.spotId) === spotID) {
-                    setBooked(true)
-                    setStartDate(booking.startDate)
-                    setEndDate(booking.endDate)
-                    userBooking = booking
-                }
+            const today = new Date();
+            let formattedToday = today.toISOString().slice(0, 10).split("-").join("")
+            //booking in future
+            //if there is a booking, and it starts in the future, we would say we are booked
+            if (Number(userBooking.startDate.split("-").join("")) > Number(formattedToday)) {
+                setBooked("future")
             }
-        }
-    }, [loaded])
 
+            //booking in present
+            //if there is a booking, and the start date is in the past, but the end date is in the future, we are currently staying
+
+            if (Number(userBooking.startDate.split("-").join("")) < Number(formattedToday) &&
+                Number(userBooking.endDate.split("-").join("")) > Number(formattedToday)) {
+                setBooked("present")
+            }
+
+
+            //booking in past
+            if (Number(userBooking.endDate.split("-").join("")) < Number(formattedToday)) {
+                setBooked("past/none")
+            }
+            //no booking
+        } else { setBooked("past/none") }
+
+    }, [loaded])
 
 
 
@@ -477,7 +502,7 @@ const SpotIDPage = () => {
                             </div>
                             <div className='SpotIDPage_bookCenter'>
                                 {loaded && <Book userBooking={userBooking} booked={booked}
-                                    setBooked={setBooked} startDate={startDate} setStartDate={setStartDate} endDate={endDate} setEndDate={setEndDate}
+                                    setBooked={setBooked}
                                     setToggleRender={setToggleRender} toggleRender={toggleRender} />}
                             </div>
                         </div>
