@@ -28,12 +28,52 @@
     font-size: 17px;
     color: white;
     caret-color: transparent;
-
 }
 
 .Bookings_addSpotInner {
     margin-right: 400px;
 
+}
+
+.Bookings_card {
+    display: flex;
+    width: 800px;
+    margin: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.492);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.Bookings_cardImage {
+    object-fit: cover;
+    height: 300px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.Bookings_cardLow {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.Bookings_cardSpot {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.Bookings_cardLocation {
+    font-size: 15px;
+    margin-bottom: 50px;
+    color: rgba(0, 0, 0, 0.763);
+}
+
+.bolded {
+    font-weight: bold;
+}
 
 
+.Bookings_cardStart,
+.Bookings_cardEnd {
+    font-size: 15px;
+    margin-bottom: 20px;
 }
