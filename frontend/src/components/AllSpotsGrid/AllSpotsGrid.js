@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import SpotCard from './SpotCard'
 import './AllSpotsGrid.css'
 import { Modal, useModalContext } from '../../context/Modal';
-
+import { getUserBookingsThunk } from "../../store/bookings"
 
 const AllSpotsGrid = () => {
 
@@ -13,6 +13,7 @@ const AllSpotsGrid = () => {
 
     useEffect(() => {
         dispatch(getAllSpotsThunk())
+        dispatch(getUserBookingsThunk())
     }, [])
 
     let spotObj = useSelector((state) => state?.spots?.allSpots)
