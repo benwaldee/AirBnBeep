@@ -23,6 +23,7 @@ const Bookings = () => {
     let userBookings = useSelector(state => state?.bookings?.userBookings)
     if (userBookings) {
         userBookings = Object.values(userBookings)
+            .sort((a, b) => a.startDate.split("-").join("") - b.startDate.split("-").join(""))
     }
 
     const handleBookingClick = (id) => {
@@ -30,6 +31,7 @@ const Bookings = () => {
         history.push(`/spots/${id}`)
     }
 
+    console.log(Number("2022-10-14".split("-").join("")))
 
     return (
         <>
