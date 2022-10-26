@@ -92,6 +92,8 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
                     setBooked("future")
                     setAddStart("")
                     setAddEnd("")
+                    setDeleteClick(false)
+                    setEditClick(false)
                 }
             })
         setToggleRender(!toggleRender)
