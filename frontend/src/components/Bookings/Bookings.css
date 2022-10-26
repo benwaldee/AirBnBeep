@@ -1,0 +1,39 @@
+.Bookings_outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Bookings_addSpotOuter {
+    background-image: linear-gradient(to left, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(196, 47, 117) 57.5%, rgb(189, 30, 144) 75%, rgb(120, 18, 98) 100%);
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    caret-color: transparent;
+    height: 150px;
+}
+
+.Bookings_today {
+    padding-top: 40px;
+    padding-left: 30px;
+    font-size: 40px;
+    color: white;
+    font-weight: 600;
+    caret-color: transparent;
+}
+
+.Bookings_hostSoon {
+    padding-top: 17px;
+    padding-left: 30px;
+    font-size: 17px;
+    color: white;
+    caret-color: transparent;
+
+}
+
+.Bookings_addSpotInner {
+    margin-right: 400px;
+
+
+
+}

@@ -22,12 +22,16 @@ function UserMenu({ user }) {
         e.preventDefault();
         dispatch(sessionActions.logout())
             .then(dispatch(getUserSpotsThunk(true)))
-        if (url === '/host') {
+        if (url === '/host' || url === '/bookings') {
             history.replace('/')
         }
         setShowLoginModal(false)
         setShowLoginFormSpotCard(false)
     };
+
+    const handleBook = () => {
+        history.push('/bookings')
+    }
 
     return (
         <div className='userMenuOuter'>
@@ -35,7 +39,9 @@ function UserMenu({ user }) {
                 <div className='logoutDiv'>
                     <button className='logout' onClick={logout}>Log Out</button>
                 </div>
-
+                <div className='logoutDiv'>
+                    <button className='logout' onClick={handleBook}>My Bookings</button>
+                </div>
                 <div className="userMenuAboutDiv">
                     <div className="userMenuAbout" >
                         <div className='toplinkspace'>
@@ -43,6 +49,7 @@ function UserMenu({ user }) {
                                 Home
                             </Link>
                         </div>
+
                         <div className='bottomlinkspace'>
                             <Link to='/about' className='aboutLink'>
                                 About

@@ -14,6 +14,8 @@ router.get('/current', restoreUser, async (req, res) => {
 
     const userId = req.user.id
 
+    console.log("USER ID HERE ------------!!!!!!", userId)
+
     let Bookings = await Booking.findAll({
         where: {
             userId: userId
@@ -61,6 +63,8 @@ router.get('/current', restoreUser, async (req, res) => {
 
 
     }
+
+    console.log('----------LLOOOOOK HERE !!!!!!!!!!!!!!!!', bookArr)
 
     res.json({ Bookings: bookArr })
 })
