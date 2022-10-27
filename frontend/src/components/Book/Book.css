@@ -52,6 +52,7 @@
 
 .Book_emptySub {
     margin-left: 10px;
+    margin-right: 10px;
     font-size: 16px;
 }
 
@@ -203,4 +204,11 @@
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 5px;
+}
+
+.Book_logout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }

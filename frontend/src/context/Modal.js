@@ -16,10 +16,13 @@ export function ModalProvider({ children }) {
     const [showLoginFormSpotCard, setShowLoginFormSpotCard] = useState(false)
     const [searchToggle, setSearchToggle] = useState(false)
     const [userSearch, setUserSearch] = useState("")
+    const [booked, setBooked] = useState("")
 
     useEffect(() => {
         setValue(modalRef.current);
     }, [])
+
+
 
     return (
         <>
@@ -31,7 +34,8 @@ export function ModalProvider({ children }) {
                 setShowSignUpModal, showLoginFormHost, setShowLoginFormHost, showLoginFormSpotCard, setShowLoginFormSpotCard,
                 showReviewModal, setShowReviewModal,
                 searchToggle, setSearchToggle,
-                userSearch, setUserSearch
+                userSearch, setUserSearch,
+                booked, setBooked
             }}>
                 {children}
             </ModalContext.Provider>

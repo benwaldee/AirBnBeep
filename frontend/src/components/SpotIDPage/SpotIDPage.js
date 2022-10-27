@@ -12,6 +12,7 @@ import Review from '../ReviewModal/Review'
 import Book from '../Book/Book'
 import { getUserBookingsThunk } from "../../store/bookings"
 
+
 const SpotIDPage = () => {
     const [stars, setStars] = useState(0)
     const [reviewMessage, setReviewMessage] = useState('')
@@ -28,7 +29,7 @@ const SpotIDPage = () => {
     const [toggleRender, setToggleRender] = useState(false)
 
 
-    const { showLoginFormSpotCard, setShowLoginFormSpotCard, showReviewModal, setShowReviewModal, searchToggle } = useModalContext();
+    const { showLoginFormSpotCard, setShowLoginFormSpotCard, showReviewModal, setShowReviewModal, searchToggle, booked, setBooked } = useModalContext();
 
 
     const history = useHistory()
@@ -71,12 +72,15 @@ const SpotIDPage = () => {
             }
             )
 
-
-    }, [showAddReview, showEdit, toggle, searchToggle])
+        if (sessionUser) {
+            dispatch(getUserBookingsThunk())
+                .then(() => setLoaded(true))
+        }
+    }, [showAddReview, showEdit, toggle, searchToggle, sessionUser])
 
 
     const [loaded, setLoaded] = useState(false)
-    const [booked, setBooked] = useState(false)
+
 
 
     useEffect(() => {
@@ -95,9 +99,10 @@ const SpotIDPage = () => {
             }
             )
 
-        dispatch(getUserBookingsThunk())
-            .then(() => setLoaded(true))
-
+        if (sessionUser) {
+            dispatch(getUserBookingsThunk())
+                .then(() => setLoaded(true))
+        } else { setLoaded(true) }
     }, [])
 
 
@@ -109,6 +114,9 @@ const SpotIDPage = () => {
 
 
     useEffect(() => {
+
+
+
         //four scenarios
 
         //no booking - should be able to book
@@ -144,7 +152,13 @@ const SpotIDPage = () => {
             //no booking
         } else { setBooked("past/none") }
 
-    }, [loaded])
+        //no user? prompt a login
+
+        if (!sessionUser) {
+            setBooked('login')
+        }
+
+    }, [loaded, sessionUser])
 
 
 
@@ -504,7 +518,7 @@ const SpotIDPage = () => {
                                 {loaded && <Book userBooking={userBooking} booked={booked}
                                     setBooked={setBooked}
                                     setToggleRender={setToggleRender} toggleRender={toggleRender}
-                                    spotID={spotID}
+                                    spotID={spotID} sessionUser={sessionUser}
                                 />}
                             </div>
                         </div>
