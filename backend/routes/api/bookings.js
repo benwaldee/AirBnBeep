@@ -76,7 +76,7 @@ router.put('/:bookingId', async (req, res) => {
     const bookingId = req.params.bookingId
     const { startDate, endDate } = req.body
 
-    console.log("IMPORTANT INFO HERE -----------", userId, bookingId, startDate, endDate)
+    // console.log("IMPORTANT INFO HERE -----------", userId, bookingId, startDate, endDate)
 
     let oldBooking = await Booking.findOne({
         where: { id: bookingId },

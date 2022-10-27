@@ -387,7 +387,7 @@ const SpotIDPage = () => {
 
                                             {errors.map((error, idx) => {
                                                 return (
-                                                    <div className='alignAddSpot'>
+                                                    <div key={error} className='alignAddSpot'>
                                                         <span>
                                                             <img id='errorImgLogin' src={exclImg}></img>
                                                         </span>
@@ -412,16 +412,16 @@ const SpotIDPage = () => {
 
 
                                         <div className='starDiv'>
-                                            {stars < 1 && <i id='noStar1' onClick={() => starCount(1)} class="fa-regular fa-star"></i>}
-                                            {stars > 0 && <i id='star1' onClick={() => starCount(1)} class="fa-solid fa-star"></i>}
-                                            {stars < 2 && <i id='noStar2' onClick={() => starCount(2)} class="fa-regular fa-star"></i>}
-                                            {stars > 1 && <i id='star2' onClick={() => starCount(1)} class="fa-solid fa-star"></i>}
-                                            {stars < 3 && <i id='noStar3' onClick={() => starCount(3)} class="fa-regular fa-star"></i>}
-                                            {stars > 2 && <i id='star3' onClick={() => starCount(2)} class="fa-solid fa-star"></i>}
-                                            {stars < 4 && <i id='noStar4' onClick={() => starCount(4)} class="fa-regular fa-star"></i>}
-                                            {stars > 3 && <i id='star4' onClick={() => starCount(3)} class="fa-solid fa-star"></i>}
-                                            {stars < 5 && <i id='noStar5' onClick={() => starCount(5)} class="fa-regular fa-star"></i>}
-                                            {stars > 4 && <i id='star5' onClick={() => starCount(4)} class="fa-solid fa-star"></i>}
+                                            {stars < 1 && <i id='noStar1' onClick={() => starCount(1)} className="fa-regular fa-star"></i>}
+                                            {stars > 0 && <i id='star1' onClick={() => starCount(1)} className="fa-solid fa-star"></i>}
+                                            {stars < 2 && <i id='noStar2' onClick={() => starCount(2)} className="fa-regular fa-star"></i>}
+                                            {stars > 1 && <i id='star2' onClick={() => starCount(1)} className="fa-solid fa-star"></i>}
+                                            {stars < 3 && <i id='noStar3' onClick={() => starCount(3)} className="fa-regular fa-star"></i>}
+                                            {stars > 2 && <i id='star3' onClick={() => starCount(2)} className="fa-solid fa-star"></i>}
+                                            {stars < 4 && <i id='noStar4' onClick={() => starCount(4)} className="fa-regular fa-star"></i>}
+                                            {stars > 3 && <i id='star4' onClick={() => starCount(3)} className="fa-solid fa-star"></i>}
+                                            {stars < 5 && <i id='noStar5' onClick={() => starCount(5)} className="fa-regular fa-star"></i>}
+                                            {stars > 4 && <i id='star5' onClick={() => starCount(4)} className="fa-solid fa-star"></i>}
 
                                         </div>
 
@@ -488,16 +488,16 @@ const SpotIDPage = () => {
 
 
                                                     <div className='starDiv'>
-                                                        {stars < 1 && <i id='noStar1' onClick={() => starCount(1)} class="fa-regular fa-star"></i>}
-                                                        {stars > 0 && <i id='star1' onClick={() => starCount(1)} class="fa-solid fa-star"></i>}
-                                                        {stars < 2 && <i id='noStar2' onClick={() => starCount(2)} class="fa-regular fa-star"></i>}
-                                                        {stars > 1 && <i id='star2' onClick={() => starCount(1)} class="fa-solid fa-star"></i>}
-                                                        {stars < 3 && <i id='noStar3' onClick={() => starCount(3)} class="fa-regular fa-star"></i>}
-                                                        {stars > 2 && <i id='star3' onClick={() => starCount(2)} class="fa-solid fa-star"></i>}
-                                                        {stars < 4 && <i id='noStar4' onClick={() => starCount(4)} class="fa-regular fa-star"></i>}
-                                                        {stars > 3 && <i id='star4' onClick={() => starCount(3)} class="fa-solid fa-star"></i>}
-                                                        {stars < 5 && <i id='noStar5' onClick={() => starCount(5)} class="fa-regular fa-star"></i>}
-                                                        {stars > 4 && <i id='star5' onClick={() => starCount(4)} class="fa-solid fa-star"></i>}
+                                                        {stars < 1 && <i id='noStar1' onClick={() => starCount(1)} className="fa-regular fa-star"></i>}
+                                                        {stars > 0 && <i id='star1' onClick={() => starCount(1)} className="fa-solid fa-star"></i>}
+                                                        {stars < 2 && <i id='noStar2' onClick={() => starCount(2)} className="fa-regular fa-star"></i>}
+                                                        {stars > 1 && <i id='star2' onClick={() => starCount(1)} className="fa-solid fa-star"></i>}
+                                                        {stars < 3 && <i id='noStar3' onClick={() => starCount(3)} className="fa-regular fa-star"></i>}
+                                                        {stars > 2 && <i id='star3' onClick={() => starCount(2)} className="fa-solid fa-star"></i>}
+                                                        {stars < 4 && <i id='noStar4' onClick={() => starCount(4)} className="fa-regular fa-star"></i>}
+                                                        {stars > 3 && <i id='star4' onClick={() => starCount(3)} className="fa-solid fa-star"></i>}
+                                                        {stars < 5 && <i id='noStar5' onClick={() => starCount(5)} className="fa-regular fa-star"></i>}
+                                                        {stars > 4 && <i id='star5' onClick={() => starCount(4)} className="fa-solid fa-star"></i>}
 
                                                     </div>
 
