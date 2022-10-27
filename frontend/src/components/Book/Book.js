@@ -28,8 +28,8 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
     const { showSignUpModal, setShowSignUpModal } = useModalContext();
 
     const today = new Date();
-    let min = today.toISOString().slice(0, 8)
-    let last = Number(today.toISOString().slice(8, 10)) + 1
+    let min = today?.toISOString().slice(0, 8)
+    let last = Number(today?.toISOString().slice(8, 10)) + 1
     min = min + last
 
     if (sessionUser) {
@@ -42,7 +42,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
 
         let caught = false
 
-        await dispatch(updateUserBookingThunk(Number(userBooking.id), { startDate: newStart, endDate: newEnd }))
+        await dispatch(updateUserBookingThunk(Number(userBooking?.id), { startDate: newStart, endDate: newEnd }))
             .catch(async (res) => {
 
                 caught = true
@@ -191,9 +191,9 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
                             Looks like you are currently staying here. Enjoy!
                         </div>
                         <div className='Book_emptyTimeCenter'>
-                            <div className='Book_emptyTime'>{userBooking.startDate}</div>
+                            <div className='Book_emptyTime'>{userBooking?.startDate}</div>
                             <div className='Book_emptyTime Book_emptyTimeArrow'>↓</div>
-                            <div className='Book_emptyTime'>{userBooking.endDate}</div>
+                            <div className='Book_emptyTime'>{userBooking?.endDate}</div>
                         </div>
                     </div>
                 }
@@ -204,9 +204,9 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
                             Looks like you have already booked this location for the following times:
                         </div>
                         <div className='Book_emptyTimeCenter'>
-                            <div className='Book_emptyTime'>{userBooking.startDate}</div>
+                            <div className='Book_emptyTime'>{userBooking?.startDate}</div>
                             <div className='Book_emptyTime Book_emptyTimeArrow'>↓</div>
-                            <div className='Book_emptyTime'>{userBooking.endDate}</div>
+                            <div className='Book_emptyTime'>{userBooking?.endDate}</div>
                         </div>
                         <div className='Book_emptySub'> Would you like to edit or delete this booking?</div>
                         <div className='Book_emptyButtonWrap'>
