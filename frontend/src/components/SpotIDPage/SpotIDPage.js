@@ -111,7 +111,7 @@ const SpotIDPage = () => {
     let userBooking = Object.values(useSelector(state => state?.bookings?.userBookings))
         .filter(booking => Number(booking.spotId) === spotID)[0]
 
-    console.log("users booking", userBooking)
+    // console.log("users booking", userBooking)
 
     useEffect(() => {
 
