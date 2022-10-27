@@ -16,8 +16,8 @@ module.exports = {
       {
         spotId: 1,
         userId: 2,
-        startDate: '2022-01-17T04:33:12.000Z',
-        endDate: '2022-01-17T04:33:12.000Z',
+        startDate: '2028-01-17T04:33:12.000Z',
+        endDate: '2028-01-17T04:33:12.000Z',
       },
       {
         spotId: 1,
@@ -28,14 +28,14 @@ module.exports = {
       {
         spotId: 2,
         userId: 2,
-        startDate: '2022-02-17T04:33:12.000Z',
-        endDate: '2022-11-17T04:33:12.000Z',
+        startDate: '2025-02-17T04:33:12.000Z',
+        endDate: '2025-11-17T04:33:12.000Z',
       },
       {
         spotId: 3,
         userId: 4,
-        startDate: '2022-01-01T04:33:12.000Z',
-        endDate: '2022-01-17T04:33:12.000Z',
+        startDate: '2028-01-01T04:33:12.000Z',
+        endDate: '2028-01-17T04:33:12.000Z',
       },
       {
         spotId: 4,
@@ -46,38 +46,38 @@ module.exports = {
       {
         spotId: 5,
         userId: 6,
-        startDate: '2022-05-13T04:33:12.000Z',
-        endDate: '2022-06-17T04:33:12.000Z',
+        startDate: '2029-05-13T04:33:12.000Z',
+        endDate: '2029-06-17T04:33:12.000Z',
       },
       {
         spotId: 6,
         userId: 7,
-        startDate: '2022-12-17T04:33:12.000Z',
-        endDate: '2022-12-19T04:33:12.000Z',
+        startDate: '2032-12-17T04:33:12.000Z',
+        endDate: '2032-12-19T04:33:12.000Z',
       },
       {
         spotId: 7,
         userId: 8,
-        startDate: '2022-08-17T04:33:12.000Z',
-        endDate: '2022-09-17T04:33:12.000Z',
+        startDate: '2042-08-17T04:33:12.000Z',
+        endDate: '2042-09-17T04:33:12.000Z',
       },
       {
         spotId: 1,
         userId: 9,
-        startDate: '2022-01-07T04:32:12.000Z',
-        endDate: '2022-01-17T04:33:12.000Z',
+        startDate: '2052-01-07T04:32:12.000Z',
+        endDate: '2052-01-17T04:33:12.000Z',
       },
       {
         spotId: 1,
         userId: 10,
-        startDate: '2022-01-17T04:33:12.000Z',
-        endDate: '2022-01-17T04:13:12.000Z',
+        startDate: '2062-01-17T04:33:12.000Z',
+        endDate: '2062-01-17T04:13:12.000Z',
       },
       {
         spotId: 1,
         userId: 1,
-        startDate: '2022-03-17T04:33:12.000Z',
-        endDate: '2022-03-30T04:33:12.000Z',
+        startDate: '2082-03-17T04:33:12.000Z',
+        endDate: '2082-03-30T04:33:12.000Z',
       }
 
     ])
