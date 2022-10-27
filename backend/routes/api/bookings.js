@@ -14,6 +14,8 @@ router.get('/current', restoreUser, async (req, res) => {
 
     const userId = req.user.id
 
+    // console.log("USER ID HERE ------------!!!!!!", userId)
+
     let Bookings = await Booking.findAll({
         where: {
             userId: userId
@@ -62,6 +64,8 @@ router.get('/current', restoreUser, async (req, res) => {
 
     }
 
+    // console.log('----------LLOOOOOK HERE !!!!!!!!!!!!!!!!', bookArr)
+
     res.json({ Bookings: bookArr })
 })
 
@@ -71,6 +75,8 @@ router.put('/:bookingId', async (req, res) => {
     const userId = req.user.id
     const bookingId = req.params.bookingId
     const { startDate, endDate } = req.body
+
+    console.log("IMPORTANT INFO HERE -----------", userId, bookingId, startDate, endDate)
 
     let oldBooking = await Booking.findOne({
         where: { id: bookingId },
@@ -96,7 +102,7 @@ router.put('/:bookingId', async (req, res) => {
         let error = new Error(`Validation Error`)
         error.status = '400'
         error.errors = {
-            endDate: "endDate cannot come before startDate"
+            endDate: "End date cannot come before start date."
         }
         throw error
     }

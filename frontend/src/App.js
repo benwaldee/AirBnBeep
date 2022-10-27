@@ -10,6 +10,7 @@ import AllSpotsGrid from './components/AllSpotsGrid/AllSpotsGrid'
 import Host from "./components/Host/Host";
 import SpotIDPage from "./components/SpotIDPage/SpotIDPage";
 import About from "./components/About/About";
+import Bookings from "./components/Bookings/Bookings";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,10 @@ function App() {
           <Route path='/about'>
             <Navigation isLoaded={isLoaded} />
             <About />
+          </Route>
+          <Route path='/bookings'>
+            <Navigation isLoaded={isLoaded} />
+            <Bookings />
           </Route>
           <Route>
             <Navigation isLoaded={isLoaded} />
