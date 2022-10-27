@@ -656,7 +656,7 @@ router.post('/:spotId/bookings', async (req, res) => {
         let error = new Error(`Validation Error`)
         error.status = '400'
         error.errors = {
-            endDate: "endDate cannot come before startDate"
+            endDate: "End date cannot come before start date"
         }
         throw error
     }

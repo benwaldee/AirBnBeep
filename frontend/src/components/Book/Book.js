@@ -49,6 +49,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
 
                 if (caught === false) {
                     setEditClick(false)
+                    setErrors([])
                 }
             })
 
@@ -63,7 +64,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
         dispatch(deleteUserBookingThunk(Number(userBooking.id)))
         setToggleRender(!toggleRender)
         setBooked("past/none")
-
+        setErrors([])
     }
 
     const handleAdd = async () => {
@@ -94,6 +95,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
                     setAddEnd("")
                     setDeleteClick(false)
                     setEditClick(false)
+                    setErrors([])
                 }
             })
         setToggleRender(!toggleRender)
