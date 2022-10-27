@@ -10,6 +10,12 @@ const Bookings = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+
+    const today = new Date()
+    let min = today.toISOString().slice(0, 8)
+    let last = Number(today.toISOString().slice(8, 10)) + 1
+    min = min + last
+
     useEffect(() => {
         if (!sessionUser) {
             history.push('/')
@@ -23,6 +29,7 @@ const Bookings = () => {
     let userBookings = useSelector(state => state?.bookings?.userBookings)
     if (userBookings) {
         userBookings = Object.values(userBookings)
+            .filter(booking => booking.startDate > min)
             .sort((a, b) => a.startDate.split("-").join("") - b.startDate.split("-").join(""))
     }
 
