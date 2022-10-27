@@ -113,7 +113,7 @@ const Book = ({ userBooking, booked, setBooked, setToggleRender, toggleRender, s
         setToggleRender(!toggleRender)
     }
 
-    console.log("booked", booked)
+    // console.log("booked", booked)
 
     return (
         <>

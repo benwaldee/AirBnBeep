@@ -34,11 +34,11 @@ const Bookings = () => {
     }
 
     const handleBookingClick = (id) => {
-        console.log(id)
+        // console.log(id)
         history.push(`/spots/${id}`)
     }
 
-    console.log(Number("2022-10-14".split("-").join("")))
+    // console.log(Number("2022-10-14".split("-").join("")))
 
     return (
         <>
